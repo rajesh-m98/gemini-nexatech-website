@@ -1,0 +1,141 @@
+import {
+    FaLaptopCode,
+    FaGlobe,
+    FaMobileAlt,
+    FaPaintBrush,
+    FaBrain,
+    FaLightbulb,
+    FaCloud,
+    FaNetworkWired,
+    FaBuilding,
+    FaMicrochip,
+    FaChartBar,
+    FaTools,
+    FaGasPump,
+    FaIndustry,
+    FaBolt,
+    FaHardHat,
+    FaTruck,
+    FaPlane,
+} from "react-icons/fa";
+
+export const SERVICES_MENU = [
+    {
+        icon: FaLaptopCode,
+        title: "Custom Software Development",
+        desc: "Tailored solutions for scalability and value.",
+        href: "services-section",
+    },
+    {
+        icon: FaGlobe,
+        title: "Web App Development",
+        desc: "Seamless and secure web applications.",
+        href: "services-section",
+    },
+    {
+        icon: FaMobileAlt,
+        title: "Mobile App Development",
+        desc: "Powerful Android and iOS mobile apps.",
+        href: "services-section",
+    },
+    {
+        icon: FaPaintBrush,
+        title: "UX/UI Design",
+        desc: "Intuitive digital experiences for users.",
+        href: "services-section",
+    },
+    {
+        icon: FaBrain,
+        title: "AI Development",
+        desc: "AI solutions for automation and insights.",
+        href: "services-section",
+    },
+    {
+        icon: FaLightbulb,
+        title: "IT & Software Consulting",
+        desc: "Strategic consulting for digital success.",
+        href: "services-section",
+    },
+    {
+        icon: FaCloud,
+        title: "Cloud & DevOps",
+        desc: "Cloud infrastructure for faster deployment.",
+        href: "services-section",
+    },
+    {
+        icon: FaNetworkWired,
+        title: "API & System Integration",
+        desc: "Secure APIs for platform communication.",
+        href: "services-section",
+    },
+    {
+        icon: FaBuilding,
+        title: "Enterprise App Development",
+        desc: "Robust apps to automate web workflows.",
+        href: "services-section",
+    },
+    {
+        icon: FaMicrochip,
+        title: "IoT & Smart Monitoring",
+        desc: "Real-time IoT monitoring and control.",
+        href: "services-section",
+    },
+    {
+        icon: FaChartBar,
+        title: "Data Analytics & BI",
+        desc: "Actionable insights through data analytics.",
+        href: "services-section",
+    },
+    {
+        icon: FaTools,
+        title: "Application Support",
+        desc: "Continuous monitoring and technical support.",
+        href: "services-section",
+    },
+];
+
+export const INDUSTRIES_MENU = [
+    {
+        icon: FaGasPump,
+        title: "Oil & Gas",
+        desc: "Operational continuity in critical environments.",
+        href: "industries-section",
+    },
+    {
+        icon: FaIndustry,
+        title: "Manufacturing & Industrial",
+        desc: "Optimize processes and monitor operations.",
+        href: "industries-section",
+    },
+    {
+        icon: FaBolt,
+        title: "Energy & Utilities",
+        desc: "Safeguard infrastructure and enhance efficiency.",
+        href: "industries-section",
+    },
+    {
+        icon: FaHardHat,
+        title: "Construction & Infrastructure",
+        desc: "Protect worksites and personnel with monitoring.",
+        href: "industries-section",
+    },
+    {
+        icon: FaTruck,
+        title: "Transportation & Logistics",
+        desc: "Track fleets and cargo for safety and efficiency.",
+        href: "industries-section",
+    },
+    {
+        icon: FaPlane,
+        title: "Aviation & Aerospace",
+        desc: "Secure airports and units with smart solutions.",
+        href: "industries-section",
+    },
+];
+
+export const NAV_LINKS = [
+    { label: "About Us", href: "about" },
+    { label: "Products", href: "products" },
+    { label: "Insights", href: "insights" },
+    { label: "Contact Us", href: "contact" },
+];
