@@ -69,11 +69,11 @@ const Navbar = () => {
               </div>
             </div>
 
-            <div className="nav-link-container px-2 py-2 relative z-10 group">
+            <div className="nav-link-container px-2 py-1 relative z-10 group">
               <div className="nav-link-inner">
                 <button
                   data-section="services"
-                  className="flex items-center text-[#013299] group-hover:text-[#FD8E18] cursor-pointer font-semibold transition-colors py-4"
+                  className="flex items-center text-[#013299] group-hover:text-[#FD8E18] cursor-pointer font-semibold transition-colors py-2"
                 >
                   Services{" "}
                   <FaChevronDown className="ml-1 text-xs group-hover:rotate-180 transition-transform duration-300" />
@@ -117,11 +117,11 @@ const Navbar = () => {
               </div>
             </div>
 
-            <div className="nav-link-container px-2 py-2 relative z-10 group">
+            <div className="nav-link-container px-2 py-1 relative z-10 group">
               <div className="nav-link-inner">
                 <button
                   data-section="industries"
-                  className="flex items-center text-[#013299] group-hover:text-[#FD8E18] cursor-pointer font-semibold transition-colors py-4"
+                  className="flex items-center text-[#013299] group-hover:text-[#FD8E18] cursor-pointer font-semibold transition-colors py-2"
                 >
                   Industries{" "}
                   <FaChevronDown className="ml-1 text-xs group-hover:rotate-180 transition-transform duration-300" />
