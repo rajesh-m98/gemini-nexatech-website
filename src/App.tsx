@@ -10,10 +10,14 @@ import IndustryDetail from "./pages/IndustryDetail";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import VideoLibraryPage from "./pages/VideoLibraryPage";
+import ScrollToTop from "./components/common/ScrollToTop";
+import BrochureFAB from "./components/common/BrochureFAB";
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
+      <BrochureFAB />
       <div className="min-h-screen">
         <Navbar />
         <Routes>

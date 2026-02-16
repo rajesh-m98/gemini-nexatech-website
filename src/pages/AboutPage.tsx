@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import Container from "../components/common/Container";
 import { roadmap, coreValues } from "../data/websiteData";
 import { FaRocket, FaEye, FaGem } from "react-icons/fa";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -40,10 +40,6 @@ const StatCard = ({
 const AboutPage = () => {
   const { stats } = useAboutManager();
   const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   useGSAP(
     () => {

@@ -30,6 +30,7 @@ export const useNavbarManager = () => {
         if (href.startsWith("#")) {
             scrollToSection(href);
         } else {
+            window.scrollTo(0, 0);
             navigate(href);
             setIsMobileMenuOpen(false);
         }
