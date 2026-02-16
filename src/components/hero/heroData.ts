@@ -6,7 +6,7 @@ export const HERO_DATA = {
     },
     ctas: [
         { label: "Schedule a Call", href: "#contact", type: "primary" },
-        { label: "Video Library", href: "#videos", type: "secondary" }
+        { label: "Video Library", href: "/video-library", type: "secondary" }
     ],
     trustedBy: {
         label: "Trusted by",

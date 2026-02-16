@@ -1,5 +1,5 @@
 import Container from "../common/Container";
-import { FaCalendar, FaUser, FaArrowRight } from "react-icons/fa";
+import { FaUser, FaArrowRight } from "react-icons/fa";
 import { useInsightsAnimations } from "./insights/InsightsAnimations";
 import { useInsightsManager } from "./insights/InsightsManager";
 
@@ -14,43 +14,46 @@ const Insights = () => {
       className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#000A16] to-[#011C3D] border-t border-white/10"
     >
       <Container>
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 drop-shadow-lg">
-            Latest <span className="text-[#FF8C00]">Insights</span>
-          </h2>
-          <p className="text-gray-200 text-base sm:text-lg max-w-3xl mx-auto">
-            Stay updated with our latest thoughts and industry trends
-          </p>
+        <div className="flex flex-col lg:flex-row items-center justify-between mb-16 gap-8">
+          <div className="text-center lg:text-left">
+            <h2 className="text-4xl lg:text-6xl font-black text-white mb-4 tracking-tighter">
+              KNOWLEDGE <span className="text-gemini-orange">HUB</span>
+            </h2>
+            <p className="text-gray-400 font-bold uppercase tracking-[0.2em]">
+              Latest Research, Blogs & Videos
+            </p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Blog Posts */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           {insights.map((insight, index) => (
             <div
               key={index}
-              className="group bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:bg-white/10 hover:border-[#FF8C00]/50 transition-all duration-300 overflow-hidden transform hover:-translate-y-2 shadow-lg hover:shadow-xl"
+              className="group bg-[#00152F] rounded-3xl border border-white/10 hover:border-gemini-blue/50 transition-all duration-500 overflow-hidden shadow-2xl relative"
             >
-              <div className="p-6">
-                <div className="text-[#FF8C00] text-sm font-semibold mb-3">
+              <div className="h-48 bg-tech-blueprint opacity-20 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#00152F] to-transparent" />
+              </div>
+              <div className="p-8 -mt-16 relative z-10">
+                <div className="inline-block px-3 py-1 rounded-lg bg-gemini-blue text-white text-[10px] font-black uppercase tracking-widest mb-4">
                   {insight.category}
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#FF8C00] transition-colors">
+                <h3 className="text-xl font-black text-white mb-4 leading-tight group-hover:text-gemini-orange transition-colors">
                   {insight.title}
                 </h3>
-                <p className="text-gray-300 mb-4">{insight.excerpt}</p>
-                <div className="flex items-center justify-between text-sm text-gray-400 mb-4">
-                  <div className="flex items-center">
-                    <FaUser className="mr-2" />
-                    {insight.author}
+                <p className="text-gray-400 text-sm mb-6 line-clamp-2 italic font-medium">
+                  "{insight.excerpt}"
+                </p>
+
+                <div className="flex items-center justify-between pt-6 border-t border-white/5">
+                  <div className="flex items-center gap-2 text-xs text-gray-500 font-bold uppercase">
+                    <FaUser className="text-gemini-blue" /> {insight.author}
                   </div>
-                  <div className="flex items-center">
-                    <FaCalendar className="mr-2" />
-                    {insight.date}
-                  </div>
+                  <button className="text-white hover:text-gemini-orange transition-colors">
+                    <FaArrowRight />
+                  </button>
                 </div>
-                <button className="inline-flex items-center text-[#FF8C00] hover:text-white transition-colors font-semibold cursor-pointer">
-                  Read More
-                  <FaArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" />
-                </button>
               </div>
             </div>
           ))}

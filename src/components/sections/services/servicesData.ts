@@ -25,7 +25,7 @@ export interface ServiceItem {
 
 export const servicesData: ServiceItem[] = [
     {
-        id: "software",
+        id: "custom-software",
         icon: FaLaptopCode,
         title: "Custom Software Development",
         desc: "We design and develop tailored software solutions that align perfectly with your business processes, ensuring scalability and value.",
@@ -39,7 +39,7 @@ export const servicesData: ServiceItem[] = [
         gradient: "from-[#0047AB] to-[#002152]",
     },
     {
-        id: "web",
+        id: "web-app",
         icon: FaGlobe,
         title: "Web Application Development",
         desc: "We create responsive, secure, and high-performing web applications that streamline operations and deliver seamless user experiences.",
@@ -53,7 +53,7 @@ export const servicesData: ServiceItem[] = [
         gradient: "from-[#00152F] to-[#0047AB]",
     },
     {
-        id: "mobile",
+        id: "mobile-app",
         icon: FaMobileAlt,
         title: "Mobile Application Development",
         desc: "We develop powerful Android and iOS mobile applications that enhance mobility, productivity, and customer engagement.",
@@ -67,7 +67,7 @@ export const servicesData: ServiceItem[] = [
         gradient: "from-[#1a1a1a] to-[#FF8C00]/30",
     },
     {
-        id: "uiux",
+        id: "ui-ux",
         icon: FaPaintBrush,
         title: "UX/UI Design Services",
         desc: "We craft intuitive and visually compelling digital experiences that enhance usability, engagement, and brand perception.",
@@ -81,7 +81,7 @@ export const servicesData: ServiceItem[] = [
         gradient: "from-[#0047AB] via-[#000510] to-[#FF8C00]/20",
     },
     {
-        id: "ai",
+        id: "ai-dev",
         icon: FaBrain,
         title: "AI Development Services",
         desc: "We deliver AI-powered solutions that automate processes, enhance decision-making, and unlock predictive business insights.",
@@ -109,7 +109,7 @@ export const servicesData: ServiceItem[] = [
         gradient: "from-[#FF8C00]/20 to-[#00152F]",
     },
     {
-        id: "cloud",
+        id: "cloud-devops",
         icon: FaCloud,
         title: "Cloud & DevOps Services",
         desc: "We enable businesses to leverage cloud infrastructure and DevOps practices for faster deployment, scalability, and operational efficiency.",
@@ -123,7 +123,7 @@ export const servicesData: ServiceItem[] = [
         gradient: "from-[#0047AB]/60 to-[#00152F]",
     },
     {
-        id: "api",
+        id: "api-integration",
         icon: FaNetworkWired,
         title: "API & System Integration",
         desc: "We build secure APIs and integrate enterprise systems to ensure seamless communication between platforms and devices.",
@@ -137,7 +137,7 @@ export const servicesData: ServiceItem[] = [
         gradient: "from-[#1a1a1a] via-[#00152F] to-[#0047AB]/40",
     },
     {
-        id: "enterprise",
+        id: "enterprise-app",
         icon: FaBuilding,
         title: "Enterprise App Development",
         desc: "We develop robust enterprise-grade applications that automate workflows, improve collaboration, and support large-scale operations.",
@@ -151,7 +151,7 @@ export const servicesData: ServiceItem[] = [
         gradient: "from-[#002861] to-[#1a1a1a]",
     },
     {
-        id: "iot",
+        id: "iot-monitoring",
         icon: FaMicrochip,
         title: "IoT & Smart Monitoring",
         desc: "We design intelligent IoT-enabled systems that provide real-time monitoring, asset visibility, and operational control.",
@@ -165,7 +165,7 @@ export const servicesData: ServiceItem[] = [
         gradient: "from-[#FF8C00]/10 via-[#000510] to-[#0047AB]",
     },
     {
-        id: "data",
+        id: "data-analytics",
         icon: FaChartBar,
         title: "Data Analytics & BI",
         desc: "We transform raw data into actionable insights through advanced analytics, dashboards, and reporting solutions.",
@@ -179,7 +179,7 @@ export const servicesData: ServiceItem[] = [
         gradient: "from-[#00152F] via-[#0047AB]/30 to-[#000A16]",
     },
     {
-        id: "support",
+        id: "maintenance",
         icon: FaTools,
         title: "Application Support",
         desc: "We provide continuous monitoring, upgrades, and technical support to ensure your systems operate smoothly and efficiently.",

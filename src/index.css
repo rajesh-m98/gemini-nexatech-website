@@ -1,16 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
+@utility custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-gemini-blue);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gemini-orange);
+  }
+}
+
 @theme {
-  --color-gemini-blue: #013299;
-  --color-gemini-orange: #FD8E18;
-  --color-gemini-blue-dark: #002673;
-  --color-gemini-orange-dark: #D47514;
+  --color-gemini-blue: #002673;
+  /* Darker blue */
+  --color-gemini-orange: #C46D10;
+  /* Darker orange */
+  --color-gemini-blue-dark: #001A4D;
+  --color-gemini-orange-dark: #A35A0D;
 
   /* Premium Animations */
   --animate-ring: phone-ring 0.8s ease-in-out infinite;
   --animate-play-pulse: simple-pulse 1.2s ease-in-out infinite;
   --animate-float: float 3s ease-in-out infinite;
+  --animate-glow-line: glow-line 4s linear infinite;
+  --animate-scanner: scanner 3s ease-in-out infinite;
 }
 
 @keyframes phone-ring {
@@ -248,6 +272,30 @@ body {
 @keyframes shimmer {
   100% {
     transform: translateX(100%);
+  }
+}
+
+/* Glow Divider Animation */
+@keyframes glow-line {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+/* Scanner Animation */
+@keyframes scanner {
+
+  0%,
+  100% {
+    left: 0%;
+  }
+
+  50% {
+    left: 100%;
   }
 }
 

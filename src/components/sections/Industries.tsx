@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import Container from "../common/Container";
 import { useIndustriesManager } from "./industries/IndustriesManager";
 import { useIndustriesAnimations } from "./industries/IndustriesAnimations";
@@ -93,9 +94,12 @@ const Industries = () => {
                 <p className="text-gray-300 text-sm lg:text-base leading-relaxed mb-6">
                   {industry.desc}
                 </p>
-                <button className="px-6 py-2.5 bg-white text-black font-bold rounded-xl text-sm hover:bg-[#FF8C00] hover:text-white transition-all transform active:scale-95">
+                <Link
+                  to={`/industries/${industry.id}`}
+                  className="px-6 py-2.5 bg-white text-black font-bold rounded-xl text-sm hover:bg-[#FF8C00] hover:text-white transition-all transform active:scale-95 inline-block pointer-events-auto"
+                >
                   View Solution
-                </button>
+                </Link>
               </div>
             </div>
 

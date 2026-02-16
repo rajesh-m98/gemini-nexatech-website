@@ -38,8 +38,8 @@ const Navbar = () => {
             />
             <div className="flex flex-col items-start justify-center ml-2">
               <span className="text-sm sm:text-base lg:text-lg font-bold leading-tight">
-                <span className="text-[#013299]">GEMINI </span>
-                <span className="text-[#FD8E18]">NEXATECH</span>
+                <span className="text-gemini-blue">GEMINI </span>
+                <span className="text-gemini-orange">NEXATECH</span>
               </span>
               <span className="text-[9px] sm:text-[10px] lg:text-[11px] text-gray-600 tracking-wide uppercase font-medium leading-tight">
                 Where Ideas Meet Innovation

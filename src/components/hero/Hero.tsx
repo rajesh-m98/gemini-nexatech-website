@@ -4,7 +4,14 @@ import heroImage from "../../assets/hero_section_image.jpg";
 import { useHeroManager } from "./HeroManager";
 import { useHeroAnimations } from "./HeroAnimations";
 
-const Hero = () => {
+import { useNavigate } from "react-router-dom";
+
+interface HeroProps {
+  onScheduleCall?: () => void;
+}
+
+const Hero = ({ onScheduleCall }: HeroProps) => {
+  const navigate = useNavigate();
   const {
     heading,
     ctas,
@@ -60,10 +67,18 @@ const Hero = () => {
               {ctas.map((cta, index) => (
                 <button
                   key={index}
-                  onClick={() => scrollToSection(cta.href)}
+                  onClick={() => {
+                    if (cta.type === "primary" && onScheduleCall) {
+                      onScheduleCall();
+                    } else if (cta.href.startsWith("/")) {
+                      navigate(cta.href);
+                    } else {
+                      scrollToSection(cta.href);
+                    }
+                  }}
                   className={`group relative w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-all duration-300 flex items-center justify-center gap-3 active:scale-95 cursor-pointer ${
                     cta.type === "primary"
-                      ? "bg-gradient-to-r from-cyan-400 via-cyan-500 to-blue-500 text-white"
+                      ? "bg-gradient-to-r from-gemini-blue via-blue-600 to-blue-700 text-white"
                       : "bg-transparent border-2 border-white text-white hover:bg-white hover:text-[#0047AB]"
                   }`}
                 >
@@ -75,6 +90,15 @@ const Hero = () => {
                   )}
                 </button>
               ))}
+
+              {/* New Buttons for Video and PDF
+              <button className="group w-full sm:w-auto px-8 py-3 rounded-lg border border-gemini-orange text-gemini-orange font-bold text-sm tracking-wider hover:bg-gemini-orange hover:text-white transition-all flex items-center justify-center gap-2">
+                <FaPlay size={10} /> Presentation Video
+              </button>
+
+              <button className="group w-full sm:w-auto px-8 py-3 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-sm tracking-wider hover:bg-white hover:text-gemini-blue transition-all flex items-center justify-center gap-2">
+                PDF Profile
+              </button> */}
             </div>
           </div>
         </div>

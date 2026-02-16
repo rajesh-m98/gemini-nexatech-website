@@ -40,12 +40,24 @@ export const useIndustriesAnimations = () => {
                 const image = pillar.querySelector(".pillar-image") as HTMLElement;
 
                 pillar.addEventListener("mouseenter", () => {
-                    gsap.killTweensOf(pillarsArray);
-                    gsap.to(pillarsArray, { flexGrow: 0.7, duration: 0.8, ease: "power3.inOut", overwrite: "auto" });
-                    gsap.to(pillar, { flexGrow: 2.8, duration: 0.8, ease: "power3.inOut", overwrite: "auto" });
-                    gsap.to(details, { opacity: 1, x: 0, duration: 0.6, delay: 0.1, ease: "power2.out" });
-                    gsap.to(title, { opacity: 0, y: -30, duration: 0.3 });
-                    gsap.to(image, { scale: 1.1, filter: "grayscale(0%)", opacity: 0.7, duration: 1.2 });
+                    // 1. Reset all OTHER pillars to closed state
+                    pillarsArray.forEach(other => {
+                        if (other === pillar) return;
+                        const otherTitle = other.querySelector(".pillar-title");
+                        const otherDetails = other.querySelector(".pillar-details");
+                        const otherImage = other.querySelector(".pillar-image");
+
+                        gsap.to(other, { flexGrow: 0.6, duration: 0.8, ease: "power4.out", overwrite: true });
+                        gsap.to(otherTitle, { opacity: 1, y: 0, duration: 0.4, overwrite: true });
+                        gsap.to(otherDetails, { opacity: 0, x: -40, duration: 0.4, overwrite: true });
+                        gsap.to(otherImage, { scale: 1.25, filter: "grayscale(100%)", opacity: 0.4, duration: 1, overwrite: true });
+                    });
+
+                    // 2. Expand the CURRENT hovered pillar
+                    gsap.to(pillar, { flexGrow: 3.5, duration: 0.8, ease: "power4.out", overwrite: true });
+                    gsap.to(details, { opacity: 1, x: 0, duration: 0.7, delay: 0.1, ease: "power2.out", overwrite: true });
+                    gsap.to(title, { opacity: 0, y: -40, duration: 0.4, overwrite: true });
+                    gsap.to(image, { scale: 1, filter: "grayscale(0%)", opacity: 0.8, duration: 1.5, overwrite: true });
                 });
             });
 

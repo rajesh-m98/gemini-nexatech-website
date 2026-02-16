@@ -9,6 +9,6 @@ export const ABOUT_DATA = {
         { value: "2500+", numericValue: 2500, suffix: "+", label: "Empowered Clients" },
         { value: "25+", numericValue: 25, suffix: "+", label: "Countries Served" },
         { value: "300+", numericValue: 300, suffix: "+", label: "Tech Engineers" },
-        { value: "2000+", numericValue: 2000, suffix: "+", label: "Digital Solutions Launched" },
+        { value: "2000+", numericValue: 2000, suffix: "+", label: "Digital Solutions" },
     ]
 };

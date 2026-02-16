@@ -45,7 +45,7 @@ export const INDUSTRIES_DATA = [
         image: "https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=1500", // Construction site at night/sunset
     },
     {
-        id: "transportation",
+        id: "logistics",
         title: "Transportation & Logistics",
         shortTitle: "Logistics",
         desc: "Track fleets, assets, and cargo for safety and efficiency.",

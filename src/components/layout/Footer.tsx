@@ -34,14 +34,14 @@ const Footer = () => {
             viewport={{ once: true }}
             className="max-w-xl text-left w-full lg:w-auto"
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6 leading-tight text-center lg:text-left">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6 leading-tight text-center lg:text-left tracking-tighter">
               Ready to build the <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF8C00] to-orange-400">
+              <span className="text-gemini-orange uppercase">
                 Next Big Thing?
               </span>
             </h2>
             <div className="flex justify-center lg:justify-start">
-              <button className="px-8 py-4 bg-white text-[#0047AB] font-black rounded-2xl hover:bg-[#FF8C00] hover:text-white transition-all transform hover:scale-105 active:scale-95 shadow-2xl">
+              <button className="px-8 py-4 bg-white text-gemini-blue font-black rounded-2xl hover:bg-gemini-orange hover:text-white transition-all transform hover:scale-105 active:scale-95 shadow-2xl">
                 LET'S WORK TOGETHER
               </button>
             </div>
@@ -90,11 +90,11 @@ const Footer = () => {
             className="space-y-6 text-left"
           >
             <div className="flex flex-col items-start">
-              <span className="text-2xl font-black tracking-tight leading-none">
-                <span className="text-[#0047AB]">GEMINI </span>
-                <span className="text-[#FF8C00]">NEXATECH</span>
+              <span className="text-2xl font-black tracking-tight leading-none uppercase">
+                <span className="text-gemini-blue">GEMINI </span>
+                <span className="text-gemini-orange">NEXATECH</span>
               </span>
-              <span className="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold mt-1">
+              <span className="text-[10px] text-gray-500 uppercase tracking-[0.4em] font-bold mt-2">
                 Innovation Redefined
               </span>
             </div>
@@ -113,7 +113,7 @@ const Footer = () => {
               }}
               className="space-y-6 flex flex-col items-start text-left"
             >
-              <h4 className="text-white font-black uppercase tracking-widest text-sm border-l-2 border-[#FF8C00] pl-4 w-full text-left">
+              <h4 className="text-white font-black uppercase tracking-widest text-sm border-l-4 border-gemini-orange pl-4 w-full text-left">
                 {section.title}
               </h4>
               <ul className="space-y-4">
@@ -136,7 +136,7 @@ const Footer = () => {
                       href={item.href}
                       className={`flex items-center space-x-3 transition-all ${
                         item.highlight
-                          ? "text-[#FF8C00] font-bold"
+                          ? "text-gemini-orange font-bold text-lg"
                           : "text-gray-400 hover:text-white"
                       }`}
                     >

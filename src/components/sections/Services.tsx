@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
 import Container from "../common/Container";
 import { servicesData } from "./services/servicesData";
@@ -130,15 +131,12 @@ const Services = () => {
                 </div>
 
                 <div className="mt-auto pointer-events-auto">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      // Redirect or handle click
-                    }}
-                    className="px-8 py-3 bg-white text-[#0047AB] text-sm font-bold rounded-xl hover:bg-[#FF8C00] hover:text-white transition-all transform active:scale-95 shadow-lg relative z-20"
+                  <Link
+                    to={`/services/${activeService.id}`}
+                    className="px-8 py-3 bg-white text-[#0047AB] text-sm font-bold rounded-xl hover:bg-[#FF8C00] hover:text-white transition-all transform active:scale-95 shadow-lg relative z-20 block w-fit mx-auto"
                   >
                     LEARN MORE
-                  </button>
+                  </Link>
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -289,11 +287,14 @@ const Services = () => {
                     ))}
                   </div>
 
-                  <button className="group/btn relative px-6 py-3 lg:px-8 lg:py-3.5 bg-white text-[#0047AB] font-bold rounded-xl lg:rounded-2xl hover:bg-[#FF8C00] hover:text-white transition-all duration-300 transform active:scale-95 shadow-lg">
+                  <Link
+                    to={`/services/${activeService.id}`}
+                    className="group/btn relative px-6 py-3 lg:px-8 lg:py-3.5 bg-white text-[#0047AB] font-bold rounded-xl lg:rounded-2xl hover:bg-[#FF8C00] hover:text-white transition-all duration-300 transform active:scale-95 shadow-lg block w-fit"
+                  >
                     <span className="relative z-10 flex items-center gap-2">
                       Learn More <span className="text-xl">→</span>
                     </span>
-                  </button>
+                  </Link>
                 </div>
 
                 <div className="flex-1 w-full max-w-[440px] relative">

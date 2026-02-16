@@ -1,27 +1,55 @@
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Hero from "../components/hero/Hero";
-import About from "../components/sections/About";
 import Services from "../components/sections/Services";
 import Products from "../components/sections/Products";
 import CaseStudies from "../components/sections/CaseStudies";
 import Industries from "../components/sections/Industries";
 import Insights from "../components/sections/Insights";
-// import Footer from "../components/layout/Footer";
+import ScheduleCallModal from "../components/common/ScheduleCallModal";
+import SectionDivider from "../components/common/SectionDivider";
 
 const Home = () => {
+  const { hash } = useLocation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (hash) {
+      const id = hash.replace("#", "");
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+  }, [hash]);
+
   return (
     <main>
       <div className="relative">
-        <Hero />
+        <Hero onScheduleCall={() => setIsModalOpen(true)} />
       </div>
-      <About />
+
+      <SectionDivider direction="right" />
       <Services />
+
+      <SectionDivider direction="left" />
       <Products />
+
+      <SectionDivider direction="both" />
       <Industries />
+
+      {/* <SectionDivider direction="right" /> */}
       <CaseStudies />
+
+      <SectionDivider direction="left" />
       <Insights />
-      {/* <div id="contact">
-        <Footer />
-      </div> */}
+
+      <ScheduleCallModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </main>
   );
 };
