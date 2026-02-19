@@ -148,6 +148,31 @@ body {
   animation: ripple-cyan 2s ease-out infinite;
 }
 
+/* Orange ripple for Brochure - Matching brand orange */
+@keyframes ripple-orange {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(253, 142, 24, 0.4),
+      0 0 0 0 rgba(253, 142, 24, 0.2);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 10px rgba(253, 142, 24, 0.2),
+      0 0 0 20px rgba(253, 142, 24, 0.1);
+  }
+
+  100% {
+    box-shadow:
+      0 0 0 20px rgba(253, 142, 24, 0),
+      0 0 0 40px rgba(253, 142, 24, 0);
+  }
+}
+
+.animate-ripple-orange {
+  animation: ripple-orange 2s ease-out infinite;
+}
+
 /* Minimal ripple for WhatsApp - reduced intensity */
 @keyframes ripple-cyan-minimal {
   0% {
@@ -357,6 +382,57 @@ body {
   /* Liquid Gooey Filter for Navbar/UI */
   .filter-gooey {
     filter: url('#gooey');
+  }
+
+  /* --- CENTRALIZED TYPOGRAPHY --- */
+  .typo-heading {
+    @apply text-2xl md:text-3xl lg:text-4xl font-black text-white tracking-[0.1em] leading-none uppercase;
+  }
+
+  .typo-section {
+    @apply text-xl md:text-2xl lg:text-3xl font-black text-white tracking-[0.1em] uppercase;
+  }
+
+  .typo-subsection {
+    @apply text-lg md:text-xl lg:text-lg font-black text-black tracking-[0.02em] uppercase;
+  }
+
+  .typo-subsection-white {
+    @apply text-lg md:text-xl lg:text-lg font-black text-white tracking-[0.02em] uppercase;
+  }
+
+  .typo-tab-heading {
+    @apply text-xs md:text-sm font-black uppercase tracking-[0.2em] text-white;
+  }
+
+  .typo-body {
+    @apply text-sm md:text-base text-white font-medium leading-relaxed;
+  }
+
+  .typo-body-bold {
+    @apply text-sm md:text-base text-white font-bold leading-relaxed;
+  }
+
+  .typo-label {
+    @apply text-[12px] font-bold uppercase tracking-[0.2em] text-white/80;
+  }
+
+  /* --- CONSISTENCY SIZING --- */
+  .icon-box-lg {
+    @apply w-16 h-16 shrink-0 rounded-2xl flex items-center justify-center transition-all duration-500 bg-white/[0.03] border border-white/5;
+  }
+
+  .icon-box-md {
+    @apply w-12 h-12 shrink-0 rounded-xl flex items-center justify-center transition-all duration-500 bg-white/[0.03] border border-white/5;
+  }
+
+  .icon-box-sm {
+    @apply w-10 h-10 shrink-0 rounded-lg flex items-center justify-center transition-all duration-500 bg-white/[0.03] border border-white/5;
+  }
+
+  /* --- PAGE LAYOUT --- */
+  .page-center-layout {
+    @apply flex flex-col justify-center min-h-screen py-12;
   }
 }
 

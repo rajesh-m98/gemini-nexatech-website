@@ -1,3 +1,16 @@
+import customSoftwareImg from "../assets/services/Custom-Software-Development.jpg";
+import webAppImg from "../assets/services/web_application_development.jpg";
+import mobileAppImg from "../assets/services/mobile-app-development.png";
+import uiUxImg from "../assets/services/ui_ux.webp";
+import aiDevImg from "../assets/services/ai-development.webp";
+import consultingImg from "../assets/services/Software-Consulting.webp";
+import cloudDevOpsImg from "../assets/services/cloud_devops.png";
+import apiIntegrationImg from "../assets/services/api_integration.jpg";
+import enterpriseAppImg from "../assets/services/enterprise-application-development.webp";
+import iotImg from "../assets/services/iot.webp";
+import dataAnalyticsImg from "../assets/services/data-analytics-techniques.avif";
+import maintenanceImg from "../assets/services/application-support.jpg";
+
 export const services = [
     {
         id: "custom-software",
@@ -10,7 +23,8 @@ export const services = [
             "Secure, high-performance coding standards",
             "Seamless third-party integrations"
         ],
-        icon: "software"
+        icon: "software",
+        image: customSoftwareImg
     },
     {
         id: "web-app",
@@ -23,7 +37,8 @@ export const services = [
             "High-speed performance optimization",
             "Enterprise-grade security implementation"
         ],
-        icon: "globe"
+        icon: "globe",
+        image: webAppImg
     },
     {
         id: "mobile-app",
@@ -36,7 +51,8 @@ export const services = [
             "App Store & Play Store deployment support",
             "Ongoing updates & feature enhancements"
         ],
-        icon: "mobile"
+        icon: "mobile",
+        image: mobileAppImg
     },
     {
         id: "ui-ux",
@@ -49,7 +65,8 @@ export const services = [
             "Conversion-focused layouts",
             "Design system & brand consistency"
         ],
-        icon: "palette"
+        icon: "palette",
+        image: uiUxImg
     },
     {
         id: "ai-dev",
@@ -62,7 +79,8 @@ export const services = [
             "Intelligent dashboards & reporting",
             "Custom AI integrations for business tools"
         ],
-        icon: "brain"
+        icon: "brain",
+        image: aiDevImg
     },
     {
         id: "consulting",
@@ -75,7 +93,8 @@ export const services = [
             "Process optimization & automation advisory",
             "Risk assessment & scalability planning"
         ],
-        icon: "users"
+        icon: "users",
+        image: consultingImg
     },
     {
         id: "cloud-devops",
@@ -88,7 +107,8 @@ export const services = [
             "Infrastructure automation",
             "Monitoring & performance management"
         ],
-        icon: "cloud"
+        icon: "cloud",
+        image: cloudDevOpsImg
     },
     {
         id: "api-integration",
@@ -101,12 +121,13 @@ export const services = [
             "Payment gateway integration",
             "Secure data exchange protocols"
         ],
-        icon: "link"
+        icon: "link",
+        image: apiIntegrationImg
     },
     {
         id: "enterprise-app",
         title: "Enterprise Application Development Services",
-        description: "We create enterprise-grade applications that streamline workflows, enhance collaboration, and support complex operations.",
+        description: "We create enterprise-grade applications that streamline workflows, enhance collaboration, and support large-scale operations.",
         features: [
             "Workflow & process automation",
             "Multi-user role management",
@@ -114,7 +135,8 @@ export const services = [
             "High availability & scalability",
             "Advanced security & compliance standards"
         ],
-        icon: "briefcase"
+        icon: "briefcase",
+        image: enterpriseAppImg
     },
     {
         id: "iot-monitoring",
@@ -127,7 +149,8 @@ export const services = [
             "Real-time alerts & notifications",
             "Data analytics for operational insights"
         ],
-        icon: "cpu"
+        icon: "cpu",
+        image: iotImg
     },
     {
         id: "data-analytics",
@@ -140,7 +163,8 @@ export const services = [
             "KPI monitoring & forecasting",
             "Decision-support analytics tools"
         ],
-        icon: "bar-chart"
+        icon: "bar-chart",
+        image: dataAnalyticsImg
     },
     {
         id: "maintenance",
@@ -153,7 +177,8 @@ export const services = [
             "Version upgrades & feature improvements",
             "24/7 issue resolution assistance"
         ],
-        icon: "shield"
+        icon: "shield",
+        image: maintenanceImg
     }
 ];
 

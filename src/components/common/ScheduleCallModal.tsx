@@ -106,7 +106,7 @@ const ScheduleCallModal = ({ isOpen, onClose }: ScheduleCallModalProps) => {
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            className="relative w-full max-w-lg bg-[#001024]/90 backdrop-blur-xl border border-white/10 rounded-[2rem] overflow-hidden shadow-2xl flex flex-col max-h-[98vh] sm:max-h-[93vh]"
+            className="relative w-full max-w-2xl bg-[#001024]/90 backdrop-blur-xl border border-white/10 rounded-[2rem] overflow-hidden shadow-2xl flex flex-col max-h-[98vh] sm:max-h-[93vh]"
           >
             {/* Header - Fixed */}
             <div className="relative p-6 sm:p-8 border-b border-white/5 bg-[#001024]/80 backdrop-blur-md z-30">
@@ -192,7 +192,7 @@ const ScheduleCallModal = ({ isOpen, onClose }: ScheduleCallModalProps) => {
                           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                           className="bg-white/5 border border-white/10 rounded-2xl px-3 py-3.5 sm:py-4 flex items-center gap-2 cursor-pointer hover:bg-white/10 transition-colors"
                         >
-                          <div className="w-5 h-3.5 overflow-hidden rounded-sm bg-white/10">
+                          <div className="w-6 h-3.5 overflow-hidden rounded-sm bg-white/10">
                             <img
                               src={`https://flagcdn.com/w40/${selectedCountry.iso}.png`}
                               alt={selectedCountry.name}
@@ -208,7 +208,7 @@ const ScheduleCallModal = ({ isOpen, onClose }: ScheduleCallModalProps) => {
                           />
                         </div>
                         {isDropdownOpen && (
-                          <div className="absolute top-full left-0 mt-2 bg-[#001D3D] border border-white/10 rounded-2xl overflow-hidden shadow-2xl z-50 min-w-[220px]">
+                          <div className="absolute top-full left-0 mt-2 bg-[#001D3D] border border-white/10 rounded-2xl overflow-hidden shadow-2xl z-50 min-w-[260px]">
                             {countries.map((c) => (
                               <div
                                 key={c.code}
@@ -216,7 +216,7 @@ const ScheduleCallModal = ({ isOpen, onClose }: ScheduleCallModalProps) => {
                                   setSelectedCountry(c);
                                   setIsDropdownOpen(false);
                                 }}
-                                className="px-4 py-3 hover:bg-gray-800 cursor-pointer flex items-center gap-3 border-b border-white/5 last:border-0 transition-colors"
+                                className="px-4 py-3 hover:bg-gray-800 cursor-pointer flex items-center gap-2 border-b border-white/5 last:border-0 transition-colors"
                               >
                                 <div className="w-6 h-4 overflow-hidden rounded-sm bg-white/10 shrink-0">
                                   <img
@@ -226,10 +226,10 @@ const ScheduleCallModal = ({ isOpen, onClose }: ScheduleCallModalProps) => {
                                   />
                                 </div>
                                 <div className="flex flex-col">
-                                  <span className="text-white text-xs font-bold">
+                                  <span className="text-white text-sm font-bold">
                                     {c.name}
                                   </span>
-                                  <span className="text-gemini-blue text-[10px] font-black italic">
+                                  <span className="text-gemini-blue text-sm font-black italic">
                                     {c.code}
                                   </span>
                                 </div>

@@ -1,7 +1,6 @@
 import { HERO_DATA } from "./heroData";
 
 export const useHeroManager = () => {
-    const companySlots = Array(HERO_DATA.trustedBy.logoCount).fill(null);
 
     const openWhatsApp = () => {
         window.open(
@@ -22,7 +21,7 @@ export const useHeroManager = () => {
         heading: HERO_DATA.heading,
         ctas: HERO_DATA.ctas,
         trustedByLabel: HERO_DATA.trustedBy.label,
-        companySlots,
+        logos: HERO_DATA.trustedBy.logos,
         openWhatsApp,
         scrollToSection
     };

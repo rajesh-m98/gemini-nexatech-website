@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Hero from "../components/hero/Hero";
+import Stats from "../components/sections/Stats";
 import Services from "../components/sections/Services";
 import Products from "../components/sections/Products";
 import CaseStudies from "../components/sections/CaseStudies";
 import Industries from "../components/sections/Industries";
-import Insights from "../components/sections/Insights";
 import ScheduleCallModal from "../components/common/ScheduleCallModal";
 import SectionDivider from "../components/common/SectionDivider";
 
@@ -31,6 +31,8 @@ const Home = () => {
         <Hero onScheduleCall={() => setIsModalOpen(true)} />
       </div>
 
+      <Stats />
+
       <SectionDivider direction="right" />
       <Services />
 
@@ -43,8 +45,8 @@ const Home = () => {
       {/* <SectionDivider direction="right" /> */}
       <CaseStudies />
 
-      <SectionDivider direction="left" />
-      <Insights />
+      {/* <SectionDivider direction="left" />
+      <Insights /> */}
 
       <ScheduleCallModal
         isOpen={isModalOpen}

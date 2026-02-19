@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { SERVICES_MENU, INDUSTRIES_MENU, NAV_LINKS } from "./navbarData";
+import { PRODUCTS_DATA } from "../../sections/products/productsData";
 
 export const useNavbarManager = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -9,7 +10,7 @@ export const useNavbarManager = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const scrollToSection = useCallback((id: string) => {
+    const internalScrollToSection = useCallback((id: string) => {
         setIsMobileMenuOpen(false);
         setActiveDropdown(null);
 
@@ -17,7 +18,6 @@ export const useNavbarManager = () => {
 
         if (location.pathname !== "/") {
             navigate("/#" + targetId);
-            // Scrolling will be handled by a listener or effect in Home/App
         } else {
             const element = document.getElementById(targetId);
             if (element) {
@@ -27,12 +27,13 @@ export const useNavbarManager = () => {
     }, [location.pathname, navigate]);
 
     const handleNavClick = (href: string) => {
+        setIsMobileMenuOpen(false);
+        setActiveDropdown(null);
+
         if (href.startsWith("#")) {
-            scrollToSection(href);
+            internalScrollToSection(href);
         } else {
-            window.scrollTo(0, 0);
             navigate(href);
-            setIsMobileMenuOpen(false);
         }
     };
 
@@ -49,6 +50,7 @@ export const useNavbarManager = () => {
         if (location.pathname !== "/") navigate("/");
         window.scrollTo({ top: 0, behavior: "smooth" });
         setIsMobileMenuOpen(false);
+        setActiveDropdown(null);
     };
 
     return {
@@ -56,8 +58,10 @@ export const useNavbarManager = () => {
         activeDropdown,
         isModalOpen,
         setIsModalOpen,
+        location,
         services: SERVICES_MENU,
         industries: INDUSTRIES_MENU,
+        products: PRODUCTS_DATA,
         navLinks: NAV_LINKS,
         scrollToSection: handleNavClick,
         toggleMobileMenu,

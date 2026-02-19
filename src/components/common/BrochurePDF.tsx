@@ -31,39 +31,37 @@ const styles = StyleSheet.create({
   // --- HEADER SECTIONS ---
   coverHeader: {
     backgroundColor: "#FFFFFF",
-    paddingBottom: 25,
-    borderBottomWidth: 3,
+    paddingBottom: 20,
+    borderBottomWidth: 2,
     borderBottomColor: "#013299",
-    textAlign: "center",
-    display: "flex",
-    flexDirection: "column",
+    flexDirection: "row",
     alignItems: "center",
-    marginBottom: 30,
+    marginBottom: 40,
   },
   logoImage: {
-    width: 70,
-    height: 70,
-    marginBottom: 12,
+    width: 45,
+    height: 45,
+    marginRight: 8,
+  },
+  brandContainer: {
+    flexDirection: "column",
+    justifyContent: "center",
   },
   brandName: {
-    fontSize: 38,
+    fontSize: 22,
     fontFamily: "Helvetica-Bold",
-    letterSpacing: 1,
+    letterSpacing: -0.5,
+    lineHeight: 1,
   },
-  geminiText: { color: "#013299" },
-  nexatechText: { color: "#fd8e18" },
+  geminiText: { color: "#0047AB" },
+  nexatechText: { color: "#FF8C00" },
   tagline: {
-    fontSize: 12,
+    fontSize: 8,
     color: "#666666",
-    marginTop: 8,
+    marginTop: 2,
     textTransform: "uppercase",
-    letterSpacing: 4,
-  },
-  accentLine: {
-    width: 60,
-    height: 3,
-    backgroundColor: "#fd8e18",
-    marginTop: 20,
+    letterSpacing: 1.5,
+    fontFamily: "Helvetica-Bold",
   },
 
   // --- CONTENT CONTAINER ---
@@ -116,6 +114,7 @@ const styles = StyleSheet.create({
     lineHeight: 1.5,
     color: "#475569",
     fontFamily: "Helvetica-Oblique",
+    marginTop: 2,
   },
 
   // --- GRID SYSTEM ---
@@ -186,12 +185,13 @@ export const BrochurePDF = () => (
     <Page size="A4" style={styles.page}>
       <View style={styles.coverHeader}>
         <Image src={logo} style={styles.logoImage} />
-        <Text style={styles.brandName}>
-          <Text style={styles.geminiText}>GEMINI </Text>
-          <Text style={styles.nexatechText}>NEXATECH</Text>
-        </Text>
-        <Text style={styles.tagline}>Where Ideas Meet Innovation</Text>
-        <View style={styles.accentLine} />
+        <View style={styles.brandContainer}>
+          <Text style={styles.brandName}>
+            <Text style={styles.geminiText}>GEMINI </Text>
+            <Text style={styles.nexatechText}>NEXATECH</Text>
+          </Text>
+          <Text style={styles.tagline}>Where Ideas Meet Innovation</Text>
+        </View>
       </View>
 
       <View style={styles.content}>
@@ -337,13 +337,17 @@ export const BrochurePDF = () => (
       <View style={styles.contactStrip}>
         <View style={styles.contactCol}>
           <Text style={styles.contactHeading}>LETS CONNECT</Text>
-          <Text style={styles.contactDetail}>contact@gemininexatech.com</Text>
-          <Text style={styles.contactDetail}>+971 (0) 4 123 4567</Text>
+          <Text style={styles.contactDetail}>sales@gemininexatech.com</Text>
+          <Text style={styles.contactDetail}>+91 90032 75271</Text>
         </View>
         <View style={[styles.contactCol, { textAlign: "right" }]}>
           <Text style={styles.contactHeading}>HEADQUARTERS</Text>
-          <Text style={styles.contactDetail}>Innovation Hub, 5th Floor</Text>
-          <Text style={styles.contactDetail}>Dubai Silicon Oasis, UAE</Text>
+          <Text style={styles.contactDetail}>
+            Campus-1a, Millenia Business Park-I
+          </Text>
+          <Text style={styles.contactDetail}>
+            Perungudi, Chennai, TN 600096
+          </Text>
         </View>
       </View>
       <Text

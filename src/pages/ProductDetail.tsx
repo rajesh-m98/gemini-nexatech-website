@@ -3,9 +3,9 @@ import { products } from "../data/websiteData";
 import { motion } from "framer-motion";
 import {
   FaArrowLeft,
-  FaShieldAlt,
   FaChartLine,
   FaCheckCircle,
+  FaCheck,
 } from "react-icons/fa";
 import Container from "../components/common/Container";
 import { useEffect } from "react";
@@ -44,66 +44,82 @@ const ProductDetail = () => {
           </Link>
         </div>
 
-        <div className="mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-4xl"
-          >
-            <h1 className="text-5xl lg:text-7xl font-black text-white mb-6 uppercase tracking-tighter">
-              {product.title}
-            </h1>
-            <p className="text-2xl text-gemini-orange font-bold mb-8 uppercase tracking-widest">
-              {product.subtitle}
-            </p>
-            <p className="text-xl text-gray-400 leading-relaxed font-medium">
-              {product.description}
-            </p>
-          </motion.div>
-        </div>
-
-        <div className="grid lg:grid-cols-3 gap-8 mb-20">
-          {/* Benefits Section */}
-          <div className="lg:col-span-2 grid sm:grid-cols-2 gap-6">
-            <h3 className="col-span-full text-white font-black text-2xl mb-4 flex items-center gap-3">
-              <FaShieldAlt className="text-gemini-blue" /> KEY BENEFITS
-            </h3>
-            {product.benefits.map((benefit, idx) => (
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: idx * 0.1 }}
-                key={idx}
-                className="bg-white/5 border border-white/10 p-6 rounded-2xl flex items-start gap-4 hover:bg-gemini-blue/10 transition-colors"
-              >
-                <FaCheckCircle className="text-gemini-orange mt-1 flex-shrink-0" />
-                <span className="text-gray-300 font-bold uppercase text-sm tracking-wide">
-                  {benefit}
-                </span>
-              </motion.div>
-            ))}
+        <div className="grid lg:grid-cols-12 gap-6 xl:gap-8 mb-24 items-start">
+          {/* Column 1: Title & Description (5 cols) */}
+          <div className="lg:col-span-4 flex flex-col pt-4 min-w-0">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h1 className="text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-6 uppercase tracking-tighter leading-[0.9] break-words">
+                {product.title}
+              </h1>
+              <p className="text-lg lg:text-xl text-gemini-orange font-black mb-8 uppercase tracking-widest leading-tight">
+                {product.subtitle}
+              </p>
+              <p className="text-base lg:text-lg text-gray-400 leading-relaxed font-medium max-w-lg">
+                {product.description}
+              </p>
+            </motion.div>
           </div>
 
-          {/* Major Products Sidebar */}
-          <div className="bg-[#00152F] border border-white/10 p-8 rounded-[32px] shadow-2xl h-fit">
-            <h3 className="text-white font-black text-xl mb-6 flex items-center gap-3">
-              <FaChartLine className="text-gemini-orange" /> SOLUTIONS
+          {/* Column 2: Benefits List (4 cols) */}
+          <div className="lg:col-span-4 bg-[#050B16] border border-white/5 p-6 xl:p-10 rounded-[40px] shadow-2xl space-y-8 min-w-0">
+            <h3 className="text-white font-black text-xl xl:text-2xl mb-10 flex items-center gap-4">
+              <div className="w-10 h-10 rounded-xl bg-gemini-orange/10 flex items-center justify-center border border-gemini-orange/20 flex-shrink-0">
+                <FaCheckCircle className="text-gemini-orange" />
+              </div>
+              <span className="uppercase tracking-widest">KEY BENEFITS</span>
             </h3>
-            <ul className="space-y-4">
-              {product.majorProducts.map((p, idx) => (
-                <li
+            <div className="space-y-8">
+              {product.benefits.map((benefit, idx) => (
+                <motion.div
                   key={idx}
-                  className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors cursor-default group"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * idx }}
+                  className="group flex items-start gap-4 xl:gap-5 cursor-default"
                 >
-                  <div className="w-1.5 h-1.5 bg-gemini-blue rounded-full group-hover:scale-150 transition-transform" />
-                  <span className="font-semibold text-sm">{p}</span>
-                </li>
+                  <div className="w-7 h-7 xl:w-8 xl:h-8 rounded-full border border-white/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:border-yellow-400 group-hover:bg-yellow-400/10 transition-all duration-300">
+                    <FaCheck className="text-[10px] xl:text-[12px] text-white/20 group-hover:text-yellow-400 group-hover:scale-110 transition-all duration-300" />
+                  </div>
+                  <span className="text-gray-400 font-bold uppercase text-[11px] xl:text-[13px] tracking-[0.15em] group-hover:text-white transition-colors duration-300 text-left leading-relaxed">
+                    {benefit}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Column 3: Solutions (3 cols) */}
+          <div className="lg:col-span-4 bg-[#00152F] border border-white/5 p-6 xl:p-10 rounded-[40px] shadow-2xl h-full min-w-0">
+            <h3 className="text-white font-black text-xl xl:text-2xl mb-10 flex items-center gap-4">
+              <div className="w-10 h-10 rounded-xl bg-gemini-blue/10 flex items-center justify-center border border-gemini-blue/20 flex-shrink-0">
+                <FaChartLine className="text-gemini-blue" />
+              </div>
+              <span className="uppercase tracking-widest">SOLUTIONS</span>
+            </h3>
+            <ul className="space-y-8">
+              {product.majorProducts.map((p, idx) => (
+                <motion.li
+                  key={idx}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * idx }}
+                  className="group flex items-start gap-4 xl:gap-5 cursor-default"
+                >
+                  <div className="w-2.5 h-2.5 rounded-full bg-gemini-blue/40 flex-shrink-0 mt-2 group-hover:bg-yellow-400 group-hover:shadow-[0_0_15px_rgba(250,204,21,0.6)] transition-all duration-300" />
+                  <span className="font-bold text-[12px] xl:text-[14px] text-gray-500 uppercase tracking-widest group-hover:text-white transition-colors duration-300 text-left leading-relaxed">
+                    {p}
+                  </span>
+                </motion.li>
               ))}
             </ul>
           </div>
         </div>
 
-        {/* Technical Showcase Placeholder */}
+        {/* Technical Showcase Section */}
         <div className="relative rounded-[40px] overflow-hidden bg-white/5 border border-white/10 p-12 text-center group">
           <div className="absolute inset-0 bg-gradient-to-r from-gemini-blue/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
           <h2 className="text-3xl font-black text-white mb-6 relative z-10 uppercase tracking-widest">
@@ -113,9 +129,12 @@ const ProductDetail = () => {
             Discover how {product.title} can revolutionize your operations and
             provide the visibility you've been missing.
           </p>
-          <button className="relative z-10 bg-white text-gemini-blue hover:bg-gemini-orange hover:text-white font-black py-4 px-12 rounded-xl transition-all shadow-xl">
+          <Link
+            to="/contact"
+            className="inline-block relative z-10 bg-white text-gemini-blue hover:bg-gemini-orange hover:text-white font-black py-4 px-12 rounded-xl transition-all shadow-xl"
+          >
             CONSULT OUR EXPERTS
-          </button>
+          </Link>
         </div>
       </Container>
     </div>

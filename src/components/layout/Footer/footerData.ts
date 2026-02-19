@@ -9,28 +9,28 @@ export const FOOTER_DATA = {
         {
             title: "Our Services",
             links: [
-                { label: "Custom Software", href: "services-section" },
-                { label: "AI & Automation", href: "services-section" },
-                { label: "Cloud Systems", href: "services-section" },
-                { label: "Smart Monitoring", href: "services-section" }
+                { label: "Custom Software", href: "/services/custom-software" },
+                { label: "AI & Automation", href: "/services/ai-dev" },
+                { label: "Cloud Systems", href: "/services/cloud-devops" },
+                { label: "Smart Monitoring", href: "/services/iot-monitoring" }
             ]
         },
         {
             title: "Quick Links",
             links: [
-                { label: "About Us", href: "about" },
-                { label: "Our Products", href: "products" },
-                { label: "Latest Insights", href: "insights" },
-                { label: "Case Studies", href: "case-studies" }
+                { label: "About Us", href: "/about" },
+                { label: "Our Products", href: "/#products" },
+                { label: "Latest Insights", href: "/video-library" },
+                { label: "Case Studies", href: "/#cases" }
             ]
         },
         {
             title: "Contact Info",
             contact: [
-                { icon: FaPhone, label: "+1 (555) 000-0000", href: "tel:+15550000000" },
-                { icon: FaEnvelope, label: "hello@gemininexatech.com", href: "mailto:hello@gemininexatech.com" },
-                { icon: FaMapMarkerAlt, label: "Tech Hub, Silicon Valley, CA", href: "#" },
-                { icon: FaWhatsapp, label: "Chat on WhatsApp", href: "https://wa.me/something", highlight: true }
+                { icon: FaPhone, label: "+91 9003275271", href: "tel:+919003275271" },
+                { icon: FaEnvelope, label: "sales@gemininexatech.com", href: "mailto:sales@gemininexatech.com" },
+                { icon: FaMapMarkerAlt, label: "Campus-1a, MILLENIA BUSINESS PARK-I, Perungudi, Chennai, Tamil Nadu 600096", href: "https://www.google.com/maps/search/?api=1&query=Campus-1a,+MILLENIA+BUSINESS+PARK-I,+Perungudi,+Chennai,+Tamil+Nadu+600096" },
+                { icon: FaWhatsapp, label: "Chat on WhatsApp", href: "https://wa.me/919003275271", highlight: true }
             ]
         }
     ],

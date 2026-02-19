@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import Container from "../common/Container";
 import { useFooterManager } from "./Footer/FooterManager";
 import { useFooterAnimations } from "./Footer/FooterAnimations";
 
 const Footer = () => {
-  const { about, sections, socials, currentYear } = useFooterManager();
+  const { about, sections, socials } = useFooterManager();
   const { footerRef } = useFooterAnimations();
 
   return (
@@ -41,9 +42,12 @@ const Footer = () => {
               </span>
             </h2>
             <div className="flex justify-center lg:justify-start">
-              <button className="px-8 py-4 bg-white text-gemini-blue font-black rounded-2xl hover:bg-gemini-orange hover:text-white transition-all transform hover:scale-105 active:scale-95 shadow-2xl">
+              <Link
+                to="/contact"
+                className="px-8 py-4 bg-white text-gemini-blue font-black rounded-2xl hover:bg-gemini-orange hover:text-white transition-all transform hover:scale-105 active:scale-95 shadow-2xl"
+              >
                 LET'S WORK TOGETHER
-              </button>
+              </Link>
             </div>
           </motion.div>
 
@@ -57,6 +61,8 @@ const Footer = () => {
               <a
                 key={idx}
                 href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={social.label}
                 className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-[#FF8C00] hover:bg-white/10 hover:border-[#FF8C00]/30 transition-all group"
               >
@@ -79,7 +85,7 @@ const Footer = () => {
               },
             },
           }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8"
         >
           {/* Brand Column */}
           <motion.div
@@ -119,21 +125,23 @@ const Footer = () => {
               <ul className="space-y-4">
                 {section.links?.map((link, lIdx) => (
                   <li key={lIdx}>
-                    <a
-                      href={`#${link.href}`}
+                    <Link
+                      to={link.href}
                       className="text-gray-400 hover:text-white flex items-center group transition-colors text-sm sm:text-base pl-4"
                     >
                       <div className="relative flex items-center">
                         <span className="absolute -left-4 w-0 group-hover:w-3 h-[2px] bg-[#FF8C00] transition-all duration-300"></span>
                         {link.label}
                       </div>
-                    </a>
+                    </Link>
                   </li>
                 ))}
                 {section.contact?.map((item, cIdx) => (
                   <li key={cIdx} className="pl-4">
                     <a
                       href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={`flex items-center space-x-3 transition-all ${
                         item.highlight
                           ? "text-gemini-orange font-bold text-lg"
@@ -152,7 +160,7 @@ const Footer = () => {
           ))}
         </motion.div>
 
-        <div className="pt-12 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-6 text-gray-500 text-[11px] sm:text-[13px] font-medium tracking-wide">
+        {/* <div className="pt-12 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-6 text-gray-500 text-[11px] sm:text-[13px] font-medium tracking-wide">
           <p>© {currentYear} GEMINI NEXATECH. ALL RIGHTS RESERVED.</p>
           <div className="flex items-center gap-8">
             <a
@@ -174,7 +182,7 @@ const Footer = () => {
               Cookie Policy
             </a>
           </div>
-        </div>
+        </div> */}
       </Container>
     </footer>
   );

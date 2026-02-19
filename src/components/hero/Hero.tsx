@@ -1,4 +1,4 @@
-import { FaWhatsapp, FaImage, FaPhone, FaPlay } from "react-icons/fa";
+import { FaWhatsapp, FaPhone, FaPlay } from "react-icons/fa";
 import AnimatedServices from "./AnimatedServices";
 import heroImage from "../../assets/hero_section_image.jpg";
 import { useHeroManager } from "./HeroManager";
@@ -16,7 +16,7 @@ const Hero = ({ onScheduleCall }: HeroProps) => {
     heading,
     ctas,
     trustedByLabel,
-    companySlots,
+    logos,
     openWhatsApp,
     scrollToSection,
   } = useHeroManager();
@@ -26,6 +26,7 @@ const Hero = ({ onScheduleCall }: HeroProps) => {
   return (
     <>
       <section
+        id="hero"
         ref={containerRef}
         className="relative min-h-[80vh] sm:min-h-[85vh] w-full flex items-center justify-center overflow-hidden pt-14 sm:pt-20"
       >
@@ -55,7 +56,7 @@ const Hero = ({ onScheduleCall }: HeroProps) => {
           className="relative z-10 w-full px-6 sm:px-8 lg:px-12 xl:px-16 py-3 sm:py-8"
         >
           <div className="text-center">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-2 lg:mb-6 leading-tight font-inter drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+            <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-semibold text-white mb-2 lg:mb-6 leading-tight font-inter tracking-widest uppercase opacity-80 drop-shadow-md">
               {heading}
             </h1>
 
@@ -76,29 +77,20 @@ const Hero = ({ onScheduleCall }: HeroProps) => {
                       scrollToSection(cta.href);
                     }
                   }}
-                  className={`group relative w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-all duration-300 flex items-center justify-center gap-3 active:scale-95 cursor-pointer ${
+                  className={`group relative w-full sm:w-auto h-12 sm:h-14 px-8 sm:px-10 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-3 active:scale-95 cursor-pointer border-2 ${
                     cta.type === "primary"
-                      ? "bg-gradient-to-r from-gemini-blue via-blue-600 to-blue-700 text-white"
-                      : "bg-transparent border-2 border-white text-white hover:bg-white hover:text-[#0047AB]"
+                      ? "bg-gradient-to-r from-gemini-blue via-blue-600 to-blue-700 text-white border-transparent"
+                      : "bg-transparent border-white text-white hover:bg-white hover:text-[#013299]"
                   }`}
                 >
                   <span>{cta.label}</span>
                   {cta.type === "primary" ? (
-                    <FaPhone className="group-hover:animate-ring transition-all rotate-90 duration-300" />
+                    <FaPhone className="group-hover:animate-ring transition-all rotate-90 duration-300 text-xs sm:text-sm" />
                   ) : (
-                    <FaPlay className="group-hover:animate-play-pulse transition-all duration-300" />
+                    <FaPlay className="group-hover:animate-play-pulse transition-all duration-300 text-[10px] sm:text-xs" />
                   )}
                 </button>
               ))}
-
-              {/* New Buttons for Video and PDF
-              <button className="group w-full sm:w-auto px-8 py-3 rounded-lg border border-gemini-orange text-gemini-orange font-bold text-sm tracking-wider hover:bg-gemini-orange hover:text-white transition-all flex items-center justify-center gap-2">
-                <FaPlay size={10} /> Presentation Video
-              </button>
-
-              <button className="group w-full sm:w-auto px-8 py-3 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-sm tracking-wider hover:bg-white hover:text-gemini-blue transition-all flex items-center justify-center gap-2">
-                PDF Profile
-              </button> */}
             </div>
           </div>
         </div>
@@ -109,41 +101,24 @@ const Hero = ({ onScheduleCall }: HeroProps) => {
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
             <div className="flex-shrink-0 relative overflow-hidden rounded-lg">
               <div className="absolute inset-0 bg-gradient-to-r from-[#0047AB] via-[#0066CC] to-[#0047AB] animate-gradient-xy"></div>
-
               <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
-
-              <h3 className="relative z-10 text-lg sm:text-xl lg:text-2xl font-bold text-white px-6 py-2 whitespace-nowrap drop-shadow-md">
+              <h3 className="relative z-10 text-xs sm:text-sm lg:text-base font-black text-white px-6 py-2 whitespace-nowrap drop-shadow-md uppercase tracking-[0.2em]">
                 {trustedByLabel}
               </h3>
             </div>
 
             <div className="flex-1 overflow-hidden relative w-full">
               <div className="flex animate-scroll-left">
-                {companySlots.map((_, index) => (
+                {[...logos, ...logos].map((logo, index) => (
                   <div
-                    key={`first-${index}`}
-                    className="group bg-white/5 backdrop-blur-sm rounded-lg p-4 sm:p-5 flex-shrink-0 flex items-center justify-center border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-4 sm:mx-6 lg:mx-8 shadow-lg hover:shadow-xl"
+                    key={index}
+                    className="group bg-white rounded-xl p-3 sm:p-4 flex-shrink-0 flex items-center justify-center border border-white/10 hover:shadow-[0_0_20px_rgba(253,142,24,0.3)] transition-all duration-500 w-28 h-16 sm:w-36 sm:h-20 lg:w-48 lg:h-24 mx-4 sm:mx-8 lg:mx-10"
                   >
-                    <div className="text-center opacity-40 group-hover:opacity-60 transition-opacity">
-                      <FaImage className="text-lg sm:text-xl lg:text-2xl text-white mx-auto mb-1" />
-                      <p className="text-[10px] sm:text-xs text-gray-300 font-medium">
-                        Logo {index + 1}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-
-                {companySlots.map((_, index) => (
-                  <div
-                    key={`second-${index}`}
-                    className="group bg-white/5 backdrop-blur-sm rounded-lg p-4 sm:p-5 flex-shrink-0 flex items-center justify-center border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-4 sm:mx-6 lg:mx-8 shadow-lg hover:shadow-xl"
-                  >
-                    <div className="text-center opacity-40 group-hover:opacity-60 transition-opacity">
-                      <FaImage className="text-lg sm:text-xl lg:text-2xl text-white mx-auto mb-1" />
-                      <p className="text-[10px] sm:text-xs text-gray-300 font-medium">
-                        Logo {index + 1}
-                      </p>
-                    </div>
+                    <img
+                      src={logo.src}
+                      alt={logo.name}
+                      className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500"
+                    />
                   </div>
                 ))}
               </div>

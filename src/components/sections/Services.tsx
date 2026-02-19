@@ -30,6 +30,16 @@ const Services = () => {
     setActiveIndex(index);
   };
 
+  const [scrollDir, setScrollDir] = useState(1); // 1 = down, -1 = up
+
+  const handleSkip = () => {
+    const targetId = scrollDir === 1 ? "products" : "hero";
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const { containerRef, tabsRef, syncScrollToTab } = useServicesAnimations(
     activeIndex,
     previousIndex,
@@ -40,6 +50,7 @@ const Services = () => {
     oldContentRef,
     newContentRef,
     scanlineRef,
+    (_, direction) => setScrollDir(direction),
   );
 
   const activeService = servicesData[activeIndex];
@@ -130,13 +141,23 @@ const Services = () => {
                   ))}
                 </div>
 
-                <div className="mt-auto pointer-events-auto">
+                <div className="mt-auto pointer-events-auto flex flex-col items-center gap-3">
                   <Link
                     to={`/services/${activeService.id}`}
                     className="px-8 py-3 bg-white text-[#0047AB] text-sm font-bold rounded-xl hover:bg-[#FF8C00] hover:text-white transition-all transform active:scale-95 shadow-lg relative z-20 block w-fit mx-auto"
                   >
                     LEARN MORE
                   </Link>
+                  <button
+                    onClick={() => {
+                      document
+                        .getElementById("products")
+                        ?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="text-[#FF8C00] text-[10px] font-black uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity"
+                  >
+                    Skip Section ↓
+                  </button>
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -287,14 +308,26 @@ const Services = () => {
                     ))}
                   </div>
 
-                  <Link
-                    to={`/services/${activeService.id}`}
-                    className="group/btn relative px-6 py-3 lg:px-8 lg:py-3.5 bg-white text-[#0047AB] font-bold rounded-xl lg:rounded-2xl hover:bg-[#FF8C00] hover:text-white transition-all duration-300 transform active:scale-95 shadow-lg block w-fit"
-                  >
-                    <span className="relative z-10 flex items-center gap-2">
-                      Learn More <span className="text-xl">→</span>
-                    </span>
-                  </Link>
+                  <div className="flex flex-wrap items-center gap-4 lg:gap-6">
+                    <Link
+                      to={`/services/${activeService.id}`}
+                      className="group/btn relative px-6 py-3 lg:px-8 lg:py-3.5 bg-white text-[#0047AB] font-bold rounded-xl lg:rounded-2xl hover:bg-[#FF8C00] hover:text-white transition-all duration-300 transform active:scale-95 shadow-lg block w-fit"
+                    >
+                      <span className="relative z-10 flex items-center gap-2">
+                        Learn More <span className="text-xl">→</span>
+                      </span>
+                    </Link>
+
+                    <button
+                      onClick={handleSkip}
+                      className="px-6 py-3 lg:px-8 lg:py-3.5 bg-[#FF8C00]/10 border border-[#FF8C00]/30 text-[#FF8C00] font-black text-[10px] lg:text-xs rounded-xl lg:rounded-2xl hover:bg-[#FF8C00] hover:text-white transition-all uppercase tracking-[0.2em] shadow-xl group/skip"
+                    >
+                      {scrollDir === 1 ? "Skip to Products" : "Skip to Top"}
+                      <span className="ml-2 inline-block transition-transform group-hover/skip:translate-y-[-2px]">
+                        {scrollDir === 1 ? "↓" : "↑"}
+                      </span>
+                    </button>
+                  </div>
                 </div>
 
                 <div className="flex-1 w-full max-w-[440px] relative">

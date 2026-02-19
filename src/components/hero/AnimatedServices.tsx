@@ -66,7 +66,7 @@ const AnimatedServices = () => {
   };
 
   return (
-    <div className="h-24 sm:h-32 md:h-40 lg:h-48 flex items-center justify-center overflow-hidden px-3">
+    <div className="h-12 sm:h-16 md:h-20 lg:h-24 flex items-center justify-center overflow-hidden px-3">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
@@ -74,7 +74,7 @@ const AnimatedServices = () => {
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white text-center flex flex-wrap justify-center leading-[1.1] tracking-normal"
+          className="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white text-center flex flex-wrap justify-center leading-[1] tracking-normal font-inter"
         >
           {words.map((word, wordIndex) => (
             <span key={wordIndex} className="whitespace-nowrap flex">

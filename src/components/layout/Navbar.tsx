@@ -10,26 +10,27 @@ const Navbar = () => {
     activeDropdown,
     services,
     industries,
+    products,
     navLinks,
     scrollToSection,
     toggleMobileMenu,
     toggleDropdown,
     scrollToTop,
+    location,
   } = useNavbarManager();
 
-  const { navRef, logoRef, pillRef } = useNavbarAnimations(isMobileMenuOpen);
+  const { navRef } = useNavbarAnimations(isMobileMenuOpen, location.pathname);
 
   return (
     <nav
       ref={navRef}
-      className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg border-b border-gray-200"
+      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100"
     >
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           <button
-            ref={logoRef}
             onClick={scrollToTop}
-            className="flex-shrink-0 flex items-center cursor-pointer hover:opacity-90 transition-opacity preserve-3d"
+            className="flex-shrink-0 flex items-center cursor-pointer transition-all"
           >
             <img
               src={logo}
@@ -37,139 +38,145 @@ const Navbar = () => {
               className="h-10 sm:h-11 lg:h-12 w-auto"
             />
             <div className="flex flex-col items-start justify-center ml-2">
-              <span className="text-sm sm:text-base lg:text-lg font-bold leading-tight">
+              <span className="text-base sm:text-xl lg:text-2xl font-black leading-none tracking-tight">
                 <span className="text-gemini-blue">GEMINI </span>
                 <span className="text-gemini-orange">NEXATECH</span>
               </span>
-              <span className="text-[9px] sm:text-[10px] lg:text-[11px] text-gray-600 tracking-wide uppercase font-medium leading-tight">
+              <span className="text-[9px] sm:text-[10px] lg:text-[11px] text-gray-500 tracking-[0.13em] uppercase font-bold leading-tight mt-1">
                 Where Ideas Meet Innovation
               </span>
             </div>
           </button>
 
           <div className="hidden lg:flex lg:items-center lg:space-x-4 xl:space-x-8 nav-links-wrapper relative">
-            {/* Liquid Pill Indicator */}
-            <div className="filter-gooey absolute inset-0 pointer-events-none z-0">
-              <div
-                ref={pillRef}
-                className="absolute h-10 top-1/2 -translate-y-1/2 bg-[#FD8E18]/20 rounded-full opacity-0 blur-[1px]"
-                style={{ minWidth: "40px" }}
-              />
-            </div>
-
-            <div className="nav-link-container px-2 py-2 relative z-10">
+            <div className="nav-link-container px-2 relative z-10">
               <div className="nav-link-inner">
                 <button
                   data-section="about"
-                  onClick={() => scrollToSection(navLinks[0].href)}
-                  className="text-[#013299] hover:text-[#FD8E18] cursor-pointer font-semibold transition-colors"
+                  onClick={() => scrollToSection(navLinks[0].Link)}
+                  className="flex items-center text-[#013299] hover:text-[#FD8E18] cursor-pointer font-inter font-bold transition-colors uppercase tracking-wider text-xs py-2"
                 >
                   {navLinks[0].label}
                 </button>
               </div>
             </div>
 
-            <div className="nav-link-container px-2 py-1 relative z-10 group">
+            {/* Services Dropdown */}
+            <div className="nav-link-container px-2 relative z-10 group">
               <div className="nav-link-inner">
                 <button
                   data-section="services"
-                  className="flex items-center text-[#013299] group-hover:text-[#FD8E18] cursor-pointer font-semibold transition-colors py-2"
+                  className="flex items-center text-[#013299] group-hover:text-[#FD8E18] cursor-pointer font-bold transition-colors uppercase tracking-wider text-xs py-2"
                 >
                   Services{" "}
-                  <FaChevronDown className="ml-1 text-xs group-hover:rotate-180 transition-transform duration-300" />
+                  <FaChevronDown className="ml-1 text-[10px] group-hover:rotate-180 transition-transform duration-300" />
                 </button>
               </div>
-              <div className="absolute left-2/3 -translate-x-3/5 xl:left-7/8 xl:-translate-x-2/3 top-full w-[95vw] lg:w-[1050px] xl:w-[1240px] bg-white/95 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-500 transform group-hover:translate-y-0 translate-y-4 p-3 lg:p-6 z-50 overflow-hidden text-center">
-                <div className="grid grid-cols-3 xl:grid-cols-2 gap-x-4 xl:gap-x-6 gap-y-2 xl:gap-y-3">
+              <div className="absolute left-0 lg:left-[-150px] xl:left-[-250px] top-full mt-1 w-[95vw] lg:w-[650px] xl:w-[750px] bg-[#000510]/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-2xl border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-4 p-4 lg:p-5 z-50">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
                   {services.map((service, index) => (
                     <button
                       key={index}
-                      onClick={() => scrollToSection(service.href)}
-                      className="group/card cursor-pointer relative flex items-start space-x-4 bg-[#0047AB] p-3 rounded-xl transition-all duration-500 text-left overflow-hidden hover:bg-white hover:shadow-[0_10px_30px_rgba(0,71,171,0.15)] hover:-translate-y-1 active:scale-[0.98]"
+                      onClick={() => scrollToSection(service.Link)}
+                      className="group/card cursor-pointer relative flex items-center space-x-3 bg-[#013299]/10 hover:bg-white p-2.5 rounded-xl transition-all duration-300 text-left overflow-hidden border border-transparent hover:border-[#FD8E18]/20 hover:shadow-lg"
                     >
-                      <div className="relative flex-shrink-0 mt-0.5 p-1.5 bg-white/10 rounded-lg group-hover/card:bg-[#FD8E18]/10 transition-all duration-500 shadow-inner">
-                        <service.icon className="text-lg text-white group-hover/card:text-[#FD8E18] transition-colors duration-500" />
+                      <div className="relative flex-shrink-0 p-1.5 bg-white/5 rounded-lg group-hover/card:bg-[#FF8C00]/20 transition-all duration-300">
+                        <service.icon className="text-sm text-white group-hover/card:text-[#FF8C00] transition-colors" />
                       </div>
-                      <div className="relative flex flex-col items-start justify-start text-left min-w-0 flex-1">
-                        <h4 className="text-[13px] lg:text-[14px] font-bold text-white group-hover/card:text-[#013299] transition-colors duration-500 leading-tight w-full whitespace-nowrap overflow-hidden text-ellipsis">
-                          {service.title}
-                        </h4>
-                        <p className="text-[10px] lg:text-[11px] text-white/80 group-hover/card:text-gray-600 mt-0.5 leading-snug w-full transition-colors duration-500 whitespace-nowrap overflow-hidden text-ellipsis">
-                          {service.desc}
-                        </p>
-                      </div>
-                      <div className="absolute bottom-0 left-0 h-1 w-0 bg-[#FD8E18] group-hover/card:w-full transition-all duration-500 rounded-full"></div>
+                      <span className="text-[14px] xl:text-[15px] font-bold text-gray-200 group-hover/card:text-[#013299] transition-colors leading-tight whitespace-normal break-words">
+                        {service.title}
+                      </span>
+                      {/* Animated Line */}
+                      <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-[#FD8E18] transition-all duration-300 group-hover/card:w-full" />
                     </button>
                   ))}
                 </div>
               </div>
             </div>
 
-            <div className="nav-link-container px-2 py-2 relative z-10">
+            {/* Products Dropdown */}
+            <div className="nav-link-container px-2 relative z-10 group">
               <div className="nav-link-inner">
                 <button
                   data-section="products"
-                  onClick={() => scrollToSection(navLinks[1].href)}
-                  className="text-[#013299] hover:text-[#FD8E18] cursor-pointer font-semibold transition-colors"
+                  className="flex items-center text-[#013299] group-hover:text-[#FD8E18] cursor-pointer font-bold uppercase tracking-wider text-xs transition-colors py-2"
                 >
-                  {navLinks[1].label}
-                </button>
-              </div>
-            </div>
-
-            <div className="nav-link-container px-2 py-1 relative z-10 group">
-              <div className="nav-link-inner">
-                <button
-                  data-section="industries"
-                  className="flex items-center text-[#013299] group-hover:text-[#FD8E18] cursor-pointer font-semibold transition-colors py-2"
-                >
-                  Industries{" "}
+                  Products{" "}
                   <FaChevronDown className="ml-1 text-xs group-hover:rotate-180 transition-transform duration-300" />
                 </button>
               </div>
-              <div className="absolute left-1/2 -translate-x-1/4 lg:left-1/2 lg:-translate-x-3/4 xl:left-1/2 xl:-translate-x-3/4 top-full w-[95vw] lg:w-[900px] xl:w-[1000px] bg-white/95 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-500 transform group-hover:translate-y-0 translate-y-4 p-4 lg:p-8 z-50 overflow-hidden text-center">
-                <div className="grid grid-cols-2 gap-x-10 gap-y-3">
-                  {industries.map((ind, index) => (
+              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-[95vw] lg:w-[500px] xl:w-[600px] bg-[#000510]/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-2xl border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-4 p-4 lg:p-5 z-50">
+                <div className="grid grid-cols-2 gap-2">
+                  {products.map((product, index) => (
                     <button
                       key={index}
-                      onClick={() => scrollToSection(ind.href)}
-                      className="group/card cursor-pointer relative flex items-start space-x-3 bg-[#0047AB] p-4 rounded-xl transition-all duration-500 text-left overflow-hidden hover:bg-white hover:shadow-[0_10px_30px_rgba(0,71,171,0.15)] hover:-translate-y-1 active:scale-[0.98]"
+                      onClick={() => scrollToSection(`/products/${product.id}`)}
+                      className="group/card cursor-pointer relative flex items-center space-x-3 bg-[#013299]/10 hover:bg-white p-2.5 rounded-xl transition-all duration-300 text-left overflow-hidden border border-transparent hover:border-[#FD8E18]/20 hover:shadow-lg"
                     >
-                      <div className="relative flex-shrink-0 mt-1 p-2 bg-white/10 rounded-lg group-hover/card:bg-[#FD8E18]/10 transition-all duration-500 shadow-inner">
-                        <ind.icon className="text-xl text-white group-hover/card:text-[#FD8E18] transition-colors duration-500" />
+                      <div className="relative flex-shrink-0 p-1.5 bg-white/5 rounded-lg group-hover/card:bg-[#FF8C00]/20 transition-all duration-300">
+                        <product.icon className="text-sm text-white group-hover/card:text-[#FF8C00] transition-colors" />
                       </div>
-                      <div className="relative min-w-0 flex-1">
-                        <h4 className="text-[15px] font-bold text-white group-hover/card:text-[#013299] transition-colors duration-500 leading-tight w-full whitespace-nowrap overflow-hidden text-ellipsis">
-                          {ind.title}
-                        </h4>
-                        <p className="text-[12px] text-white/80 group-hover/card:text-gray-600 mt-1 leading-relaxed w-full whitespace-nowrap overflow-hidden text-ellipsis transition-colors duration-500">
-                          {ind.desc}
-                        </p>
-                      </div>
-                      <div className="absolute bottom-0 left-0 h-1 w-0 bg-[#FD8E18] group-hover/card:w-full transition-all duration-500 rounded-full"></div>
+                      <span className="text-[14px] xl:text-[15px] font-bold text-gray-200 group-hover/card:text-[#013299] transition-colors leading-tight whitespace-normal break-words">
+                        {product.title}
+                      </span>
+                      {/* Animated Line */}
+                      <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-[#FD8E18] transition-all duration-300 group-hover/card:w-full" />
                     </button>
                   ))}
                 </div>
               </div>
             </div>
 
-            <div className="nav-link-container px-2 py-2 relative z-10">
+            {/* Industries Dropdown */}
+            <div className="nav-link-container px-2 relative z-10 group">
+              <div className="nav-link-inner">
+                <button
+                  data-section="industries"
+                  className="flex items-center text-[#013299] group-hover:text-[#FD8E18] cursor-pointer font-bold transition-colors uppercase tracking-wider text-xs py-2"
+                >
+                  Industries{" "}
+                  <FaChevronDown className="ml-1 text-[10px] group-hover:rotate-180 transition-transform duration-300" />
+                </button>
+              </div>
+              <div className="absolute right-0 lg:right-[-100px] xl:right-[-180px] top-full mt-1 w-[95vw] lg:w-[500px] xl:w-[600px] bg-[#000510]/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-2xl border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-4 p-4 lg:p-5 z-50">
+                <div className="grid grid-cols-2 gap-2">
+                  {industries.map((ind, index) => (
+                    <button
+                      key={index}
+                      onClick={() => scrollToSection(ind.Link)}
+                      className="group/card cursor-pointer relative flex items-center space-x-3 bg-[#013299]/10 hover:bg-white p-2.5 rounded-xl transition-all duration-300 text-left overflow-hidden border border-transparent hover:border-[#FD8E18]/20 hover:shadow-lg"
+                    >
+                      <div className="relative flex-shrink-0 p-1.5 bg-white/5 rounded-lg group-hover/card:bg-[#FF8C00]/20 transition-all duration-300">
+                        <ind.icon className="text-sm text-white group-hover/card:text-[#FF8C00] transition-colors duration-500" />
+                      </div>
+                      <span className="text-[14px] xl:text-[15px] font-bold text-gray-200 group-hover/card:text-[#013299] transition-colors duration-500 leading-tight whitespace-normal break-words">
+                        {ind.title}
+                      </span>
+                      {/* Animated Line */}
+                      <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-[#FD8E18] transition-all duration-300 group-hover/card:w-full" />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="nav-link-container px-2 relative z-10">
               <div className="nav-link-inner">
                 <button
                   data-section="insights"
-                  onClick={() => scrollToSection(navLinks[2].href)}
-                  className="text-[#013299] hover:text-[#FD8E18] cursor-pointer font-semibold transition-colors"
+                  onClick={() => scrollToSection(navLinks[2].Link)}
+                  className="flex items-center text-[#013299] hover:text-[#FD8E18] cursor-pointer font-bold transition-colors uppercase tracking-wider text-xs py-2"
                 >
                   {navLinks[2].label}
                 </button>
               </div>
             </div>
-            <div className="nav-link-container px-2 py-2 relative z-10">
+            <div className="nav-link-container px-2 relative z-10">
               <div className="nav-link-inner">
                 <button
                   data-section="contact"
-                  onClick={() => scrollToSection(navLinks[3].href)}
-                  className="text-[#013299] hover:text-[#FD8E18] cursor-pointer font-semibold transition-colors"
+                  onClick={() => scrollToSection(navLinks[3].Link)}
+                  className="flex items-center text-[#013299] hover:text-[#FD8E18] cursor-pointer font-bold transition-colors uppercase tracking-wider text-xs py-2"
                 >
                   {navLinks[3].label}
                 </button>
@@ -212,11 +219,11 @@ const Navbar = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden border-t border-gray-100 bg-white overflow-hidden shadow-2xl rounded-b-[24px]"
+              className="lg:hidden border-t border-white/10 bg-[#000510]/90 backdrop-blur-xl overflow-hidden shadow-2xl rounded-b-[24px]"
             >
               <div className="flex flex-col p-4 space-y-1">
                 <button
-                  onClick={() => scrollToSection(navLinks[0].href)}
+                  onClick={() => scrollToSection(navLinks[0].Link)}
                   className="w-full text-left px-4 py-3 text-[#013299] hover:bg-blue-50/50 font-bold transition-all rounded-xl"
                 >
                   {navLinks[0].label}
@@ -250,11 +257,11 @@ const Navbar = () => {
                           {services.map((service, index) => (
                             <button
                               key={index}
-                              onClick={() => scrollToSection(service.href)}
+                              onClick={() => scrollToSection(service.Link)}
                               className="w-full flex items-center space-x-3 px-4 py-2.5 hover:bg-white rounded-lg transition-all group"
                             >
-                              <service.icon className="text-base text-[#FD8E18] group-hover:scale-110 transition-transform" />
-                              <span className="text-sm font-semibold text-gray-700">
+                              <service.icon className="text-base text-[#FF8C00] group-hover:scale-110 transition-transform" />
+                              <span className="text-sm font-semibold text-gray-200 group-hover:text-white">
                                 {service.title}
                               </span>
                             </button>
@@ -265,12 +272,50 @@ const Navbar = () => {
                   </AnimatePresence>
                 </div>
 
-                <button
-                  onClick={() => scrollToSection(navLinks[1].href)}
-                  className="w-full text-left px-4 py-3 text-[#013299] hover:bg-blue-50/50 font-bold transition-all rounded-xl"
-                >
-                  {navLinks[1].label}
-                </button>
+                <div className="w-full">
+                  <button
+                    onClick={() => toggleDropdown("products")}
+                    className={`w-full flex items-center justify-between px-4 py-3 text-[#013299] font-bold transition-all rounded-xl ${
+                      activeDropdown === "products"
+                        ? "bg-blue-50/50"
+                        : "hover:bg-blue-50/50"
+                    }`}
+                  >
+                    <span>Products</span>
+                    <FaChevronDown
+                      className={`text-xs transition-transform duration-300 ${
+                        activeDropdown === "products" ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  <AnimatePresence>
+                    {activeDropdown === "products" && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="overflow-hidden bg-gray-50/50 mt-1 rounded-xl"
+                      >
+                        <div className="px-2 py-3 space-y-1">
+                          {products.map((product, index) => (
+                            <button
+                              key={index}
+                              onClick={() =>
+                                scrollToSection(`/products/${product.id}`)
+                              }
+                              className="w-full flex items-center space-x-3 px-4 py-2.5 hover:bg-white rounded-lg transition-all group"
+                            >
+                              <product.icon className="text-base text-[#FD8E18] group-hover:scale-110 transition-transform" />
+                              <span className="text-sm font-semibold text-gray-700 text-left">
+                                {product.title}
+                              </span>
+                            </button>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
 
                 <div className="w-full">
                   <button
@@ -300,11 +345,11 @@ const Navbar = () => {
                           {industries.map((ind, index) => (
                             <button
                               key={index}
-                              onClick={() => scrollToSection(ind.href)}
+                              onClick={() => scrollToSection(ind.Link)}
                               className="w-full flex items-center space-x-3 px-4 py-2.5 hover:bg-white rounded-lg transition-all group"
                             >
                               <ind.icon className="text-base text-[#FD8E18] group-hover:scale-110 transition-transform" />
-                              <span className="text-sm font-semibold text-gray-700">
+                              <span className="text-sm font-semibold text-gray-700 text-left">
                                 {ind.title}
                               </span>
                             </button>
@@ -316,13 +361,13 @@ const Navbar = () => {
                 </div>
 
                 <button
-                  onClick={() => scrollToSection(navLinks[2].href)}
+                  onClick={() => scrollToSection(navLinks[2].Link)}
                   className="w-full text-left px-4 py-3 text-[#013299] hover:bg-blue-50/50 font-bold transition-all rounded-xl"
                 >
                   {navLinks[2].label}
                 </button>
                 <button
-                  onClick={() => scrollToSection(navLinks[3].href)}
+                  onClick={() => scrollToSection(navLinks[3].Link)}
                   className="w-full text-left px-4 py-3 text-[#013299] hover:bg-blue-50/50 font-bold transition-all rounded-xl"
                 >
                   {navLinks[3].label}

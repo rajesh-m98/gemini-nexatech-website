@@ -16,7 +16,8 @@ export const useServicesAnimations = (
     cardRef: React.RefObject<HTMLDivElement | null>,
     oldContentRef: React.RefObject<HTMLDivElement | null>,
     newContentRef: React.RefObject<HTMLDivElement | null>,
-    scanlineRef: React.RefObject<HTMLDivElement | null>
+    scanlineRef: React.RefObject<HTMLDivElement | null>,
+    onScrollUpdate?: (progress: number, direction: number) => void
 ) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const tabsRef = useRef<HTMLDivElement>(null);
@@ -41,6 +42,10 @@ export const useServicesAnimations = (
                 scrub: 0.7,
                 onUpdate: (self) => {
                     const progress = self.progress;
+
+                    if (onScrollUpdate) {
+                        onScrollUpdate(progress, self.direction);
+                    }
 
                     if (headerRef.current) {
                         // Smoothly fade out the header

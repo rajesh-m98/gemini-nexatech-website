@@ -1,111 +1,190 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Container from "../components/common/Container";
-import { roadmap, coreValues } from "../data/websiteData";
+import { coreValues } from "../data/websiteData";
 import { FaRocket, FaEye, FaGem } from "react-icons/fa";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-import { useAboutManager } from "../components/sections/about/AboutManager";
+import Stats from "../components/sections/Stats";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const StatCard = ({
-  numericValue,
-  suffix,
-  label,
-}: {
-  numericValue: number;
-  suffix: string;
-  label: string;
-}) => (
-  <div className="relative group">
-    <div className="bg-gradient-to-b from-[#0047AB] to-[#002861] p-8 rounded-[2rem] border border-white/10 group-hover:border-gemini-blue/50 transition-all duration-500 transform group-hover:-translate-y-3 group-hover:shadow-[0_20px_40px_rgba(0,71,171,0.5)] shadow-2xl relative overflow-hidden flex flex-col items-center justify-center min-h-[160px]">
-      {/* Dynamic Glow Accent Line */}
-      <div className="absolute bottom-0 left-0 w-full h-1.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100 transition-all duration-500 rounded-full" />
-
-      <div className="text-4xl lg:text-5xl font-black text-white mb-2 tracking-tighter group-hover:scale-110 transition-transform duration-500 flex items-baseline gap-1">
-        <span className="stat-number" data-target={numericValue}>
-          0
-        </span>
-        <span className="text-gemini-orange">{suffix}</span>
-      </div>
-      <div className="text-blue-100/70 text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] text-center leading-tight">
-        {label}
-      </div>
-    </div>
-  </div>
-);
-
 const AboutPage = () => {
-  const { stats } = useAboutManager();
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      // Numerical Stats Counter
-      const counts = gsap.utils.toArray<HTMLElement>(".stat-number");
-      counts.forEach((count) => {
-        const target = parseInt(count.getAttribute("data-target") || "0", 10);
-        gsap.to(count, {
-          innerText: target,
-          duration: 2.5,
-          snap: { innerText: 1 },
-          ease: "power4.out",
-          scrollTrigger: {
-            trigger: count,
-            start: "top 90%",
-          },
-        });
-      });
-
-      // Horizontal Scroll for Roadmap
-      const track = document.querySelector("#roadmap-track");
-      if (track) {
-        const trackWidth = track.scrollWidth;
-        const viewportWidth = window.innerWidth;
-        const scrollAmount = trackWidth - viewportWidth;
-
-        if (scrollAmount > 0) {
-          gsap.to(track, {
-            x: () => -scrollAmount,
-            ease: "none",
-            scrollTrigger: {
-              trigger: "#roadmap-container",
-              start: "top 20%",
-              end: () => `+=${scrollAmount}`,
-              pin: true,
-              scrub: 1,
-              invalidateOnRefresh: true,
-              onUpdate: (self) => {
-                gsap.to("#scroll-progress", {
-                  width: `${self.progress * 100}%`,
-                  duration: 0.1,
-                  ease: "none",
-                });
-              },
-            },
-          });
-        }
-      }
+  const journeyData = [
+    {
+      year: "2026",
+      description:
+        "In 2026, we cemented our position as global leaders in AI-driven industrial safety and operational excellence, expanding our R&D horizons to next-gen robotics.",
+      image:
+        "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=2070",
     },
-    { scope: sectionRef },
-  );
+    {
+      year: "2025",
+      description:
+        "In 2025, we earned multiple prestigious industry recognitions, including Top Flutter Developers and Top Robotics Company, cementing our position as a global leader.",
+      image:
+        "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=2071",
+    },
+    {
+      year: "2024",
+      description:
+        "Successfully deployed integrated security systems for major international airports and expanded our footprint in the aviation sector.",
+      image:
+        "https://images.unsplash.com/photo-1530521954074-e64f6810b32d?auto=format&fit=crop&q=80&w=2070",
+    },
+    {
+      year: "2023",
+      description:
+        "Opened our strategic hub in Dubai to meet growing tech demands in the Middle East and launched next-gen RTLS platforms.",
+      image:
+        "https://images.unsplash.com/photo-1512453979798-5ea4e7388814?auto=format&fit=crop&q=80&w=2070",
+    },
+    {
+      year: "2022",
+      description:
+        "Formed key global alliances with cloud providers, enabling massive scalability for our enterprise clients.",
+      image:
+        "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2072",
+    },
+    {
+      year: "2021",
+      description:
+        "Released our ultra-accurate centimeter-level RTLS platform, revolutionizing indoor asset tracking.",
+      image:
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2070",
+    },
+    {
+      year: "2020",
+      description:
+        "Ensured operational continuity for clients worldwide during the global shift, specializing in remote monitoring.",
+      image:
+        "https://images.unsplash.com/photo-1587560699334-cc4ff634909a?auto=format&fit=crop&q=80&w=2070",
+    },
+    {
+      year: "2019",
+      description:
+        "Launched green-tech initiatives and eco-friendly monitoring solutions, aligning tech with sustainability.",
+      image:
+        "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=2070",
+    },
+    {
+      year: "2018",
+      description:
+        "Named 'Most Innovative Tech Partner' in the Oil & Gas sector, recognizing our specialized safety solutions.",
+      image:
+        "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=2070",
+    },
+    {
+      year: "2017",
+      description:
+        "Fully integrated advanced AI and predictive analytics into our core tracking and safety product offerings.",
+      image:
+        "https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&q=80&w=2070",
+    },
+    {
+      year: "2016",
+      description:
+        "Kicked off international operations with major industrial projects across Europe and South East Asia.",
+      image:
+        "https://images.unsplash.com/photo-1449034446853-66c86144b0ad?auto=format&fit=crop&q=80&w=2070",
+    },
+    {
+      year: "2015",
+      description:
+        "Established a state-of-the-art R&D center focused exclusively on IoT and sensor-based technologies.",
+      image:
+        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070",
+    },
+    {
+      year: "2014",
+      description:
+        "Delivered our first enterprise-grade tracking solution for a regional logistics leader, proving our core tech.",
+      image:
+        "https://images.unsplash.com/photo-1519003722824-192d992a6058?auto=format&fit=crop&q=80&w=2070",
+    },
+    {
+      year: "2013",
+      description:
+        "Gemini Nexatech founded with a bold vision to transform industrial operations through innovative technology.",
+      image:
+        "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=2070",
+    },
+  ];
+
+  // const videoLibrary = [
+  //   {
+  //     id: 1,
+  //     title: "AI Video Analytics for Site Safety",
+  //     description:
+  //       "Learn how our AI-driven surveillance ensures uncompromising safety levels across hazardous industrial sites.",
+  //     thumbnail:
+  //       "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2070",
+  //     duration: "3:45",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "RTLS Precision Tracking in Logistics",
+  //     description:
+  //       "Discover the power of centimeter-level accuracy in asset tracking and its impact on supply chain efficiency.",
+  //     thumbnail:
+  //       "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2070",
+  //     duration: "4:20",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "RFID Solutions for Inventory Control",
+  //     description:
+  //       "A deep dive into how our smart RFID systems automate identification and intelligent inventory management.",
+  //     thumbnail:
+  //       "https://images.unsplash.com/photo-1566576721346-d4a3b4eaad5b?auto=format&fit=crop&q=80&w=2070",
+  //     duration: "2:55",
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "IoT Smart Monitoring Systems",
+  //     description:
+  //       "Real-time visibility and operational control through our advanced IoT device integration and connectivity.",
+  //     thumbnail:
+  //       "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2070",
+  //     duration: "5:10",
+  //   },
+  //   {
+  //     id: 5,
+  //     title: "Industrial Safety in Oil & Gas",
+  //     description:
+  //       "Certified safety solutions designed for hazardous high-risk environments in the energy sector.",
+  //     thumbnail:
+  //       "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&q=80&w=2069",
+  //     duration: "3:15",
+  //   },
+  //   {
+  //     id: 6,
+  //     title: "Digital Transformation Consulting",
+  //     description:
+  //       "Our approach to aligning digital strategy with business objectives through expert tech consulting.",
+  //     thumbnail:
+  //       "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=2070",
+  //     duration: "4:40",
+  //   },
+  // ];
+
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <div
       ref={sectionRef}
-      className="bg-[#000510] min-h-screen pt-24 pb-20 overflow-hidden font-inter"
+      className="bg-[#000510] min-h-screen pt-20 pb-12 overflow-hidden font-inter"
     >
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32">
+      <section className="relative py-5 lg:py-10">
         <div className="absolute inset-x-0 top-0 h-full bg-gradient-to-b from-gemini-blue/10 to-transparent -z-10" />
         <Container>
           <div className="max-w-4xl mx-auto text-center">
             <motion.span
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-gemini-orange font-black text-xs tracking-[0.4em] uppercase mb-4 block"
+              className="typo-tab-heading text-gemini-orange mb-4 block"
             >
               Our Legacy
             </motion.span>
@@ -113,7 +192,7 @@ const AboutPage = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7 }}
-              className="text-4xl lg:text-6xl font-black text-white mb-8 tracking-tighter leading-tight"
+              className="typo-heading mb-8"
             >
               WE ARE <span className="text-gemini-blue uppercase">GEMINI</span>{" "}
               <span className="text-gemini-orange uppercase">NEXATECH</span>
@@ -122,7 +201,7 @@ const AboutPage = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="text-xl text-gray-400 font-medium leading-relaxed uppercase tracking-wide"
+              className="typo-body uppercase opacity-80"
             >
               Empowering businesses with innovative technology solutions that
               drive efficiency, safety, and growth across industries worldwide.
@@ -132,51 +211,31 @@ const AboutPage = () => {
       </section>
 
       {/* Stats Section Integrated */}
-      <section className="pb-32">
-        <Container>
-          <div className="w-full bg-[#001D3D]/30 backdrop-blur-xl rounded-[4rem] p-10 sm:p-16 border border-white/5 shadow-2xl relative overflow-hidden">
-            {/* Background Flair for the box */}
-            <div className="absolute -top-24 -left-24 w-64 h-64 bg-gemini-blue/10 blur-[100px] rounded-full" />
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
-              {stats.slice(0, 4).map((stat, idx) => (
-                <StatCard
-                  key={idx}
-                  numericValue={stat.numericValue}
-                  suffix={stat.suffix}
-                  label={stat.label}
-                />
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
+      <Stats />
 
       {/* Mission & Vision Section */}
-      <section className="py-24 bg-[#000510] relative overflow-hidden">
+      <section className="py-16 lg:py-20 bg-[#000510] relative overflow-hidden">
         {/* Decorative Light Blurs */}
         <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-gemini-blue/5 blur-[120px] rounded-full -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gemini-orange/5 blur-[120px] rounded-full translate-x-1/2 translate-y-1/2" />
 
         <Container>
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="group relative p-12 rounded-[3.5rem] bg-gradient-to-br from-[#001D3D]/50 to-transparent border border-white/5 hover:border-gemini-blue/30 transition-all duration-700 shadow-2xl overflow-hidden"
+              className="group relative p-10 rounded-[2.5rem] bg-gradient-to-br from-[#001D3D]/50 to-transparent border border-white/5 hover:border-gemini-blue/30 transition-all duration-700 shadow-2xl overflow-hidden"
             >
               <div className="absolute -top-10 -right-10 p-12 text-gemini-blue/30 text-[12rem] transition-all duration-1000 group-hover:text-gemini-blue/50 group-hover:scale-110 group-hover:-rotate-12 pointer-events-none">
                 <FaRocket />
               </div>
               <div className="relative z-10">
-                <div className="flex items-center gap-4 mb-8">
+                <div className="flex items-center gap-4 mb-6">
                   <div className="w-12 h-1.5 bg-gemini-blue rounded-full" />
-                  <h3 className="text-white font-black text-4xl tracking-tighter uppercase">
-                    MISSION
-                  </h3>
+                  <h3 className="typo-section">MISSION</h3>
                 </div>
-                <p className="text-gray-300 text-xl leading-relaxed font-semibold italic tracking-tight">
+                <p className="typo-body italic">
                   "Empowering businesses with innovative technology solutions
                   that drive efficiency, safety, and growth across industries
                   worldwide."
@@ -188,19 +247,17 @@ const AboutPage = () => {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="group relative p-12 rounded-[3.5rem] bg-gradient-to-br from-[#001D3D]/30 to-transparent border border-white/5 hover:border-gemini-orange/30 transition-all duration-700 shadow-2xl overflow-hidden"
+              className="group relative p-10 rounded-[2.5rem] bg-gradient-to-br from-[#001D3D]/30 to-transparent border border-white/5 hover:border-gemini-orange/30 transition-all duration-700 shadow-2xl overflow-hidden"
             >
               <div className="absolute -top-10 -right-10 p-12 text-gemini-orange/30 text-[12rem] transition-all duration-1000 group-hover:text-gemini-orange/50 group-hover:scale-110 group-hover:rotate-12 pointer-events-none">
                 <FaEye />
               </div>
               <div className="relative z-10">
-                <div className="flex items-center gap-4 mb-8">
+                <div className="flex items-center gap-4 mb-6">
                   <div className="w-12 h-1.5 bg-gemini-orange rounded-full" />
-                  <h3 className="text-white font-black text-4xl tracking-tighter uppercase">
-                    VISION
-                  </h3>
+                  <h3 className="typo-section">VISION</h3>
                 </div>
-                <p className="text-gray-300 text-xl leading-relaxed font-semibold italic tracking-tight">
+                <p className="typo-body text-md text-white italic">
                   "To be a global leader in smart, integrated, and sustainable
                   tech solutions that transform operations and create lasting
                   value for our clients and communities."
@@ -212,10 +269,10 @@ const AboutPage = () => {
       </section>
 
       {/* Core Values Section */}
-      <section className="py-20 lg:py-32">
+      <section className="py-16 lg:py-24">
         <Container>
-          <div className="text-center mb-20">
-            <h2 className="text-4xl lg:text-6xl font-black text-white mb-6 uppercase tracking-tighter">
+          <div className="text-center mb-12">
+            <h2 className="typo-heading mb-6">
               Our Core <span className="text-gemini-orange">Values</span>
             </h2>
             <div className="w-24 h-2 bg-gemini-blue mx-auto rounded-full" />
@@ -239,15 +296,13 @@ const AboutPage = () => {
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gemini-blue/5 blur-3xl rounded-full group-hover:bg-gemini-blue/20 transition-colors" />
 
                 <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-gemini-blue/20 to-gemini-blue/5 flex items-center justify-center mb-8 border border-white/5 group-hover:bg-gemini-blue transition-all duration-500 shadow-xl group-hover:rotate-[360deg]">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-gemini-blue/20 to-gemini-blue/5 flex items-center justify-center mb-6 border border-white/5 group-hover:bg-gemini-blue transition-all duration-500 shadow-xl group-hover:rotate-[360deg]">
                     <FaGem className="text-gemini-blue text-2xl group-hover:text-white transition-colors" />
                   </div>
-                  <h4 className="text-white font-black text-2xl mb-4 tracking-tight group-hover:text-gemini-orange transition-colors">
+                  <h4 className="typo-subsection-white mb-4 group-hover:text-gemini-orange transition-colors">
                     {value.title}
                   </h4>
-                  <p className="text-gray-400 leading-relaxed font-medium text-sm tracking-wide">
-                    {value.description}
-                  </p>
+                  <p className="typo-body opacity-70">{value.description}</p>
                 </div>
 
                 {/* Bottom line accent */}
@@ -258,69 +313,201 @@ const AboutPage = () => {
         </Container>
       </section>
 
-      {/* GSAP Horizontal Scroll Roadmap */}
-      <section className="py-20 lg:py-32 bg-transparent select-none">
-        <div className="container mx-auto px-4 mb-20 text-center">
-          <h2 className="text-5xl lg:text-7xl font-black text-white mb-4 tracking-tighter inline-block">
-            COMPANY <span className="text-gemini-blue">JOURNEY</span>
-          </h2>
-          <p className="text-gray-500 font-black text-xs lg:text-sm uppercase tracking-[0.5em] block mt-4">
-            Our 10-Year Roadmap of Innovation
-          </p>
+      {/* Company Journey Interactive Section */}
+      <section className="relative min-h-[700px] flex items-center overflow-hidden py-8">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 z-0">
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={activeIndex}
+              src={journeyData[activeIndex].image}
+              alt={`Journey ${journeyData[activeIndex].year}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.4 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              className="w-full h-full object-cover grayscale"
+            />
+          </AnimatePresence>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#000510] via-[#000510]/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t border-t-2 border-white/10 shadow-[5px_5px_60px_rgba(255, 255, 255, 0.6)] from-[#000510] via-transparent to-transparent" />
         </div>
 
-        <div className="overflow-hidden relative" id="roadmap-container">
-          <div
-            className="flex gap-8 px-4 lg:px-[15vw] relative pb-20 items-stretch"
-            id="roadmap-track"
-          >
-            {/* Horizontal Timeline Line */}
-            <div className="absolute top-[40%] left-0 w-[500%] h-px bg-white/10 z-0" />
+        <Container>
+          <div className="relative z-10 max-w-5xl mx-auto">
+            {/* Row 1: Centered Label */}
+            <div className="flex justify-center mb-6">
+              <span className="bg-gemini-blue/20 text-blue-400 px-6 py-2 rounded-full typo-tab-heading text-[10px] backdrop-blur-md border border-white/5 uppercase tracking-[0.2em]">
+                OUR JOURNEY
+              </span>
+            </div>
 
-            {roadmap.map((milestone, idx) => (
-              <div
-                key={idx}
-                className="roadmap-card min-w-[320px] lg:min-w-[450px] relative z-10 flex flex-col items-center"
+            {/* Row 2: Centered Year Display */}
+            <div className="flex justify-center mb-10 border-b border-white/10 pb-8">
+              <motion.div
+                key={activeIndex}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="text-white font-black text-7xl lg:text-9xl tracking-tighter"
               >
-                {/* Year Bubble */}
-                <div className="mb-12 relative">
-                  <div className="absolute inset-0 bg-gemini-orange/20 blur-2xl rounded-full" />
-                  <span className="relative text-gemini-orange font-black text-6xl lg:text-8xl tracking-tighter">
-                    {milestone.year}
-                  </span>
-                </div>
+                {journeyData[activeIndex].year}
+              </motion.div>
+            </div>
 
-                {/* Content Card */}
-                <div className="bg-[#001D3D]/60 backdrop-blur-xl border border-white/5 p-10 rounded-[3rem] hover:border-gemini-orange/40 transition-all group w-full h-full shadow-2xl relative overflow-hidden">
-                  {/* Glowing dot on top of card connected to timeline */}
-                  <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-gemini-blue rounded-full shadow-[0_0_15px_rgba(0,71,171,0.8)]" />
+            {/* Row 3: Heading & Description Grid */}
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-16 px-4">
+              <motion.h2
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="typo-heading text-3xl lg:text-5xl leading-[1.1] text-white"
+              >
+                Over 12+ Years of Innovation to Help Businesses Thrive!
+              </motion.h2>
 
-                  <h4 className="text-white font-black text-2xl mb-4 uppercase tracking-tight group-hover:text-gemini-orange transition-colors">
-                    {milestone.title}
-                  </h4>
-                  <p className="text-gray-400 text-sm lg:text-base leading-relaxed font-medium">
-                    {milestone.description}
-                  </p>
+              <motion.div
+                key={activeIndex}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <p className="typo-body text-xl lg:text-lg opacity-80 leading-relaxed border-l border-gemini-blue/30 pl-6">
+                  {journeyData[activeIndex].description}
+                </p>
+              </motion.div>
+            </div>
 
-                  <div className="absolute bottom-6 right-8 text-white/5 font-black text-6xl select-none group-hover:text-white/10 transition-colors">
-                    {idx + 1 < 10 ? `0${idx + 1}` : idx + 1}
-                  </div>
+            {/* Bottom Timeline Selector */}
+            <div className="mt-12 lg:mt-16">
+              <div className="relative">
+                {/* Timeline Line */}
+                <div className="absolute bottom-[16px] left-0 w-full h-[2px] bg-white/10" />
+
+                {/* Active Line Indicator */}
+                <motion.div
+                  className="absolute bottom-[16px] left-0 h-[2px] bg-gemini-blue z-10"
+                  animate={{
+                    width: `${(activeIndex / (journeyData.length - 1)) * 100}%`,
+                  }}
+                  transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                />
+
+                <div className="flex justify-between relative z-20">
+                  {journeyData.map((item, idx) => (
+                    <button
+                      key={item.year}
+                      onClick={() => setActiveIndex(idx)}
+                      className="group flex flex-col items-center cursor-pointer outline-none"
+                    >
+                      <motion.span
+                        className={`typo-tab-heading text-xs mb-4 transition-all duration-300 ${
+                          idx === activeIndex
+                            ? "text-white scale-125 font-black"
+                            : "text-white/40 group-hover:text-white/70"
+                        }`}
+                      >
+                        {item.year}
+                      </motion.span>
+                      <div
+                        className={`w-3 h-3 rounded-full border-2 transition-all duration-300 ${
+                          idx === activeIndex
+                            ? "bg-white border-gemini-blue scale-125 shadow-[0_0_10px_rgba(255,255,255,0.8)]"
+                            : "bg-[#000510] border-white/20 group-hover:border-white/50"
+                        }`}
+                      />
+                    </button>
+                  ))}
                 </div>
               </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* <section className="py-24 bg-[#000510] relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gemini-blue/5 blur-[150px] rounded-full pointer-events-none" />
+
+        <Container>
+          <div className="text-center mb-20 relative z-10">
+            <motion.span
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="typo-tab-heading text-gemini-blue mb-4 block"
+            >
+              Innovation in Motion
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="typo-heading text-4xl lg:text-7xl mb-6"
+            >
+              OUR VIDEO <span className="text-gemini-orange">LIBRARY</span>
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              className="typo-body max-w-2xl mx-auto opacity-70"
+            >
+              Explore our technical showcases and site-level implementations of
+              industry-leading AI, RTLS, and tracking technologies.
+            </motion.p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 relative z-10">
+            {videoLibrary.map((video, idx) => (
+              <motion.div
+                key={video.id}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: idx * 0.1 }}
+                viewport={{ once: true }}
+                className="group flex flex-col h-full rounded-[2.5rem] overflow-hidden bg-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:shadow-gemini-blue/20 transition-all duration-500 hover:-translate-y-3"
+              >
+                <div className="relative aspect-video overflow-hidden">
+                  <img
+                    src={video.thumbnail}
+                    alt={video.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gemini-blue/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-gemini-blue text-2xl shadow-2xl transform scale-75 group-hover:scale-100 transition-transform duration-500">
+                      <FaPlay className="ml-1" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md text-white text-[10px] px-3 py-1 rounded-full flex items-center gap-1.5 font-bold tracking-widest">
+                    <FaClock className="text-gemini-orange" />
+                    {video.duration}
+                  </div>
+                </div>
+
+                <div className="flex-1 p-8 flex flex-col">
+                  <h3 className="text-[#001D3D] text-xl lg:text-2xl font-black mb-4 leading-tight group-hover:text-gemini-blue transition-colors">
+                    {video.title}
+                  </h3>
+                  <p className="text-[#001D3D]/70 text-sm mb-8 line-clamp-3 leading-relaxed font-medium">
+                    {video.description}
+                  </p>
+
+                  <div className="mt-auto">
+                    <button className="flex items-center gap-3 text-gemini-blue font-black text-xs tracking-[0.2em] group/btn hover:text-gemini-orange transition-colors">
+                      WATCH NOW
+                      <div className="w-10 h-10 rounded-full border-2 border-gemini-blue/10 flex items-center justify-center group-hover/btn:border-gemini-orange group-hover/btn:bg-gemini-orange group-hover/btn:text-white transition-all shadow-lg">
+                        <FaArrowRight className="text-[10px]" />
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </div>
 
-          {/* Custom Scroll Bar Hint */}
-          <div className="container mx-auto px-4 mt-12 mb-8 flex items-center gap-4 justify-center">
-            <div className="w-24 h-1 bg-white/5 rounded-full overflow-hidden">
-              <div id="scroll-progress" className="w-0 h-full bg-gemini-blue" />
-            </div>
-            <span className="text-gray-500 font-black text-[10px] uppercase tracking-widest">
-              Scroll to Explore
-            </span>
+          <div className="mt-20 text-center relative z-10">
+            <button className="bg-gemini-blue text-white font-black py-5 px-12 rounded-2xl hover:bg-gemini-orange transition-all transform hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(0,71,171,0.3)] tracking-[0.2em] text-[10px] uppercase">
+              VIEW FULL VIDEO GALLERY
+            </button>
           </div>
-        </div>
-      </section>
+        </Container>
+      </section> */}
 
       {/* CTA Section
       <section className="py-32">

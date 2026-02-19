@@ -13,6 +13,19 @@ import {
     FaTools,
 } from "react-icons/fa";
 
+import customSoftwareImg from "../../../assets/services/Custom-Software-Development.jpg";
+import webAppImg from "../../../assets/services/web_application_development.jpg";
+import mobileAppImg from "../../../assets/services/mobile-app-development.png";
+import uiUxImg from "../../../assets/services/ui_ux.webp";
+import aiDevImg from "../../../assets/services/ai-development.webp";
+import consultingImg from "../../../assets/services/Software-Consulting.webp";
+import cloudDevOpsImg from "../../../assets/services/cloud_devops.png";
+import apiIntegrationImg from "../../../assets/services/api_integration.jpg";
+import enterpriseAppImg from "../../../assets/services/enterprise-application-development.webp";
+import iotImg from "../../../assets/services/iot.webp";
+import dataAnalyticsImg from "../../../assets/services/data-analytics-techniques.avif";
+import maintenanceImg from "../../../assets/services/application-support.jpg";
+
 export interface ServiceItem {
     id: string;
     icon: any;
@@ -34,8 +47,7 @@ export const servicesData: ServiceItem[] = [
             "Scalable & future-ready architecture",
             "Secure, high-performance solutions",
         ],
-        image:
-            "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800",
+        image: customSoftwareImg,
         gradient: "from-[#0047AB] to-[#002152]",
     },
     {
@@ -48,8 +60,7 @@ export const servicesData: ServiceItem[] = [
             "Cross-browser compatibility",
             "Optimized performance & security",
         ],
-        image:
-            "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+        image: webAppImg,
         gradient: "from-[#00152F] to-[#0047AB]",
     },
     {
@@ -62,8 +73,7 @@ export const servicesData: ServiceItem[] = [
             "User-centric mobile experiences",
             "Scalable backend integration",
         ],
-        image:
-            "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800",
+        image: mobileAppImg,
         gradient: "from-[#1a1a1a] to-[#FF8C00]/30",
     },
     {
@@ -76,8 +86,7 @@ export const servicesData: ServiceItem[] = [
             "Interactive prototypes & wireframes",
             "Modern, clean visual aesthetics",
         ],
-        image:
-            "https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?auto=format&fit=crop&q=80&w=800",
+        image: uiUxImg,
         gradient: "from-[#0047AB] via-[#000510] to-[#FF8C00]/20",
     },
     {
@@ -90,8 +99,7 @@ export const servicesData: ServiceItem[] = [
             "Predictive analytics",
             "Intelligent dashboards & insights",
         ],
-        image:
-            "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
+        image: aiDevImg,
         gradient: "from-[#000000] via-[#00152F] to-[#0047AB]",
     },
     {
@@ -104,8 +112,7 @@ export const servicesData: ServiceItem[] = [
             "System architecture advisory",
             "Process optimization strategies",
         ],
-        image:
-            "https://images.unsplash.com/photo-1454165833762-02ac1f40b9c7?auto=format&fit=crop&q=80&w=800",
+        image: consultingImg,
         gradient: "from-[#FF8C00]/20 to-[#00152F]",
     },
     {
@@ -118,8 +125,7 @@ export const servicesData: ServiceItem[] = [
             "CI/CD implementation",
             "Infrastructure management",
         ],
-        image:
-            "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800",
+        image: cloudDevOpsImg,
         gradient: "from-[#0047AB]/60 to-[#00152F]",
     },
     {
@@ -132,8 +138,7 @@ export const servicesData: ServiceItem[] = [
             "ERP & enterprise connectivity",
             "Secure data exchange",
         ],
-        image:
-            "https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&q=80&w=800",
+        image: apiIntegrationImg,
         gradient: "from-[#1a1a1a] via-[#00152F] to-[#0047AB]/40",
     },
     {
@@ -146,8 +151,7 @@ export const servicesData: ServiceItem[] = [
             "Workflow automation",
             "Enterprise-level security",
         ],
-        image:
-            "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800",
+        image: enterpriseAppImg,
         gradient: "from-[#002861] to-[#1a1a1a]",
     },
     {
@@ -160,8 +164,7 @@ export const servicesData: ServiceItem[] = [
             "Asset & fleet monitoring",
             "Data-driven alerts & reporting",
         ],
-        image:
-            "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
+        image: iotImg,
         gradient: "from-[#FF8C00]/10 via-[#000510] to-[#0047AB]",
     },
     {
@@ -174,8 +177,7 @@ export const servicesData: ServiceItem[] = [
             "Performance analytics",
             "Business decision insights",
         ],
-        image:
-            "https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&q=80&w=800",
+        image: dataAnalyticsImg,
         gradient: "from-[#00152F] via-[#0047AB]/30 to-[#000A16]",
     },
     {
@@ -188,8 +190,7 @@ export const servicesData: ServiceItem[] = [
             "Performance optimization",
             "Version upgrades & enhancements",
         ],
-        image:
-            "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=800",
+        image: maintenanceImg,
         gradient: "from-[#0a0a0a] to-[#0047AB]/40",
     },
 ];

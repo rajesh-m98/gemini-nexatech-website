@@ -107,8 +107,8 @@ const Products = () => {
                     to={`/products/${product.id}`}
                     className="absolute inset-0 z-20 flex items-center justify-center bg-[#00152F]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm rounded-[32px]"
                   >
-                    <span className="bg-white text-gemini-blue font-black py-3 px-8 rounded-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl flex items-center gap-2">
-                      EXPLORE PRODUCT <span className="text-xl">→</span>
+                    <span className="bg-white text-gemini-blue font-black py-3 px-8 rounded-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl flex items-center gap-2 whitespace-nowrap">
+                      EXPLORE {product.title} <span className="text-xl">→</span>
                     </span>
                   </Link>
                 </div>
