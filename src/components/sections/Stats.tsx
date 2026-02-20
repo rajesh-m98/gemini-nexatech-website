@@ -7,10 +7,10 @@ import Container from "../common/Container";
 gsap.registerPlugin(ScrollTrigger);
 
 const STATS = [
-  { numericValue: 12, suffix: "+", label: "Years of Excellence" },
-  { numericValue: 2500, suffix: "+", label: "Empowered Clients" },
-  { numericValue: 25, suffix: "+", label: "Countries Served" },
-  { numericValue: 300, suffix: "+", label: "Tech Engineers" },
+  { numericValue: 15, suffix: "+", label: "Years of Excellence" },
+  { numericValue: 1000, suffix: "+", label: "Empowered Clients" },
+  { numericValue: 10, suffix: "+", label: "Countries Served" },
+  { numericValue: 250, suffix: "+", label: "Tech Engineers" },
 ];
 
 const StatCard = ({
@@ -64,7 +64,7 @@ const Stats = () => {
   );
 
   return (
-    <section ref={sectionRef} className="py-16 lg:py-24 bg-[#000510]">
+    <section ref={sectionRef} className="py-10 lg:py-16 bg-[#000510]">
       <Container>
         <div className="w-full bg-[#001D3D]/30 backdrop-blur-xl rounded-[3rem] p-8 lg:p-12 border border-white/5 shadow-2xl relative overflow-hidden">
           {/* Background Flair */}

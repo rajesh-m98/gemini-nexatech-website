@@ -34,19 +34,22 @@ const Home = () => {
       <Stats />
 
       <SectionDivider direction="right" />
-      <Services />
+      <section id="services">
+        <Services />
+      </section>
 
       <SectionDivider direction="left" />
-      <Products />
+      <section id="products">
+        <Products />
+      </section>
 
       <SectionDivider direction="both" />
-      <Industries />
+      <section id="industries">
+        <Industries />
+      </section>
 
-      {/* <SectionDivider direction="right" /> */}
+      <SectionDivider direction="right" />
       <CaseStudies />
-
-      {/* <SectionDivider direction="left" />
-      <Insights /> */}
 
       <ScheduleCallModal
         isOpen={isModalOpen}

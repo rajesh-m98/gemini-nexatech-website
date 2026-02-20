@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { SERVICES_MENU, INDUSTRIES_MENU, NAV_LINKS, INSIGHTS_MENU } from "./navbarData";
 import { PRODUCTS_DATA } from "../../sections/products/productsData";
@@ -6,9 +6,17 @@ import { PRODUCTS_DATA } from "../../sections/products/productsData";
 export const useNavbarManager = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 50);
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     const internalScrollToSection = useCallback((id: string) => {
         setIsMobileMenuOpen(false);
@@ -56,8 +64,7 @@ export const useNavbarManager = () => {
     return {
         isMobileMenuOpen,
         activeDropdown,
-        isModalOpen,
-        setIsModalOpen,
+        isScrolled,
         location,
         services: SERVICES_MENU,
         industries: INDUSTRIES_MENU,

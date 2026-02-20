@@ -49,12 +49,12 @@ const Products = () => {
           {products.map((product: any) => (
             <div
               key={product.id}
-              className="product-card group relative min-h-[480px] h-auto mb-4"
+              className="product-card group relative h-auto mb-4"
               style={{ perspective: "1000px" }}
             >
               <div className="card-inner w-full h-full relative transition-transform duration-500">
-                {/* Main Card Face - Overflow hidden added back to clip the tech bar to rounded corners */}
-                <div className="relative w-full h-full bg-[#00152F]/40 backdrop-blur-xl rounded-[32px] border border-white/10 p-8 pb-16 flex flex-col items-start shadow-2xl overflow-hidden">
+                {/* Main Card Face */}
+                <div className="relative w-full h-full bg-[#00152F]/40 backdrop-blur-xl rounded-[32px] border border-white/10 p-6 pb-6 flex flex-col items-start shadow-2xl overflow-hidden">
                   {/* Digital Blueprint Overlay */}
                   <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none">
                     <div className="absolute inset-0 bg-tech-blueprint opacity-50" />
@@ -63,32 +63,36 @@ const Products = () => {
                   {/* Mouse Glow */}
                   <div className="card-glow absolute w-[100px] h-[100px] bg-white/20 blur-[60px] rounded-full opacity-0 pointer-events-none" />
 
-                  {/* Icon & Title Area */}
-                  <div className="mb-6 relative">
-                    <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-[#FF8C00]/50 transition-colors duration-500">
-                      <product.icon className="text-3xl text-[#FF8C00]" />
+                  {/* Icon & Title Row (Icon Left, Title Centered) */}
+                  <div className="flex items-center w-full mb-6 relative h-12">
+                    <div className="relative z-10">
+                      <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-[#FF8C00]/50 transition-colors duration-500">
+                        <product.icon className="text-xl text-[#FF8C00]" />
+                      </div>
+                      {/* Decorative Corner Line */}
+                      <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-[#FF8C00]/30" />
                     </div>
-                    {/* Decorative Corner Line */}
-                    <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-[#FF8C00]/30" />
+
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <h3 className="text-xl lg:text-2xl font-black text-white tracking-tight group-hover:text-[#FF8C00] transition-colors leading-none text-center">
+                        {product.title}
+                      </h3>
+                    </div>
                   </div>
 
-                  <h3 className="text-2xl font-black text-white mb-4 tracking-tight group-hover:text-[#FF8C00] transition-colors">
-                    {product.title}
-                  </h3>
-
-                  <p className="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">
+                  <p className="text-gray-400 text-[16px] leading-relaxed mb-6 text-left w-full">
                     {product.desc}
                   </p>
 
-                  {/* Product Chip List (The "Scrutiny" Reveal) */}
-                  <div className="w-full space-y-3">
+                  {/* Product Chip List */}
+                  <div className="w-full mb-4">
                     <div className="flex flex-wrap gap-2">
                       {product.products.map((sub: any, i: number) => (
                         <div
                           key={i}
-                          className="px-3 py-2 rounded-lg bg-white/5 border border-white/10 flex items-center gap-2 group/chip hover:bg-[#FF8C00]/10 hover:border-[#FF8C00]/30 transition-all cursor-default"
+                          className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 flex items-center gap-2 group/chip hover:bg-[#FF8C00]/10 hover:border-[#FF8C00]/30 transition-all cursor-default"
                         >
-                          <sub.icon className="text-xs flex-shrink-0 text-[#FF8C00]" />
+                          <sub.icon className="text-[11px] flex-shrink-0 text-[#FF8C00]" />
                           <span className="text-[11px] font-bold text-white/70 group-hover/chip:text-white uppercase tracking-wider whitespace-normal leading-tight text-left">
                             {sub.name}
                           </span>
@@ -98,16 +102,16 @@ const Products = () => {
                   </div>
 
                   {/* Bottom Tech Bar */}
-                  <div className="absolute bottom-0 left-0 w-full h-1.5 bg-[#FF8C00]/10 overflow-hidden">
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-[#FF8C00]/10 overflow-hidden">
                     <div className="w-1/3 h-full bg-[#FF8C00] translate-x-[-100%] group-hover:translate-x-[300%] transition-transform duration-1000 ease-in-out shadow-[0_0_10px_#FF8C00]" />
                   </div>
 
-                  {/* Learn More Overlay Link */}
+                  {/* Learn More Overlay Link - Now with true hidden-by-default logic */}
                   <Link
                     to={`/products/${product.id}`}
-                    className="absolute inset-0 z-20 flex items-center justify-center bg-[#00152F]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm rounded-[32px]"
+                    className="absolute inset-0 z-20 flex items-center justify-center bg-[#00152F]/90 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 backdrop-blur-md rounded-[32px]"
                   >
-                    <span className="bg-white text-gemini-blue font-black py-3 px-8 rounded-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl flex items-center gap-2 whitespace-nowrap">
+                    <span className="bg-white text-gemini-blue font-black py-3 px-8 rounded-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-xl flex items-center gap-2 whitespace-nowrap">
                       EXPLORE {product.title} <span className="text-xl">→</span>
                     </span>
                   </Link>

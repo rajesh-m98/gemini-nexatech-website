@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const services = [
@@ -16,17 +15,11 @@ const services = [
   "Application Maintenance & Support",
 ] as const;
 
-const AnimatedServices = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+interface AnimatedServicesProps {
+  currentIndex: number;
+}
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % services.length);
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, []);
-
+const AnimatedServices = ({ currentIndex }: AnimatedServicesProps) => {
   const currentService = services[currentIndex];
   const words = currentService.split(" ");
 
@@ -47,6 +40,7 @@ const AnimatedServices = () => {
       },
     },
   };
+
   const letterVariants = {
     hidden: {
       opacity: 0,
@@ -66,7 +60,7 @@ const AnimatedServices = () => {
   };
 
   return (
-    <div className="h-12 sm:h-16 md:h-20 lg:h-24 flex items-center justify-center overflow-hidden px-3">
+    <div className="min-h-[80px] sm:min-h-[100px] md:min-h-[140px] flex items-center justify-center px-4 py-4 sm:py-6 relative z-10 w-full overflow-hidden">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
@@ -74,10 +68,10 @@ const AnimatedServices = () => {
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white text-center flex flex-wrap justify-center leading-[1] tracking-normal font-inter"
+          className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white text-center flex flex-wrap justify-center items-center leading-[1.2] tracking-tight font-inter w-full max-w-[95vw] lg:max-w-7xl mx-auto"
         >
           {words.map((word, wordIndex) => (
-            <span key={wordIndex} className="whitespace-nowrap flex">
+            <span key={wordIndex} className="whitespace-nowrap flex py-1">
               {word.split("").map((letter, charIndex) => (
                 <motion.span
                   key={`${currentIndex}-${wordIndex}-${charIndex}`}

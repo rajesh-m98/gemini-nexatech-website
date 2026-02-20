@@ -14,7 +14,7 @@ import maintenanceImg from "../assets/services/application-support.jpg";
 export const services = [
     {
         id: "custom-software",
-        title: "Custom Software Development Services",
+        title: "Custom Software Development",
         description: "We build fully customized software solutions tailored to your exact business needs. From concept to deployment, our solutions are designed to improve efficiency, automate processes, and support long-term growth.",
         features: [
             "End-to-end development lifecycle",
@@ -24,11 +24,15 @@ export const services = [
             "Seamless third-party integrations"
         ],
         icon: "software",
-        image: customSoftwareImg
+        image: customSoftwareImg,
+        images: [
+            "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2070",
+            "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&q=80&w=2070"
+        ]
     },
     {
         id: "web-app",
-        title: "Web Application Development Services",
+        title: "Web Application Development",
         description: "We develop secure, fast, and responsive web applications that enhance operational efficiency and deliver exceptional user experiences across devices.",
         features: [
             "Progressive and responsive web apps",
@@ -38,11 +42,15 @@ export const services = [
             "Enterprise-grade security implementation"
         ],
         icon: "globe",
-        image: webAppImg
+        image: webAppImg,
+        images: [
+            "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2015",
+            "https://images.unsplash.com/photo-1508921234172-b68ed335b3e6?auto=format&fit=crop&q=80&w=2070"
+        ]
     },
     {
         id: "mobile-app",
-        title: "Mobile Application Development Services",
+        title: "Mobile Application Development",
         description: "We create feature-rich Android and iOS applications that boost customer engagement and improve business mobility.",
         features: [
             "Native (Android & iOS) development",
@@ -52,11 +60,15 @@ export const services = [
             "Ongoing updates & feature enhancements"
         ],
         icon: "mobile",
-        image: mobileAppImg
+        image: mobileAppImg,
+        images: [
+            "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=2070",
+            "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?auto=format&fit=crop&q=80&w=2072"
+        ]
     },
     {
         id: "ui-ux",
-        title: "UX/UI Design Services",
+        title: "UX/UI Design ",
         description: "We design intuitive and visually engaging digital experiences that convert users and strengthen brand identity.",
         features: [
             "User research & behavior analysis",
@@ -66,11 +78,15 @@ export const services = [
             "Design system & brand consistency"
         ],
         icon: "palette",
-        image: uiUxImg
+        image: uiUxImg,
+        images: [
+            "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&q=80&w=2080"
+        ]
     },
     {
         id: "ai-dev",
-        title: "AI Development Services",
+        title: "AI Development",
         description: "We implement AI-driven solutions that automate operations, improve decision-making, and unlock intelligent insights.",
         features: [
             "Machine learning model development",
@@ -80,11 +96,15 @@ export const services = [
             "Custom AI integrations for business tools"
         ],
         icon: "brain",
-        image: aiDevImg
+        image: aiDevImg,
+        images: [
+            "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=2070",
+            "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2070"
+        ]
     },
     {
         id: "consulting",
-        title: "IT & Software Consulting Services",
+        title: "IT & Software Consulting ",
         description: "We provide expert technology consulting to align your digital strategy with business objectives.",
         features: [
             "Digital transformation strategy",
@@ -94,11 +114,15 @@ export const services = [
             "Risk assessment & scalability planning"
         ],
         icon: "users",
-        image: consultingImg
+        image: consultingImg,
+        images: [
+            "https://images.unsplash.com/photo-1454165833767-027ffea9e77b?auto=format&fit=crop&q=80&w=2070",
+            "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=2070"
+        ]
     },
     {
         id: "cloud-devops",
-        title: "Cloud & DevOps Services",
+        title: "Cloud & DevOps ",
         description: "We help businesses adopt cloud infrastructure and DevOps practices for agility, scalability, and operational excellence.",
         features: [
             "AWS, Azure & Google Cloud deployment",
@@ -108,11 +132,15 @@ export const services = [
             "Monitoring & performance management"
         ],
         icon: "cloud",
-        image: cloudDevOpsImg
+        image: cloudDevOpsImg,
+        images: [
+            "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2072",
+            "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2015"
+        ]
     },
     {
         id: "api-integration",
-        title: "API Development & System Integration Services",
+        title: "API Development & System Integration",
         description: "We develop secure APIs and integrate systems to ensure smooth communication between platforms, devices, and enterprise software.",
         features: [
             "RESTful & secure API development",
@@ -122,11 +150,15 @@ export const services = [
             "Secure data exchange protocols"
         ],
         icon: "link",
-        image: apiIntegrationImg
+        image: apiIntegrationImg,
+        images: [
+            "https://images.unsplash.com/photo-1558494949-ef010cbdcc4b?auto=format&fit=crop&q=80&w=2026",
+            "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2070"
+        ]
     },
     {
         id: "enterprise-app",
-        title: "Enterprise Application Development Services",
+        title: "Enterprise Application Development",
         description: "We create enterprise-grade applications that streamline workflows, enhance collaboration, and support large-scale operations.",
         features: [
             "Workflow & process automation",
@@ -136,7 +168,11 @@ export const services = [
             "Advanced security & compliance standards"
         ],
         icon: "briefcase",
-        image: enterpriseAppImg
+        image: enterpriseAppImg,
+        images: [
+            "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070",
+            "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=2070"
+        ]
     },
     {
         id: "iot-monitoring",
@@ -150,11 +186,15 @@ export const services = [
             "Data analytics for operational insights"
         ],
         icon: "cpu",
-        image: iotImg
+        image: iotImg,
+        images: [
+            "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2070",
+            "https://images.unsplash.com/photo-1563770660941-20978e87081b?auto=format&fit=crop&q=80&w=2070"
+        ]
     },
     {
         id: "data-analytics",
-        title: "Data Analytics & Business Intelligence Services",
+        title: "Data Analytics & Business Intelligence",
         description: "We turn complex data into actionable insights through intelligent dashboards and reporting systems.",
         features: [
             "Custom BI dashboards",
@@ -164,11 +204,15 @@ export const services = [
             "Decision-support analytics tools"
         ],
         icon: "bar-chart",
-        image: dataAnalyticsImg
+        image: dataAnalyticsImg,
+        images: [
+            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2070",
+            "https://images.unsplash.com/photo-1504868584819-f8e905b6cbe0?auto=format&fit=crop&q=80&w=2070"
+        ]
     },
     {
         id: "maintenance",
-        title: "Application Maintenance & Support Services",
+        title: "Application Maintenance & Support",
         description: "We ensure your applications remain secure, optimized, and up to date with proactive support and enhancements.",
         features: [
             "SLA-based technical support",
@@ -178,7 +222,11 @@ export const services = [
             "24/7 issue resolution assistance"
         ],
         icon: "shield",
-        image: maintenanceImg
+        image: maintenanceImg,
+        images: [
+            "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=2070",
+            "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070"
+        ]
     }
 ];
 
@@ -214,7 +262,8 @@ export const products = [
             "Improved asset utilization",
             "Workforce safety monitoring",
             "Reduced asset loss & downtime",
-            "Smart geofencing alerts"
+            "Smart geofencing alerts",
+            "Seamless multi-facility coverage"
         ],
         majorProducts: [
             "Real-Time Location Systems (RTLS)",
@@ -236,7 +285,9 @@ export const products = [
             "Contactless identification",
             "Reduced human error",
             "Automated stock visibility",
-            "Seamless system integration"
+            "Seamless system integration",
+            "Industrial-grade durability",
+            "Batch processing efficiency"
         ],
         majorProducts: [
             "RFID Tags (Passive & Active)",
@@ -259,7 +310,9 @@ export const products = [
             "Route optimization & fuel savings",
             "Driver behavior analysis",
             "Fleet cost reduction",
-            "Centralized fleet monitoring"
+            "Centralized fleet monitoring",
+            "Predictive maintenance alerts",
+            "Compliance & ELD automation"
         ],
         majorProducts: [
             "GPS Vehicle Trackers",
@@ -282,7 +335,9 @@ export const products = [
             "Automated alerts & reporting",
             "Remote device management",
             "Energy & efficiency optimization",
-            "Scalable IoT architecture"
+            "Scalable IoT architecture",
+            "Edge intelligence processing",
+            "End-to-end data encryption"
         ],
         majorProducts: [
             "IoT Gateways",
@@ -305,7 +360,8 @@ export const products = [
             "Worker safety monitoring",
             "Hazard detection & alerts",
             "Compliance with international standards",
-            "Rugged & explosion-proof equipment"
+            "Rugged & explosion-proof equipment",
+            "Emergency response automation"
         ],
         majorProducts: [
             "Intrinsically Safe Tablets & Mobile Devices",
@@ -337,7 +393,9 @@ export const industries = [
             "Improved worker safety",
             "Reduced downtime",
             "Regulatory compliance assurance",
-            "Real-time operational visibility"
+            "Real-time operational visibility",
+            "Extended asset life",
+            "Optimized resource allocation"
         ],
         icon: "droplet"
     },
@@ -358,7 +416,9 @@ export const industries = [
             "Reduced equipment failures",
             "Increased productivity",
             "Minimized asset loss",
-            "Real-time production insights"
+            "Real-time production insights",
+            "Optimized energy usage",
+            "Improved quality control"
         ],
         icon: "factory"
     },
@@ -379,7 +439,9 @@ export const industries = [
             "Infrastructure protection",
             "Energy optimization",
             "Reduced operational risk",
-            "Improved service reliability"
+            "Improved service reliability",
+            "Enhanced grid resilience",
+            "Sustainable operations"
         ],
         icon: "bolt"
     },
@@ -400,7 +462,9 @@ export const industries = [
             "Enhanced site safety",
             "Reduced equipment theft",
             "Improved project monitoring",
-            "Better resource management"
+            "Better resource management",
+            "Reduced material waste",
+            "Accurate progress tracking"
         ],
         icon: "building"
     },
@@ -421,7 +485,9 @@ export const industries = [
             "Lower operational costs",
             "Improved delivery timelines",
             "Enhanced fleet safety",
-            "Real-time shipment visibility"
+            "Real-time shipment visibility",
+            "Optimized fuel consumption",
+            "Reduced carbon footprint"
         ],
         icon: "truck"
     },
@@ -442,7 +508,9 @@ export const industries = [
             "Enhanced security compliance",
             "Improved operational coordination",
             "Reduced asset misplacement",
-            "Increased infrastructure reliability"
+            "Increased infrastructure reliability",
+            "Optimized turnaround times",
+            "Strengthened safety protocols"
         ],
         icon: "plane"
     }

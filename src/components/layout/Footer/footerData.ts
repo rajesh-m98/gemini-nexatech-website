@@ -1,4 +1,5 @@
-import { FaLinkedin, FaTwitter, FaGithub, FaFacebook, FaInstagram, FaPhone, FaEnvelope, FaMapMarkerAlt, FaWhatsapp } from "react-icons/fa";
+import { FaLinkedin, FaTwitter, FaGithub, FaInstagram, FaPhone, FaEnvelope, FaMapMarkerAlt, FaWhatsapp } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa6";
 
 export const FOOTER_DATA = {
     about: {
@@ -7,21 +8,25 @@ export const FOOTER_DATA = {
     },
     sections: [
         {
-            title: "Our Services",
+            title: "Our Softwares",
             links: [
-                { label: "Custom Software", href: "/services/custom-software" },
-                { label: "AI & Automation", href: "/services/ai-dev" },
-                { label: "Cloud Systems", href: "/services/cloud-devops" },
-                { label: "Smart Monitoring", href: "/services/iot-monitoring" }
+                { label: "Gemini AI", href: "" },
+                { label: "Gemini AI", href: "" },
+                { label: "Gemini AI", href: "" },
+                { label: "Gemini AI", href: "" },
+                { label: "Gemini AI", href: "" },
+                { label: "Gemini AI", href: "" },
             ]
         },
         {
             title: "Quick Links",
             links: [
                 { label: "About Us", href: "/about" },
-                { label: "Our Products", href: "/#products" },
-                { label: "Latest Insights", href: "/video-library" },
-                { label: "Case Studies", href: "/#cases" }
+                { label: "Services", href: "#services" },
+                { label: "Products", href: "#products" },
+                { label: "Industries", href: "#industries" },
+                { label: "Insights", href: "/video-library" },
+                { label: "Blogs", href: "/blogs" },
             ]
         },
         {
@@ -35,10 +40,10 @@ export const FOOTER_DATA = {
         }
     ],
     socials: [
-        { icon: FaLinkedin, href: "#", label: "LinkedIn" },
-        { icon: FaTwitter, href: "#", label: "Twitter" },
-        { icon: FaGithub, href: "#", label: "GitHub" },
-        { icon: FaFacebook, href: "#", label: "Facebook" },
-        { icon: FaInstagram, href: "#", label: "Instagram" }
+        { icon: FaLinkedin, href: "#", label: "LinkedIn", color: "#0A66C2" },
+        { icon: FaTwitter, href: "#", label: "Twitter", color: "#1DA1F2" },
+        { icon: FaGithub, href: "#", label: "GitHub", color: "#ffffff" },
+        { icon: FaYoutube, href: "#", label: "Youtube", color: "#FF0000" },
+        { icon: FaInstagram, href: "#", label: "Instagram", color: "#E4405F" }
     ]
 };

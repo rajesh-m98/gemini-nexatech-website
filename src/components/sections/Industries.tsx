@@ -44,7 +44,7 @@ const Industries = () => {
       </div>
 
       {/* Cinematic Accordion Area */}
-      <div className="flex-grow flex flex-col lg:flex-row w-full h-auto lg:h-[700px] items-stretch overflow-hidden">
+      <div className="flex-grow flex flex-col lg:flex-row w-full h-auto lg:h-[600px] items-stretch overflow-hidden">
         {industries.map((industry: any) => (
           <div
             key={industry.id}

@@ -15,10 +15,8 @@ export const useNavbarAnimations = (isMobileMenuOpen: boolean, pathname: string)
 
         const links = Array.from(navRef.current.querySelectorAll(".nav-link-container"));
 
-        // Reset all links to default color initially on path change
+        // Reset all links to default state initially on path change
         links.forEach(l => {
-            const inner = l.querySelector(".nav-link-inner") as HTMLElement;
-            if (inner) gsap.set(inner, { color: "#013299" });
             l.classList.remove("is-active");
         });
 
@@ -46,15 +44,11 @@ export const useNavbarAnimations = (isMobileMenuOpen: boolean, pathname: string)
             if (targetLink) {
                 links.forEach(l => {
                     l.classList.remove("is-active");
-                    const inner = l.querySelector(".nav-link-inner") as HTMLElement;
-                    gsap.to(inner, { color: "#013299", duration: 0.4 });
                 });
 
                 const container = targetLink.closest(".nav-link-container") as HTMLElement;
                 if (container) {
                     container.classList.add("is-active");
-                    const inner = container.querySelector(".nav-link-inner") as HTMLElement;
-                    gsap.to(inner, { color: "#FD8E18", duration: 0.4 });
                 }
             }
         }

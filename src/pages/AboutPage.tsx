@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Stats from "../components/sections/Stats";
+import SectionDivider from "../components/common/SectionDivider";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -174,17 +175,17 @@ const AboutPage = () => {
   return (
     <div
       ref={sectionRef}
-      className="bg-[#000510] min-h-screen pt-20 pb-12 overflow-hidden font-inter"
+      className="bg-[#000510] min-h-screen pt-20 pb-10 overflow-hidden font-inter"
     >
       {/* Hero Section */}
-      <section className="relative py-5 lg:py-10">
+      <section className="relative py-4 lg:py-6">
         <div className="absolute inset-x-0 top-0 h-full bg-gradient-to-b from-gemini-blue/10 to-transparent -z-10" />
         <Container>
           <div className="max-w-4xl mx-auto text-center">
             <motion.span
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="typo-tab-heading text-gemini-orange mb-4 block"
+              className="typo-section text-gemini-orange mb-4 block"
             >
               Our Legacy
             </motion.span>
@@ -210,12 +211,11 @@ const AboutPage = () => {
         </Container>
       </section>
 
-      {/* Stats Section Integrated */}
       <Stats />
 
-      {/* Mission & Vision Section */}
-      <section className="py-16 lg:py-20 bg-[#000510] relative overflow-hidden">
-        {/* Decorative Light Blurs */}
+      <SectionDivider direction="both" />
+
+      <section className="py-8 lg:py-12 bg-[#000510] relative overflow-hidden">
         <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-gemini-blue/5 blur-[120px] rounded-full -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gemini-orange/5 blur-[120px] rounded-full translate-x-1/2 translate-y-1/2" />
 
@@ -268,8 +268,10 @@ const AboutPage = () => {
         </Container>
       </section>
 
+      <SectionDivider direction="both" />
+
       {/* Core Values Section */}
-      <section className="py-16 lg:py-24">
+      <section className="py-12 lg:py-16">
         <Container>
           <div className="text-center mb-12">
             <h2 className="typo-heading mb-6">
@@ -313,8 +315,10 @@ const AboutPage = () => {
         </Container>
       </section>
 
+      <SectionDivider direction="both" />
+
       {/* Company Journey Interactive Section */}
-      <section className="relative min-h-[700px] flex items-center overflow-hidden py-8">
+      <section className="relative min-h-[700px] flex items-center overflow-hidden py-6">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <AnimatePresence mode="wait">
@@ -362,7 +366,7 @@ const AboutPage = () => {
                 viewport={{ once: true }}
                 className="typo-heading text-3xl lg:text-5xl leading-[1.1] text-white"
               >
-                Over 12+ Years of Innovation to Help Businesses Thrive!
+                Over 15+ Years of Innovation to Help Businesses Thrive!
               </motion.h2>
 
               <motion.div

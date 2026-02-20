@@ -1,277 +1,399 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import {
-  FaUser,
-  FaEnvelope,
-  FaPhone,
-  FaChevronDown,
-  FaWhatsapp,
-  FaLinkedin,
-  FaMapMarkerAlt,
-} from "react-icons/fa";
-import { FaMessage } from "react-icons/fa6";
+import { FaChevronDown, FaCheck } from "react-icons/fa";
 import Container from "../components/common/Container";
-import { Link } from "react-router-dom";
+import { HERO_DATA } from "../components/hero/heroData";
 
 const countries = [
-  { name: "United Arab Emirates", code: "+971", iso: "ae", digits: 9 },
-  { name: "India", code: "+91", iso: "in", digits: 10 },
-  { name: "United States", code: "+1", iso: "us", digits: 10 },
-  { name: "United Kingdom", code: "+44", iso: "gb", digits: 10 },
-];
+  { name: "Afghanistan", code: "+93", iso: "af" },
+  { name: "Albania", code: "+355", iso: "al" },
+  { name: "Algeria", code: "+213", iso: "dz" },
+  { name: "Andorra", code: "+376", iso: "ad" },
+  { name: "Angola", code: "+244", iso: "ao" },
+  { name: "Argentina", code: "+54", iso: "ar" },
+  { name: "Armenia", code: "+374", iso: "am" },
+  { name: "Australia", code: "+61", iso: "au" },
+  { name: "Austria", code: "+43", iso: "at" },
+  { name: "Azerbaijan", code: "+994", iso: "az" },
+  { name: "Bahrain", code: "+973", iso: "bh" },
+  { name: "Bangladesh", code: "+880", iso: "bd" },
+  { name: "Belgium", code: "+32", iso: "be" },
+  { name: "Brazil", code: "+55", iso: "br" },
+  { name: "Canada", code: "+1", iso: "ca" },
+  { name: "China", code: "+86", iso: "cn" },
+  { name: "Denmark", code: "+45", iso: "dk" },
+  { name: "Egypt", code: "+20", iso: "eg" },
+  { name: "Finland", code: "+358", iso: "fi" },
+  { name: "France", code: "+33", iso: "fr" },
+  { name: "Germany", code: "+49", iso: "de" },
+  { name: "Greece", code: "+30", iso: "gr" },
+  { name: "Hong Kong", code: "+852", iso: "hk" },
+  { name: "India", code: "+91", iso: "in" },
+  { name: "Indonesia", code: "+62", iso: "id" },
+  { name: "Ireland", code: "+353", iso: "ie" },
+  { name: "Israel", code: "+972", iso: "il" },
+  { name: "Italy", code: "+39", iso: "it" },
+  { name: "Japan", code: "+81", iso: "jp" },
+  { name: "Kuwait", code: "+965", iso: "kw" },
+  { name: "Malaysia", code: "+60", iso: "my" },
+  { name: "Mexico", code: "+52", iso: "mx" },
+  { name: "Netherlands", code: "+31", iso: "nl" },
+  { name: "New Zealand", code: "+64", iso: "nz" },
+  { name: "Norway", code: "+47", iso: "no" },
+  { name: "Oman", code: "+968", iso: "om" },
+  { name: "Pakistan", code: "+92", iso: "pk" },
+  { name: "Philippines", code: "+63", iso: "ph" },
+  { name: "Poland", code: "+48", iso: "pl" },
+  { name: "Portugal", code: "+351", iso: "pt" },
+  { name: "Qatar", code: "+974", iso: "qa" },
+  { name: "Russia", code: "+7", iso: "ru" },
+  { name: "Saudi Arabia", code: "+966", iso: "sa" },
+  { name: "Singapore", code: "+65", iso: "sg" },
+  { name: "South Africa", code: "+27", iso: "za" },
+  { name: "South Korea", code: "+82", iso: "kr" },
+  { name: "Spain", code: "+34", iso: "es" },
+  { name: "Sri Lanka", code: "+94", iso: "lk" },
+  { name: "Sweden", code: "+46", iso: "se" },
+  { name: "Switzerland", code: "+41", iso: "ch" },
+  { name: "Thailand", code: "+66", iso: "th" },
+  { name: "Turkey", code: "+90", iso: "tr" },
+  { name: "United Arab Emirates", code: "+971", iso: "ae" },
+  { name: "United Kingdom", code: "+44", iso: "gb" },
+  { name: "United States", code: "+1", iso: "us" },
+  { name: "Vietnam", code: "+84", iso: "vn" },
+].sort((a, b) => a.name.localeCompare(b.name));
 
 const ContactPage = () => {
-  const [formData, setFormData] = useState({
+  const initialState = {
     name: "",
+    businessName: "",
     email: "",
     phone: "",
     requirements: "",
-  });
-  const [selectedCountry, setSelectedCountry] = useState(countries[0]);
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
+    nda: false,
+    updates: false,
+  };
+
+  const [formData, setFormData] = useState(initialState);
+  const [selectedCountry, setSelectedCountry] = useState(
+    countries.find((c) => c.iso === "ae") || countries[0],
+  );
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showErrors, setShowErrors] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Auto-detect country by IP
+  useEffect(() => {
+    fetch("https://ipapi.co/json/")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.country_code) {
+          const detected = countries.find(
+            (c) => c.iso.toLowerCase() === data.country_code.toLowerCase(),
+          );
+          if (detected) setSelectedCountry(detected);
+        }
+      })
+      .catch(() => {
+        // Fallback to default (already set to AE)
+      });
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  const validate = () => {
-    const newErrors: Record<string, string> = {};
-    if (!formData.name || !/^[a-zA-Z\s.]+$/.test(formData.name))
-      newErrors.name = "Valid name is required";
-    if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email))
-      newErrors.email = "Valid email is required";
-    if (
-      !formData.phone ||
-      !/^\d+$/.test(formData.phone) ||
-      formData.phone.length !== selectedCountry.digits
-    )
-      newErrors.phone = `Must be ${selectedCountry.digits} digits`;
-    if (!formData.requirements)
-      newErrors.requirements = "Please enter your requirements";
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (validate()) setIsSubmitted(true);
+    if (!formData.nda || !formData.updates) {
+      setShowErrors(true);
+      return;
+    }
+    setIsSubmitted(true);
+    setShowErrors(false);
   };
 
+  const handleReset = () => {
+    setFormData(initialState);
+    setIsSubmitted(false);
+    setSearchQuery("");
+    setShowErrors(false);
+  };
+
+  const steps = [
+    "One of our experts will reach out to you.",
+    "We'll listen to your ideas with full attention.",
+    "You'll receive a FREE expert consultation on execution.",
+  ];
+
+  const filteredCountries = countries.filter(
+    (c) =>
+      c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      c.code.includes(searchQuery),
+  );
+
+  const brandLogos = HERO_DATA.trustedBy.logos;
+
   return (
-    <div className="bg-[#000510] font-inter min-h-screen flex flex-col justify-center pt-28 lg:pt-32 pb-12 overflow-x-hidden">
-      <Container>
-        <div className="mb-8 lg:mb-10 text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="typo-heading mb-2"
-          >
-            LET'S <span className="text-gemini-orange">CONNECT</span>
-          </motion.h1>
-          <div className="flex justify-center items-center gap-3">
-            <div className="w-12 md:w-16 h-0.5 bg-gemini-blue/50" />
-            <p className="typo-tab-heading text-gray-400 text-[10px] md:text-xs">
-              Innovation starts with a conversation.
-            </p>
-            <div className="w-12 md:w-16 h-0.5 bg-gemini-blue/50" />
-          </div>
-        </div>
+    <div className="bg-[#000510] text-white min-h-screen pt-15 relative overflow-hidden font-inter flex flex-col">
+      {/* Background Glows */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] bg-gemini-blue/10 blur-[120px] rounded-full pointer-events-none" />
 
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-6 lg:mb-10">
-          <div className="lg:col-span-5">
-            <div className="relative">
-              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-gemini-orange to-transparent opacity-50" />
-              <h3 className="typo-section mb-6 text-white">
-                Get in <span className="text-gemini-blue">Touch</span>
-              </h3>
-
-              <div className="p-6 lg:p-8 rounded-[2rem] bg-[#001229]/80 backdrop-blur-xl border border-white/10 space-y-6">
-                <Link
-                  to="https://www.google.com/maps/search/?api=1&query=Campus-1a,+MILLENIA+BUSINESS+PARK-I,+Perungudi,+Chennai,+Tamil+Nadu+600096"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-start gap-4 cursor-pointer"
+      <div className="flex-1 flex items-center py-12 lg:py-20 w-full">
+        <Container>
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start w-full">
+            {/* Left Column: Info */}
+            <div className="space-y-10 text-left mt-4">
+              <div className="space-y-6">
+                <motion.h1
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight"
                 >
-                  <div className="icon-box-sm mt-1 text-gemini-blue group-hover:bg-gemini-blue group-hover:text-white transition-all">
-                    <FaMapMarkerAlt />
-                  </div>
-                  <div>
-                    <p className="typo-body-bold text-xs md:text-sm leading-relaxed group-hover:text-gemini-blue transition-colors">
-                      Campus-1a, MILLENIA BUSINESS PARK-I, Perungudi, Chennai,
-                      <br />
-                      Tamil Nadu 600096
-                    </p>
-                  </div>
-                </Link>
+                  Take the first step towards{" "}
+                  <span className="text-gemini-orange">innovation</span>
+                </motion.h1>
 
-                <div className="h-px bg-white/5" />
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-white/90 underline decoration-gemini-blue decoration-4 underline-offset-8">
+                    What happens next?
+                  </h3>
+                  <ul className="space-y-4 pt-2">
+                    {steps.map((step, idx) => (
+                      <motion.li
+                        key={idx}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 * idx }}
+                        className="flex items-center gap-4 group"
+                      >
+                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gemini-blue flex items-center justify-center text-sm font-black shadow-lg shadow-gemini-blue/30 group-hover:scale-110 transition-transform">
+                          {idx + 1}
+                        </div>
+                        <p className="text-white/80 font-medium">{step}</p>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </div>
 
-                <Link
-                  to="https://wa.me/919003275271"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-4 cursor-pointer"
-                >
-                  <div className="icon-box-sm text-green-500 group-hover:bg-green-500 group-hover:text-white transition-all">
-                    <FaWhatsapp />
-                  </div>
-                  <div>
-                    <p className="text-green-500 font-extrabold text-sm md:text-base group-hover:scale-105 transition-transform origin-left">
-                      +91 9003275271
-                    </p>
-                  </div>
-                </Link>
-
-                <div className="h-px bg-white/5" />
-
-                <Link
-                  to="mailto:sales@gemininexatech.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-4 cursor-pointer"
-                >
-                  <div className="icon-box-sm text-gemini-orange group-hover:bg-gemini-orange group-hover:text-white transition-all">
-                    <FaEnvelope />
-                  </div>
-                  <div>
-                    <p className="text-white font-bold text-sm md:text-base group-hover:text-gemini-orange transition-colors">
-                      sales@gemininexatech.com
-                    </p>
-                  </div>
-                </Link>
-
-                <div className="h-px bg-white/10" />
-
-                <div className="flex gap-4">
-                  <Link
-                    to="#"
-                    className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-gemini-blue hover:scale-110 transition-all duration-300"
+                <p className="text-white/60 leading-relaxed font-medium">
+                  Fill out the form, and our experts will contact you within
+                  minutes to discuss your <br /> requirements. You can also
+                  email us{" "}
+                  <a
+                    href="mailto:sales@gemininexatech.com"
+                    className="text-gemini-blue hover:text-gemini-orange font-bold underline transition-colors"
                   >
-                    <FaLinkedin size={18} />
-                  </Link>
+                    sales@gemininexatech.com
+                  </a>
+                </p>
+              </div>
+
+              {/* Trusted By Section */}
+              <div className="space-y-6">
+                <div className="inline-flex items-center gap-2 bg-gemini-blue/10 px-4 py-1.5 rounded-full border border-gemini-blue/20">
+                  <span className="text-[10px] uppercase font-black tracking-widest text-blue-400">
+                    Trusted by
+                  </span>
+                </div>
+                <div className="flex flex-wrap items-center gap-4 lg:gap-6">
+                  {brandLogos.map((logo, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-white p-2 sm:p-3 rounded-xl flex items-center justify-center w-24 h-14 sm:w-28 sm:h-16 shadow-xl hover:scale-110 transition-transform duration-500 overflow-hidden"
+                    >
+                      <img
+                        src={logo.src}
+                        alt={logo.name}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="lg:col-span-6 lg:col-start-7">
-            <div className="relative bg-[#001229]/80 backdrop-blur-xl border border-white/10 p-6 lg:p-8 rounded-[2rem] shadow-2xl overflow-hidden group">
-              <div className="absolute -top-24 -right-24 w-64 h-64 bg-gemini-blue/20 blur-[100px] rounded-full group-hover:bg-gemini-orange/20 transition-colors duration-1000" />
+            {/* Right Column: Form */}
+            <div className="relative">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-[#000D1A]/60 backdrop-blur-3xl p-4 lg:p-8 rounded-[3rem] border border-white/10 shadow-2xl relative z-10 box-border"
+              >
+                <div className="text-center mb-3">
+                  <h2 className="text-2xl lg:text-3xl font-black tracking-tight">
+                    Turn your vision into reality
+                  </h2>
+                </div>
 
-              {!isSubmitted ? (
-                <form
-                  onSubmit={handleSubmit}
-                  className="relative z-10 space-y-5"
-                >
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                      <label className="typo-label text-white font-bold ml-1">
-                        Full Name
-                      </label>
-                      <div className="relative">
-                        <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-gemini-orange  text-sm" />
+                {!isSubmitted ? (
+                  <form onSubmit={handleSubmit} className="space-y-3 text-left">
+                    {/* Row 1: Name and Business Name */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      <div className="space-y-1 group">
+                        <label className="text-[11px] uppercase font-black tracking-widest text-white/40 ml-1 group-focus-within:text-gemini-orange transition-colors">
+                          Full Name
+                        </label>
                         <input
                           type="text"
                           placeholder="John Doe"
+                          required
+                          className={`w-full bg-transparent border-b ${showErrors && !formData.name ? "border-red-500 shadow-[0_1px_0_0_rgba(239,68,68,0.5)]" : "border-white/20"} py-2 px-1 text-white placeholder:text-white/10 focus:outline-none focus:border-gemini-orange transition-all font-medium text-sm`}
                           value={formData.name}
                           onChange={(e) =>
                             setFormData({ ...formData, name: e.target.value })
                           }
-                          className={`w-full bg-white/[0.03] border ${errors.name ? "border-red-500" : "border-white/10"} rounded-lg py-2.5 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-gemini-blue transition-all placeholder:text-gray-500`}
+                        />
+                      </div>
+                      <div className="space-y-1 group">
+                        <label className="text-[11px] uppercase font-black tracking-widest text-white/40 ml-1 group-focus-within:text-gemini-orange transition-colors">
+                          Business Name
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Company Inc."
+                          required
+                          className={`w-full bg-transparent border-b ${showErrors && !formData.businessName ? "border-red-500 shadow-[0_1px_0_0_rgba(239,68,68,0.5)]" : "border-white/20"} py-2 px-1 text-white placeholder:text-white/10 focus:outline-none focus:border-gemini-orange transition-all font-medium text-sm`}
+                          value={formData.businessName}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              businessName: e.target.value,
+                            })
+                          }
                         />
                       </div>
                     </div>
 
-                    <div className="space-y-1.5">
-                      <label className="typo-label text-gray-300 ml-1">
-                        Email Address
-                      </label>
-                      <div className="relative">
-                        <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-gemini-orange  text-sm" />
+                    {/* Row 2: Business Email and Mobile Number */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      <div className="space-y-1 group">
+                        <label className="text-[11px] uppercase font-black tracking-widest text-white/40 ml-1 group-focus-within:text-gemini-orange transition-colors">
+                          Business Email
+                        </label>
                         <input
                           type="email"
-                          placeholder="john@example.com"
+                          placeholder="you@company.com"
+                          required
+                          className={`w-full bg-transparent border-b ${showErrors && !formData.email ? "border-red-500 shadow-[0_1px_0_0_rgba(239,68,68,0.5)]" : "border-white/20"} py-2 px-1 text-white placeholder:text-white/10 focus:outline-none focus:border-gemini-orange transition-all font-medium text-sm`}
                           value={formData.email}
                           onChange={(e) =>
                             setFormData({ ...formData, email: e.target.value })
                           }
-                          className={`w-full bg-white/[0.03] border ${errors.email ? "border-red-500" : "border-white/10"} rounded-lg py-2.5 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-gemini-blue transition-all placeholder:text-gray-500`}
                         />
                       </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="typo-label text-gray-300 ml-1">
-                      Phone Number
-                    </label>
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <div className="relative shrink-0">
+                      <div className="space-y-1 group">
+                        <label className="text-[11px] uppercase font-black tracking-widest text-white/40 ml-1 group-focus-within:text-gemini-orange transition-colors">
+                          Mobile Number
+                        </label>
                         <div
-                          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                          className="bg-white/[0.03] border border-white/10 rounded-lg px-3 py-2.5 flex items-center gap-2 cursor-pointer hover:bg-white/[0.08] transition-all"
+                          className={`flex items-center gap-2 relative border-b ${showErrors && !formData.phone ? "border-red-500 shadow-[0_1px_0_0_rgba(239,68,68,0.5)]" : "border-white/20"} group-focus-within:border-gemini-orange transition-all`}
                         >
-                          <div className="w-4 h-3 overflow-hidden rounded-sm bg-white/10">
-                            <img
-                              src={`https://flagcdn.com/w40/${selectedCountry.iso}.png`}
-                              alt={selectedCountry.name}
-                              className="w-full h-full object-cover"
-                            />
+                          <div ref={dropdownRef} className="relative shrink-0">
+                            <div
+                              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                              className="flex items-center gap-1.5 py-2 cursor-pointer hover:bg-white/5 transition-all px-1 rounded-t-lg"
+                            >
+                              <img
+                                src={`https://flagcdn.com/w40/${selectedCountry.iso}.png`}
+                                alt={selectedCountry.name}
+                                className="w-4 h-2.5 object-cover rounded-sm"
+                              />
+                              <span className="font-bold text-[11px] text-white">
+                                {selectedCountry.code}
+                              </span>
+                              <FaChevronDown
+                                className={`text-[9px] text-white/50 transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : ""}`}
+                              />
+                            </div>
+
+                            {isDropdownOpen && (
+                              <div className="absolute top-full left-0 mt-1 bg-[#001D3D] border border-white/10 rounded-xl overflow-hidden shadow-2xl z-50 w-60 max-h-[250px] flex flex-col">
+                                <div className="p-2 border-b border-white/5 bg-[#001529]">
+                                  <input
+                                    type="text"
+                                    placeholder="Search country..."
+                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-[11px] focus:outline-none focus:border-gemini-orange text-white"
+                                    value={searchQuery}
+                                    onChange={(e) =>
+                                      setSearchQuery(e.target.value)
+                                    }
+                                    onClick={(e) => e.stopPropagation()}
+                                  />
+                                </div>
+                                <div className="overflow-y-auto custom-scrollbar">
+                                  {filteredCountries.length > 0 ? (
+                                    filteredCountries.map((c) => (
+                                      <div
+                                        key={c.iso}
+                                        onClick={() => {
+                                          setSelectedCountry(c);
+                                          setIsDropdownOpen(false);
+                                          setSearchQuery("");
+                                        }}
+                                        className="flex items-center gap-3 px-4 py-3 hover:bg-gemini-blue/40 cursor-pointer transition-colors border-b border-white/5 last:border-0"
+                                      >
+                                        <img
+                                          src={`https://flagcdn.com/w40/${c.iso}.png`}
+                                          alt={c.name}
+                                          className="w-5 h-3.5 object-cover rounded-sm"
+                                        />
+                                        <span className="flex-1 text-[11px] font-bold text-white/90">
+                                          {c.name}
+                                        </span>
+                                        <span className="text-[10px] font-black text-gemini-orange">
+                                          {c.code}
+                                        </span>
+                                      </div>
+                                    ))
+                                  ) : (
+                                    <div className="px-4 py-6 text-center text-white/30 text-[11px]">
+                                      No countries found
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            )}
                           </div>
-                          <span className="text-white font-bold text-sm">
-                            {selectedCountry.code}
-                          </span>
-                          <FaChevronDown
-                            size={8}
-                            className="text-gemini-orange"
+                          <input
+                            type="tel"
+                            placeholder="000 000 0000"
+                            required
+                            className="flex-1 bg-transparent py-2 px-1 text-white placeholder:text-white/10 focus:outline-none transition-all font-medium text-sm h-full"
+                            value={formData.phone}
+                            onChange={(e) =>
+                              setFormData({
+                                ...formData,
+                                phone: e.target.value,
+                              })
+                            }
                           />
                         </div>
-                        {isDropdownOpen && (
-                          <div className="absolute top-full left-0 mt-2 bg-[#001D3D] border border-white/10 rounded-lg overflow-hidden shadow-2xl z-50 min-w-[180px]">
-                            {countries.map((c) => (
-                              <div
-                                key={c.code}
-                                onClick={() => {
-                                  setSelectedCountry(c);
-                                  setIsDropdownOpen(false);
-                                }}
-                                className="px-3 py-2 hover:bg-gemini-blue/30 cursor-pointer flex items-center justify-between border-b border-white/5 last:border-0 text-white/80 text-[11px] font-bold"
-                              >
-                                {c.name} ({c.code})
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                      <div className="relative flex-1">
-                        <FaPhone className="absolute left-4 top-1/2 -translate-y-1/2 text-gemini-orange rotate-90 text-sm" />
-                        <input
-                          type="tel"
-                          placeholder="Enter Mobile Number"
-                          value={formData.phone}
-                          onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              phone: e.target.value.replace(/\D/g, ""),
-                            })
-                          }
-                          className={`w-full bg-white/[0.03] border ${errors.phone ? "border-red-500" : "border-white/10"} rounded-lg py-2.5 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-gemini-blue transition-all placeholder:text-gray-500`}
-                        />
                       </div>
                     </div>
-                  </div>
 
-                  <div className="space-y-1.5">
-                    <label className="typo-label text-gray-300 ml-1">
-                      Project Details
-                    </label>
-                    <div className="relative">
-                      <FaMessage className="absolute left-4 top-3 text-gemini-orange text-sm" />
+                    {/* Requirement */}
+                    <div className="space-y-1 group">
+                      <label className="text-[11px] uppercase font-black tracking-widest text-white/40 ml-1 group-focus-within:text-gemini-orange transition-colors">
+                        Requirement
+                      </label>
                       <textarea
-                        rows={4}
-                        placeholder="Tell us about your requirements..."
+                        placeholder="Tell us about your project..."
+                        required
+                        rows={2}
+                        className={`w-full bg-transparent border-b ${showErrors && !formData.requirements ? "border-red-500 shadow-[0_1px_0_0_rgba(239,68,68,0.5)]" : "border-white/20"} py-2 px-1 text-white placeholder:text-white/10 focus:outline-none focus:border-gemini-orange transition-all font-medium text-md resize-none`}
                         value={formData.requirements}
                         onChange={(e) =>
                           setFormData({
@@ -279,44 +401,97 @@ const ContactPage = () => {
                             requirements: e.target.value,
                           })
                         }
-                        className={`w-full bg-white/[0.03] border ${errors.requirements ? "border-red-500" : "border-white/10"} rounded-lg py-2.5 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-gemini-blue transition-all placeholder:text-gray-500 resize-none`}
                       />
                     </div>
-                  </div>
 
-                  <button className="w-full bg-gradient-to-r cursor-pointer from-gemini-blue to-blue-600 py-3 rounded-lg text-white/80 font-bold uppercase tracking-[0.2em] text-[11px] shadow-lg hover:scale-[1.01] transition-all active:scale-[0.98]">
-                    Send Request Today
-                  </button>
-                </form>
-              ) : (
-                <div className="text-center py-10 relative z-10">
-                  <div className="mb-6 flex justify-center">
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-gemini-blue/20 blur-2xl rounded-full" />
-                      <h2 className="text-5xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-500 leading-none tracking-tighter">
-                        DONE
-                      </h2>
+                    <div className="space-y-3 pt-2">
+                      <div className="flex flex-col gap-3">
+                        <div
+                          className="flex items-center gap-3 cursor-pointer group"
+                          onClick={() =>
+                            setFormData({ ...formData, nda: !formData.nda })
+                          }
+                        >
+                          <div
+                            className={`min-w-[1.25rem] h-5 rounded border ${formData.nda ? "bg-gemini-blue border-gemini-blue" : showErrors && !formData.nda ? "border-red-500 bg-red-500/10" : "border-white/20"} flex items-center justify-center transition-all`}
+                          >
+                            {formData.nda && (
+                              <FaCheck className="text-[10px] text-white" />
+                            )}
+                          </div>
+                          <span
+                            className={`text-[12px] ${showErrors && !formData.nda ? "text-red-400" : "text-white/40"} font-bold group-hover:text-white/80 transition-colors leading-tight`}
+                          >
+                            I want to protect my business idea by signing an NDA
+                          </span>
+                        </div>
+
+                        <div
+                          className="flex items-center gap-3 cursor-pointer group"
+                          onClick={() =>
+                            setFormData({
+                              ...formData,
+                              updates: !formData.updates,
+                            })
+                          }
+                        >
+                          <div
+                            className={`min-w-[1.25rem] h-5 rounded border ${formData.updates ? "bg-gemini-blue border-gemini-blue" : showErrors && !formData.updates ? "border-red-500 bg-red-500/10" : "border-white/20"} flex items-center justify-center transition-all`}
+                          >
+                            {formData.updates && (
+                              <FaCheck className="text-[10px] text-white" />
+                            )}
+                          </div>
+                          <span
+                            className={`text-[12px] ${showErrors && !formData.updates ? "text-red-400" : "text-white/40"} font-bold group-hover:text-white/80 transition-colors leading-tight`}
+                          >
+                            I agree to receive SMS and Whatsapp
+                          </span>
+                        </div>
+                      </div>
+
+                      {showErrors && (!formData.nda || !formData.updates) && (
+                        <p className="text-[11px] text-red-500 font-bold tracking-wide animate-pulse">
+                          * Please agree to both terms to continue
+                        </p>
+                      )}
                     </div>
-                  </div>
-                  <h3 className="typo-subsection mb-3">
-                    Message <span className="text-gemini-orange">Received</span>
-                  </h3>
-                  <p className="typo-label mb-8 max-w-sm mx-auto text-white">
-                    Our team will analyze your request and get back to you in{" "}
-                    <span className="text-white font-black">5 minutes</span>{" "}
-                    flat.
-                  </p>
-                  <div className="bg-gemini-blue/10 border border-gemini-blue/20 p-6 rounded-[2rem] relative overflow-hidden">
-                    <p className="typo-label text-[10px] text-blue-400">
-                      Stay tuned to your phone and email.
+
+                    <button
+                      type="submit"
+                      className="w-1/2 mx-auto block bg-blue-600 hover:bg-gemini-orange text-white py-4 rounded-[1.25rem] font-black text-sm uppercase tracking-[0.2em] transition-all shadow-xl shadow-blue-900/40 active:scale-[0.98] mt-2"
+                    >
+                      Submit
+                    </button>
+                  </form>
+                ) : (
+                  <div className="text-center py-12">
+                    <div className="w-20 h-20 bg-gemini-blue/20 rounded-full flex items-center justify-center mx-auto mb-8 animate-bounce">
+                      <FaCheck className="text-3xl text-gemini-blue" />
+                    </div>
+                    <h3 className="text-3xl font-black mb-4 tracking-tight">
+                      Requirement Sent!
+                    </h3>
+                    <p className="text-white/60 leading-relaxed max-w-xs mx-auto mb-8">
+                      Our team will review your details and connect with you
+                      shortly.
                     </p>
+                    <button
+                      onClick={handleReset}
+                      className="text-gemini-orange font-black text-[12px] uppercase tracking-widest hover:underline"
+                    >
+                      Submit Another Requirement
+                    </button>
                   </div>
-                </div>
-              )}
+                )}
+              </motion.div>
+
+              {/* Background Blur Accent */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-500/5 blur-[100px] -z-10 rounded-full pointer-events-none" />
             </div>
           </div>
-        </div>
-      </Container>
+        </Container>
+      </div>
     </div>
   );
 };

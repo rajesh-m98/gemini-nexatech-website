@@ -13,12 +13,14 @@ import VideoLibraryPage from "./pages/VideoLibraryPage";
 import BlogsPage from "./pages/BlogsPage";
 import ScrollToTop from "./components/common/ScrollToTop";
 import BrochureFAB from "./components/common/BrochureFAB";
+import WhatsAppFAB from "./components/common/WhatsAppFAB";
 
 function App() {
   return (
     <Router>
       <ScrollToTop />
       <BrochureFAB />
+      <WhatsAppFAB />
       <div className="min-h-screen">
         <Navbar />
         <Routes>

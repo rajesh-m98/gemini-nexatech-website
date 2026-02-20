@@ -8,6 +8,7 @@ const Navbar = () => {
   const {
     isMobileMenuOpen,
     activeDropdown,
+    isScrolled,
     services,
     industries,
     insights,
@@ -22,10 +23,20 @@ const Navbar = () => {
 
   const { navRef } = useNavbarAnimations(isMobileMenuOpen, location.pathname);
 
+  // Dynamic Styles based on Scroll
+  const isHome = location.pathname === "/";
+  const navBg = isHome
+    ? isScrolled
+      ? "bg-black/80 backdrop-blur-2xl border-white/5 shadow-2xl"
+      : "bg-transparent border-transparent"
+    : "bg-black/90 backdrop-blur-xl border-white/10";
+
+  const textColor = isHome && !isScrolled ? "text-white" : "text-white/90";
+
   return (
     <nav
       ref={navRef}
-      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${navBg}`}
     >
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
@@ -40,10 +51,16 @@ const Navbar = () => {
             />
             <div className="flex flex-col items-start justify-center ml-2">
               <span className="text-base sm:text-xl lg:text-2xl font-black leading-none tracking-tight">
-                <span className="text-gemini-blue">GEMINI </span>
+                <span
+                  className={`${isHome && !isScrolled ? "text-white" : "text-gemini-blue"} transition-colors duration-500`}
+                >
+                  GEMINI{" "}
+                </span>
                 <span className="text-gemini-orange">NEXATECH</span>
               </span>
-              <span className="text-[9px] sm:text-[10px] lg:text-[11px] text-gray-500 tracking-[0.13em] uppercase font-bold leading-tight mt-1">
+              <span
+                className={`text-[9px] sm:text-[10px] lg:text-[11px] ${isHome && !isScrolled ? "text-white/60" : "text-gray-500"} tracking-[0.13em] uppercase font-bold leading-tight mt-1 transition-colors duration-500`}
+              >
                 Where Ideas Meet Innovation
               </span>
             </div>
@@ -55,7 +72,7 @@ const Navbar = () => {
                 <button
                   data-section="about"
                   onClick={() => scrollToSection(navLinks[0].Link)}
-                  className="flex items-center text-[#013299] hover:text-[#FD8E18] cursor-pointer font-inter font-bold transition-colors uppercase tracking-wider text-xs py-2"
+                  className={`flex items-center ${textColor} hover:text-gemini-orange cursor-pointer font-inter font-bold transition-colors uppercase tracking-wider text-xs py-2`}
                 >
                   {navLinks[0].label}
                 </button>
@@ -71,7 +88,7 @@ const Navbar = () => {
               <div className="nav-link-inner">
                 <button
                   data-section="services"
-                  className="flex items-center text-[#013299] group-hover:text-[#FD8E18] cursor-pointer font-bold transition-colors uppercase tracking-wider text-xs py-2"
+                  className={`flex items-center ${textColor} group-hover:text-gemini-orange cursor-pointer font-bold transition-colors uppercase tracking-wider text-xs py-2`}
                 >
                   Services{" "}
                   <FaChevronDown
@@ -80,7 +97,7 @@ const Navbar = () => {
                 </button>
               </div>
               <div
-                className={`absolute left-0 lg:left-[-150px] xl:left-[-250px] top-full mt-1 w-[95vw] lg:w-[650px] xl:w-[750px] bg-[#000510]/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-2xl border border-white/10 transition-all duration-300 transform p-4 lg:p-5 z-50 ${
+                className={`absolute left-0 lg:left-[-150px] xl:left-[-250px] top-full mt-1 w-[95vw] lg:w-[700px] xl:w-[800px] bg-[#000510]/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-2xl border border-white/10 transition-all duration-300 transform p-4 lg:p-5 z-50 ${
                   activeDropdown === "services"
                     ? "opacity-100 visible translate-y-0"
                     : "opacity-0 invisible translate-y-4"
@@ -96,7 +113,7 @@ const Navbar = () => {
                       <div className="relative flex-shrink-0 p-1.5 bg-white/5 rounded-lg group-hover/card:bg-[#FF8C00]/20 transition-all duration-300">
                         <service.icon className="text-sm text-white group-hover/card:text-[#FF8C00] transition-colors" />
                       </div>
-                      <span className="text-[14px] xl:text-[15px] font-bold text-gray-200 group-hover/card:text-[#013299] transition-colors leading-tight whitespace-normal break-words">
+                      <span className="text-[14px] xl:text-[15px] font-bold text-gray-200 group-hover/card:text-[#013299] transition-colors leading-tight whitespace-nowrap">
                         {service.title}
                       </span>
                       {/* Animated Line */}
@@ -116,7 +133,7 @@ const Navbar = () => {
               <div className="nav-link-inner">
                 <button
                   data-section="products"
-                  className="flex items-center text-[#013299] group-hover:text-[#FD8E18] cursor-pointer font-bold uppercase tracking-wider text-xs transition-colors py-2"
+                  className={`flex items-center ${textColor} group-hover:text-gemini-orange cursor-pointer font-bold uppercase tracking-wider text-xs transition-colors py-2`}
                 >
                   Products{" "}
                   <FaChevronDown
@@ -125,7 +142,7 @@ const Navbar = () => {
                 </button>
               </div>
               <div
-                className={`absolute left-1/2 -translate-x-1/2 top-full mt-1 w-[95vw] lg:w-[500px] xl:w-[600px] bg-[#000510]/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-2xl border border-white/10 transition-all duration-300 transform p-4 lg:p-5 z-50 ${
+                className={`absolute left-1/2 -translate-x-1/2 top-full mt-1 w-[95vw] lg:w-[550px] xl:w-[650px] bg-[#000510]/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-2xl border border-white/10 transition-all duration-300 transform p-4 lg:p-5 z-50 ${
                   activeDropdown === "products"
                     ? "opacity-100 visible translate-y-0"
                     : "opacity-0 invisible translate-y-4"
@@ -141,7 +158,7 @@ const Navbar = () => {
                       <div className="relative flex-shrink-0 p-1.5 bg-white/5 rounded-lg group-hover/card:bg-[#FF8C00]/20 transition-all duration-300">
                         <product.icon className="text-sm text-white group-hover/card:text-[#FF8C00] transition-colors" />
                       </div>
-                      <span className="text-[14px] xl:text-[15px] font-bold text-gray-200 group-hover/card:text-[#013299] transition-colors leading-tight whitespace-normal break-words">
+                      <span className="text-[14px] xl:text-[15px] font-bold text-gray-200 group-hover/card:text-[#013299] transition-colors leading-tight whitespace-nowrap">
                         {product.title}
                       </span>
                       {/* Animated Line */}
@@ -161,7 +178,7 @@ const Navbar = () => {
               <div className="nav-link-inner">
                 <button
                   data-section="industries"
-                  className="flex items-center text-[#013299] group-hover:text-[#FD8E18] cursor-pointer font-bold transition-colors uppercase tracking-wider text-xs py-2"
+                  className={`flex items-center ${textColor} group-hover:text-gemini-orange cursor-pointer font-bold transition-colors uppercase tracking-wider text-xs py-2`}
                 >
                   Industries{" "}
                   <FaChevronDown
@@ -170,7 +187,7 @@ const Navbar = () => {
                 </button>
               </div>
               <div
-                className={`absolute right-0 lg:right-[-100px] xl:right-[-180px] top-full mt-1 w-[95vw] lg:w-[500px] xl:w-[600px] bg-[#000510]/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-2xl border border-white/10 transition-all duration-300 transform p-4 lg:p-5 z-50 ${
+                className={`absolute right-0 lg:right-[-100px] xl:right-[-180px] top-full mt-1 w-[95vw] lg:w-[600px] xl:w-[700px] bg-[#000510]/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-2xl border border-white/10 transition-all duration-300 transform p-4 lg:p-5 z-50 ${
                   activeDropdown === "industries"
                     ? "opacity-100 visible translate-y-0"
                     : "opacity-0 invisible translate-y-4"
@@ -186,7 +203,7 @@ const Navbar = () => {
                       <div className="relative flex-shrink-0 p-1.5 bg-white/5 rounded-lg group-hover/card:bg-[#FF8C00]/20 transition-all duration-300">
                         <ind.icon className="text-sm text-white group-hover/card:text-[#FF8C00] transition-colors duration-500" />
                       </div>
-                      <span className="text-[14px] xl:text-[15px] font-bold text-gray-200 group-hover/card:text-[#013299] transition-colors duration-500 leading-tight whitespace-normal break-words">
+                      <span className="text-[14px] xl:text-[15px] font-bold text-gray-200 group-hover/card:text-[#013299] transition-colors duration-500 leading-tight whitespace-nowrap">
                         {ind.title}
                       </span>
                       {/* Animated Line */}
@@ -206,7 +223,7 @@ const Navbar = () => {
               <div className="nav-link-inner">
                 <button
                   data-section="insights"
-                  className="flex items-center text-[#013299] group-hover:text-[#FD8E18] cursor-pointer font-bold transition-colors uppercase tracking-wider text-xs py-2"
+                  className={`flex items-center ${textColor} group-hover:text-gemini-orange cursor-pointer font-bold transition-colors uppercase tracking-wider text-xs py-2`}
                 >
                   Insights{" "}
                   <FaChevronDown
@@ -246,7 +263,7 @@ const Navbar = () => {
                 <button
                   data-section="contact"
                   onClick={() => scrollToSection(navLinks[3].Link)}
-                  className="flex items-center text-[#013299] hover:text-[#FD8E18] cursor-pointer font-bold transition-colors uppercase tracking-wider text-xs py-2"
+                  className={`flex items-center ${textColor} hover:text-gemini-orange cursor-pointer font-bold transition-colors uppercase tracking-wider text-xs py-2`}
                 >
                   {navLinks[3].label}
                 </button>
@@ -256,7 +273,7 @@ const Navbar = () => {
 
           <button
             onClick={toggleMobileMenu}
-            className="lg:hidden p-2 rounded-md text-[#013299] hover:bg-gray-100 transition-colors"
+            className={`lg:hidden p-2 rounded-md ${textColor} hover:bg-white/10 transition-colors`}
           >
             <svg
               className="h-6 w-6"
@@ -294,7 +311,7 @@ const Navbar = () => {
               <div className="flex flex-col p-4 space-y-1">
                 <button
                   onClick={() => scrollToSection(navLinks[0].Link)}
-                  className="w-full text-left px-4 py-3 text-[#013299] hover:bg-blue-50/50 font-bold transition-all rounded-xl"
+                  className="w-full text-left px-4 py-3 text-white/90 hover:bg-white/10 font-bold transition-all rounded-xl"
                 >
                   {navLinks[0].label}
                 </button>
@@ -302,10 +319,10 @@ const Navbar = () => {
                 <div className="w-full">
                   <button
                     onClick={() => toggleDropdown("services")}
-                    className={`w-full flex items-center justify-between px-4 py-3 text-[#013299] font-bold transition-all rounded-xl ${
+                    className={`w-full flex items-center justify-between px-4 py-3 text-white/90 font-bold transition-all rounded-xl ${
                       activeDropdown === "services"
-                        ? "bg-blue-50/50"
-                        : "hover:bg-blue-50/50"
+                        ? "bg-white/10"
+                        : "hover:bg-white/10"
                     }`}
                   >
                     <span>Services</span>
@@ -345,10 +362,10 @@ const Navbar = () => {
                 <div className="w-full">
                   <button
                     onClick={() => toggleDropdown("products")}
-                    className={`w-full flex items-center justify-between px-4 py-3 text-[#013299] font-bold transition-all rounded-xl ${
+                    className={`w-full flex items-center justify-between px-4 py-3 text-white/90 font-bold transition-all rounded-xl ${
                       activeDropdown === "products"
-                        ? "bg-blue-50/50"
-                        : "hover:bg-blue-50/50"
+                        ? "bg-white/10"
+                        : "hover:bg-white/10"
                     }`}
                   >
                     <span>Products</span>
@@ -390,10 +407,10 @@ const Navbar = () => {
                 <div className="w-full">
                   <button
                     onClick={() => toggleDropdown("industries")}
-                    className={`w-full flex items-center justify-between px-4 py-3 text-[#013299] font-bold transition-all rounded-xl ${
+                    className={`w-full flex items-center justify-between px-4 py-3 text-white/90 font-bold transition-all rounded-xl ${
                       activeDropdown === "industries"
-                        ? "bg-blue-50/50"
-                        : "hover:bg-blue-50/50"
+                        ? "bg-white/10"
+                        : "hover:bg-white/10"
                     }`}
                   >
                     <span>Industries</span>
@@ -433,10 +450,10 @@ const Navbar = () => {
                 <div className="w-full">
                   <button
                     onClick={() => toggleDropdown("insights")}
-                    className={`w-full flex items-center justify-between px-4 py-3 text-[#013299] font-bold transition-all rounded-xl ${
+                    className={`w-full flex items-center justify-between px-4 py-3 text-white/90 font-bold transition-all rounded-xl ${
                       activeDropdown === "insights"
-                        ? "bg-blue-50/50"
-                        : "hover:bg-blue-50/50"
+                        ? "bg-white/10"
+                        : "hover:bg-white/10"
                     }`}
                   >
                     <span>Insights</span>
@@ -475,7 +492,7 @@ const Navbar = () => {
 
                 <button
                   onClick={() => scrollToSection(navLinks[3].Link)}
-                  className="w-full text-left px-4 py-3 text-[#013299] hover:bg-blue-50/50 font-bold transition-all rounded-xl"
+                  className="w-full text-left px-4 py-3 text-white/90 hover:bg-white/10 font-bold transition-all rounded-xl"
                 >
                   {navLinks[3].label}
                 </button>
@@ -504,6 +521,14 @@ const Navbar = () => {
           </filter>
         </defs>
       </svg>
+      <style>{`
+        .nav-link-container.is-active .nav-link-inner button {
+          color: #FD8E18 !important;
+        }
+        .nav-link-container.is-active .nav-link-inner button svg {
+          color: #FD8E18 !important;
+        }
+      `}</style>
     </nav>
   );
 };
