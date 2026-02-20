@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { SERVICES_MENU, INDUSTRIES_MENU, NAV_LINKS } from "./navbarData";
+import { SERVICES_MENU, INDUSTRIES_MENU, NAV_LINKS, INSIGHTS_MENU } from "./navbarData";
 import { PRODUCTS_DATA } from "../../sections/products/productsData";
 
 export const useNavbarManager = () => {
@@ -61,6 +61,7 @@ export const useNavbarManager = () => {
         location,
         services: SERVICES_MENU,
         industries: INDUSTRIES_MENU,
+        insights: INSIGHTS_MENU,
         products: PRODUCTS_DATA,
         navLinks: NAV_LINKS,
         scrollToSection: handleNavClick,

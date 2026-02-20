@@ -10,6 +10,7 @@ const Navbar = () => {
     activeDropdown,
     services,
     industries,
+    insights,
     products,
     navLinks,
     scrollToSection,
@@ -196,17 +197,50 @@ const Navbar = () => {
               </div>
             </div>
 
-            <div className="nav-link-container px-2 relative z-10">
+            {/* Insights Dropdown */}
+            <div
+              className="nav-link-container px-2 relative z-10 group"
+              onMouseEnter={() => toggleDropdown("insights")}
+              onMouseLeave={() => toggleDropdown(null as any)}
+            >
               <div className="nav-link-inner">
                 <button
                   data-section="insights"
-                  onClick={() => scrollToSection(navLinks[2].Link)}
-                  className="flex items-center text-[#013299] hover:text-[#FD8E18] cursor-pointer font-bold transition-colors uppercase tracking-wider text-xs py-2"
+                  className="flex items-center text-[#013299] group-hover:text-[#FD8E18] cursor-pointer font-bold transition-colors uppercase tracking-wider text-xs py-2"
                 >
-                  {navLinks[2].label}
+                  Insights{" "}
+                  <FaChevronDown
+                    className={`ml-1 text-[10px] transition-transform duration-300 ${activeDropdown === "insights" ? "rotate-180" : ""}`}
+                  />
                 </button>
               </div>
+              <div
+                className={`absolute right-0 lg:right-[-50px] xl:right-[-100px] top-full mt-1 w-[280px] bg-[#000510]/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-2xl border border-white/10 transition-all duration-300 transform p-4 z-50 ${
+                  activeDropdown === "insights"
+                    ? "opacity-100 visible translate-y-0"
+                    : "opacity-0 invisible translate-y-4"
+                }`}
+              >
+                <div className="flex flex-col gap-2">
+                  {insights.map((item, index) => (
+                    <button
+                      key={index}
+                      onClick={() => scrollToSection(item.Link)}
+                      className="group/card cursor-pointer relative flex items-center space-x-3 bg-white/5 hover:bg-white p-2.5 rounded-xl transition-all duration-300 text-left overflow-hidden border border-transparent hover:border-[#FD8E18]/20 hover:shadow-lg"
+                    >
+                      <div className="relative flex-shrink-0 p-1.5 bg-white/5 rounded-lg group-hover/card:bg-[#FF8C00]/20 transition-all duration-300">
+                        <item.icon className="text-sm text-white group-hover/card:text-[#FF8C00] transition-colors" />
+                      </div>
+                      <span className="text-[14px] font-bold text-gray-200 group-hover/card:text-[#013299] transition-colors leading-tight">
+                        {item.title}
+                      </span>
+                      <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-[#FD8E18] transition-all duration-300 group-hover/card:w-full" />
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
+
             <div className="nav-link-container px-2 relative z-10">
               <div className="nav-link-inner">
                 <button
@@ -396,12 +430,49 @@ const Navbar = () => {
                   </AnimatePresence>
                 </div>
 
-                <button
-                  onClick={() => scrollToSection(navLinks[2].Link)}
-                  className="w-full text-left px-4 py-3 text-[#013299] hover:bg-blue-50/50 font-bold transition-all rounded-xl"
-                >
-                  {navLinks[2].label}
-                </button>
+                <div className="w-full">
+                  <button
+                    onClick={() => toggleDropdown("insights")}
+                    className={`w-full flex items-center justify-between px-4 py-3 text-[#013299] font-bold transition-all rounded-xl ${
+                      activeDropdown === "insights"
+                        ? "bg-blue-50/50"
+                        : "hover:bg-blue-50/50"
+                    }`}
+                  >
+                    <span>Insights</span>
+                    <FaChevronDown
+                      className={`text-xs transition-transform duration-300 ${
+                        activeDropdown === "insights" ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  <AnimatePresence>
+                    {activeDropdown === "insights" && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="overflow-hidden bg-white/5 mt-1 rounded-xl"
+                      >
+                        <div className="px-2 py-3 space-y-1">
+                          {insights.map((item, index) => (
+                            <button
+                              key={index}
+                              onClick={() => scrollToSection(item.Link)}
+                              className="w-full flex items-center space-x-3 px-4 py-2.5 hover:bg-white rounded-lg transition-all group"
+                            >
+                              <item.icon className="text-base text-[#FF8C00] group-hover:scale-110 transition-transform" />
+                              <span className="text-sm font-semibold text-gray-200 group-hover:text-white text-left">
+                                {item.title}
+                              </span>
+                            </button>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
                 <button
                   onClick={() => scrollToSection(navLinks[3].Link)}
                   className="w-full text-left px-4 py-3 text-[#013299] hover:bg-blue-50/50 font-bold transition-all rounded-xl"

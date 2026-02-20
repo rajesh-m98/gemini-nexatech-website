@@ -10,6 +10,7 @@ import IndustryDetail from "./pages/IndustryDetail";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import VideoLibraryPage from "./pages/VideoLibraryPage";
+import BlogsPage from "./pages/BlogsPage";
 import ScrollToTop from "./components/common/ScrollToTop";
 import BrochureFAB from "./components/common/BrochureFAB";
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/video-library" element={<VideoLibraryPage />} />
+          <Route path="/blogs" element={<BlogsPage />} />
         </Routes>
         <Footer />
       </div>

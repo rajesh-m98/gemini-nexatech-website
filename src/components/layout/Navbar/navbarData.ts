@@ -17,6 +17,8 @@ import {
     FaHardHat,
     FaTruck,
     FaPlane,
+    FaVideo,
+    FaBlog,
 } from "react-icons/fa";
 
 export const SERVICES_MENU = [
@@ -133,9 +135,24 @@ export const INDUSTRIES_MENU = [
     },
 ];
 
+export const INSIGHTS_MENU = [
+    {
+        icon: FaVideo,
+        title: "Video Library",
+        desc: "Explore our latest technology videos.",
+        Link: "/video-library",
+    },
+    {
+        icon: FaBlog,
+        title: "Blogs",
+        desc: "Deep dive into tech insights and trends.",
+        Link: "/blogs",
+    },
+];
+
 export const NAV_LINKS = [
     { label: "About Us", Link: "/about" },
     { label: "Products", Link: "#products" },
-    { label: "Insights", Link: "/video-library" },
+    { label: "Insights", Link: "#insights" },
     { label: "Contact Us", Link: "/contact" },
 ];
