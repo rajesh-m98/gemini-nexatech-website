@@ -62,17 +62,29 @@ const Navbar = () => {
             </div>
 
             {/* Services Dropdown */}
-            <div className="nav-link-container px-2 relative z-10 group">
+            <div
+              className="nav-link-container px-2 relative z-10 group"
+              onMouseEnter={() => toggleDropdown("services")}
+              onMouseLeave={() => toggleDropdown(null as any)}
+            >
               <div className="nav-link-inner">
                 <button
                   data-section="services"
                   className="flex items-center text-[#013299] group-hover:text-[#FD8E18] cursor-pointer font-bold transition-colors uppercase tracking-wider text-xs py-2"
                 >
                   Services{" "}
-                  <FaChevronDown className="ml-1 text-[10px] group-hover:rotate-180 transition-transform duration-300" />
+                  <FaChevronDown
+                    className={`ml-1 text-[10px] transition-transform duration-300 ${activeDropdown === "services" ? "rotate-180" : ""}`}
+                  />
                 </button>
               </div>
-              <div className="absolute left-0 lg:left-[-150px] xl:left-[-250px] top-full mt-1 w-[95vw] lg:w-[650px] xl:w-[750px] bg-[#000510]/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-2xl border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-4 p-4 lg:p-5 z-50">
+              <div
+                className={`absolute left-0 lg:left-[-150px] xl:left-[-250px] top-full mt-1 w-[95vw] lg:w-[650px] xl:w-[750px] bg-[#000510]/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-2xl border border-white/10 transition-all duration-300 transform p-4 lg:p-5 z-50 ${
+                  activeDropdown === "services"
+                    ? "opacity-100 visible translate-y-0"
+                    : "opacity-0 invisible translate-y-4"
+                }`}
+              >
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
                   {services.map((service, index) => (
                     <button
@@ -95,17 +107,29 @@ const Navbar = () => {
             </div>
 
             {/* Products Dropdown */}
-            <div className="nav-link-container px-2 relative z-10 group">
+            <div
+              className="nav-link-container px-2 relative z-10 group"
+              onMouseEnter={() => toggleDropdown("products")}
+              onMouseLeave={() => toggleDropdown(null as any)}
+            >
               <div className="nav-link-inner">
                 <button
                   data-section="products"
                   className="flex items-center text-[#013299] group-hover:text-[#FD8E18] cursor-pointer font-bold uppercase tracking-wider text-xs transition-colors py-2"
                 >
                   Products{" "}
-                  <FaChevronDown className="ml-1 text-xs group-hover:rotate-180 transition-transform duration-300" />
+                  <FaChevronDown
+                    className={`ml-1 text-xs transition-transform duration-300 ${activeDropdown === "products" ? "rotate-180" : ""}`}
+                  />
                 </button>
               </div>
-              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-[95vw] lg:w-[500px] xl:w-[600px] bg-[#000510]/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-2xl border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-4 p-4 lg:p-5 z-50">
+              <div
+                className={`absolute left-1/2 -translate-x-1/2 top-full mt-1 w-[95vw] lg:w-[500px] xl:w-[600px] bg-[#000510]/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-2xl border border-white/10 transition-all duration-300 transform p-4 lg:p-5 z-50 ${
+                  activeDropdown === "products"
+                    ? "opacity-100 visible translate-y-0"
+                    : "opacity-0 invisible translate-y-4"
+                }`}
+              >
                 <div className="grid grid-cols-2 gap-2">
                   {products.map((product, index) => (
                     <button
@@ -128,17 +152,29 @@ const Navbar = () => {
             </div>
 
             {/* Industries Dropdown */}
-            <div className="nav-link-container px-2 relative z-10 group">
+            <div
+              className="nav-link-container px-2 relative z-10 group"
+              onMouseEnter={() => toggleDropdown("industries")}
+              onMouseLeave={() => toggleDropdown(null as any)}
+            >
               <div className="nav-link-inner">
                 <button
                   data-section="industries"
                   className="flex items-center text-[#013299] group-hover:text-[#FD8E18] cursor-pointer font-bold transition-colors uppercase tracking-wider text-xs py-2"
                 >
                   Industries{" "}
-                  <FaChevronDown className="ml-1 text-[10px] group-hover:rotate-180 transition-transform duration-300" />
+                  <FaChevronDown
+                    className={`ml-1 text-[10px] transition-transform duration-300 ${activeDropdown === "industries" ? "rotate-180" : ""}`}
+                  />
                 </button>
               </div>
-              <div className="absolute right-0 lg:right-[-100px] xl:right-[-180px] top-full mt-1 w-[95vw] lg:w-[500px] xl:w-[600px] bg-[#000510]/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-2xl border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-4 p-4 lg:p-5 z-50">
+              <div
+                className={`absolute right-0 lg:right-[-100px] xl:right-[-180px] top-full mt-1 w-[95vw] lg:w-[500px] xl:w-[600px] bg-[#000510]/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-2xl border border-white/10 transition-all duration-300 transform p-4 lg:p-5 z-50 ${
+                  activeDropdown === "industries"
+                    ? "opacity-100 visible translate-y-0"
+                    : "opacity-0 invisible translate-y-4"
+                }`}
+              >
                 <div className="grid grid-cols-2 gap-2">
                   {industries.map((ind, index) => (
                     <button
