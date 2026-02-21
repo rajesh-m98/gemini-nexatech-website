@@ -12,7 +12,7 @@ const Products = () => {
     <section
       id="products"
       ref={containerRef}
-      className="pt-8 lg:pt-12 pb-24 lg:pb-32 bg-[#000510] relative overflow-hidden"
+      className="pt-8 lg:pt-12 pb-20 lg:pb-24 bg-[#000510] relative overflow-hidden"
     >
       {/* Background Tech Elements */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-20 pointer-events-none">
@@ -21,7 +21,7 @@ const Products = () => {
       </div>
 
       <Container>
-        <div className="text-center mb-16 lg:mb-24 relative z-10">
+        <div className="text-center mb-12 lg:mb-16 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -33,7 +33,7 @@ const Products = () => {
             </span>
           </motion.div>
 
-          <h2 className="text-4xl lg:text-6xl font-black text-white mb-6 tracking-tight">
+          <h2 className="text-4xl lg:text-6xl font-black text-white mb-4 tracking-tight">
             Advanced Smart{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF8C00] to-orange-400">
               Technology
