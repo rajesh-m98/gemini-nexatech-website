@@ -1,7 +1,94 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Container from "../components/common/Container";
-import { FaPlay } from "react-icons/fa";
+import {
+  FaPlay,
+  FaShieldAlt,
+  FaMapMarkerAlt,
+  FaTachometerAlt,
+  FaBox,
+  FaBus,
+  FaRoute,
+  FaTimes,
+} from "react-icons/fa";
 import { useEffect, useState } from "react";
+import webAppImg from "../assets/services/web_application_development.jpg";
+
+// Auto-converts any YouTube URL format → embed URL
+function toEmbedUrl(url: string): string {
+  if (!url) return "";
+  // Already an embed URL
+  if (url.includes("youtube.com/embed/")) return url;
+  // youtu.be short link
+  const shortMatch = url.match(/youtu\.be\/([^?&]+)/);
+  if (shortMatch) return `https://www.youtube.com/embed/${shortMatch[1]}`;
+  // Full watch URL
+  const watchMatch = url.match(/[?&]v=([^?&]+)/);
+  if (watchMatch) return `https://www.youtube.com/embed/${watchMatch[1]}`;
+  return url;
+}
+
+const softwares = [
+  {
+    id: 1,
+    title: "ProtectEx",
+    subtitle: "Ex Inspection & Maintenance Software",
+    description:
+      "An end-to-end digital platform that safeguards asset integrity through inspections, preventive maintenance, compliance tracking, and real-time equipment health monitoring.",
+    icon: FaShieldAlt,
+    videoUrl: "https://www.youtube.com/watch?v=l12C53_1u8g",
+    image: webAppImg,
+  },
+  {
+    id: 2,
+    title: "TrackPro",
+    subtitle: "Asset Tracking & Management Software",
+    description:
+      "A centralized solution delivering real-time asset visibility, lifecycle management, and performance insights to optimize utilization and minimize losses.",
+    icon: FaMapMarkerAlt,
+    videoUrl: "",
+    image: "",
+  },
+  {
+    id: 3,
+    title: "Tyre Sense 360",
+    subtitle: "Tyre Pressure Monitoring Software",
+    description:
+      "A smart fleet safety system that continuously monitors tyre pressure and temperature, providing instant alerts and analytics to improve efficiency and extend tyre lifespan.",
+    icon: FaTachometerAlt,
+    videoUrl: "",
+    image: "",
+  },
+  {
+    id: 4,
+    title: "CargoVision",
+    subtitle: "Container Loading & Monitoring Software",
+    description:
+      "A digital logistics platform that tracks container loading and monitoring in real time, ensuring accuracy, compliance, accountability, and reduced cargo damage.",
+    icon: FaBox,
+    videoUrl: "",
+    image: "",
+  },
+  {
+    id: 5,
+    title: "TrackBus",
+    subtitle: "School Transportation Management Software",
+    description:
+      "A secure transport management system offering real-time vehicle tracking, route optimization, and instant communication to enhance student safety.",
+    icon: FaBus,
+    videoUrl: "",
+    image: "",
+  },
+  {
+    id: 6,
+    title: "NexTrace",
+    subtitle: "Resource Tracking & Evacuation Management Software",
+    description:
+      "An intelligent emergency management solution that enables real-time resource tracking and automated evacuation coordination for improved safety and control.",
+    icon: FaRoute,
+    videoUrl: "",
+    image: "",
+  },
+];
 
 const VideoLibraryPage = () => {
   useEffect(() => {
@@ -9,185 +96,194 @@ const VideoLibraryPage = () => {
   }, []);
 
   const [selectedVideo, setSelectedVideo] = useState<null | {
-    id: number;
     title: string;
-    description: string;
+    subtitle: string;
     url: string;
   }>(null);
 
-  const videos = [
-    {
-      id: 1,
-      title:
-        "Why Gemini Nexatech is a Leading AI & Software Development Company",
-      description:
-        "Discover our approach to building cutting-edge technical solutions that empower businesses worldwide.",
-      category: "Company Profile",
-      thumbnail:
-        "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2070",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // Placeholder
-    },
-    {
-      id: 2,
-      title: "AI in 2026: Opportunity or Chaos for Enterprises?",
-      description:
-        "A deep dive into the evolving AI landscape and how organizations can stay ahead of the curve.",
-      category: "Tech Strategy",
-      thumbnail:
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    },
-    {
-      id: 3,
-      title: "How to Build & Launch an AI-Powered App in 2026",
-      description:
-        "The complete roadmap from ideation to deployment for next-gen intelligent applications.",
-      category: "Development",
-      thumbnail:
-        "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=2071",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    },
-    {
-      id: 4,
-      title: "RTLS Solutions for Smart Warehousing",
-      description:
-        "How precision tracking is revolutionizing logistics and inventory management efficiency.",
-      category: "Logistics",
-      thumbnail:
-        "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2070",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    },
-    {
-      id: 5,
-      title: "Industrial Safety Standards for 2026",
-      description:
-        "Ensuring compliance and worker protection in hazardous high-risk industrial environments.",
-      category: "Safety",
-      thumbnail:
-        "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&q=80&w=2069",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    },
-    {
-      id: 6,
-      title: "Custom ERP Integration Success Stories",
-      description:
-        "Real-world cases of how integrated enterprise systems transform operational productivity.",
-      category: "Case Study",
-      thumbnail:
-        "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=2070",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    },
-  ];
+  const handleCardClick = (sw: (typeof softwares)[0]) => {
+    if (sw.videoUrl) {
+      setSelectedVideo({
+        title: sw.title,
+        subtitle: sw.subtitle,
+        url: toEmbedUrl(sw.videoUrl),
+      });
+    }
+  };
+
+  const closeModal = () => setSelectedVideo(null);
 
   return (
-    <div className="bg-[#000510] min-h-screen pt-32 pb-24 font-inter">
+    <div className="bg-[#000510] min-h-screen font-inter">
+      {/* ── Header ── */}
+      <div className="pt-28 pb-10 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="inline-block px-4 py-1.5 mb-5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md"
+        >
+          <span className="text-[#FF8C00] font-bold text-xs tracking-[0.25em] uppercase">
+            Our Software Products
+          </span>
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.1 }}
+          className="text-4xl md:text-5xl font-black text-white tracking-tight"
+        >
+          Software{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF8C00] to-orange-400">
+            Library
+          </span>
+        </motion.h1>
+      </div>
+
+      {/* ── Cards Grid ── */}
       <Container>
-        <div className="mb-16 text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="typo-heading text-4xl md:text-6xl mb-6"
-          >
-            Latest <span className="text-gemini-orange">Videos</span>
-          </motion.h1>
-          <div className="w-16 h-1 bg-gemini-blue mx-auto" />
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pb-16">
+          {softwares.map((sw, idx) => {
+            const Icon = sw.icon;
+            const hasVideo = Boolean(sw.videoUrl);
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-          {videos.map((video, idx) => (
-            <motion.div
-              key={video.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
-              viewport={{ once: true }}
-              onClick={() =>
-                setSelectedVideo({
-                  id: video.id,
-                  title: video.title,
-                  description: video.description,
-                  url: video.videoUrl,
-                })
-              }
-              className="group cursor-pointer"
-            >
-              {/* White Container UI from Image */}
-              <div className="bg-white rounded-[2.5rem] p-4 h-full flex flex-col shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:shadow-gemini-blue/20 transition-all duration-500 hover:-translate-y-2">
-                {/* Image at Top */}
-                <div className="aspect-video rounded-[2rem] overflow-hidden mb-6 relative">
-                  <img
-                    src={video.thumbnail}
-                    alt={video.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
-                </div>
-
-                {/* Content */}
-                <div className="px-2 flex-1 flex flex-col">
-                  <h3 className="typo-subsection text-[#001D3D] leading-snug mb-4 line-clamp-2">
-                    {video.title}
-                  </h3>
-
-                  {/* Watch Now Button UI from Image */}
-                  <div className="mt-auto pb-4">
-                    <div className="inline-flex items-center gap-4 bg-[#0047AB] text-white pl-2 pr-6 py-2 rounded-full hover:bg-gemini-orange transition-all duration-300 group/btn">
-                      <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#0047AB] group-hover/btn:text-gemini-orange transition-colors">
-                        <FaPlay className="text-[10px] ml-0.5" />
+            return (
+              <motion.div
+                key={sw.id}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: idx * 0.08 }}
+                onClick={() => handleCardClick(sw)}
+                className={`group relative bg-white rounded-[24px] overflow-hidden transition-all duration-300 hover:-translate-y-1.5 shadow-[0_4px_24px_rgba(0,0,0,0.12)] hover:shadow-[0_16px_48px_rgba(0,71,171,0.18)] flex flex-col h-full ${hasVideo ? "cursor-pointer" : "cursor-default"}`}
+              >
+                {/* Image / Placeholder area */}
+                <div className="relative w-full h-[180px] bg-gradient-to-br from-[#001a3d] to-[#000c1f] overflow-hidden flex-shrink-0">
+                  {sw.image ? (
+                    <img
+                      src={sw.image}
+                      alt={sw.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-[#0047AB]/20 border border-[#0047AB]/30">
+                        <Icon className="text-3xl text-[#0047AB]" />
                       </div>
-                      <span className="text-[11px] font-black tracking-wider uppercase">
-                        Watch Now &gt;
-                      </span>
                     </div>
-                  </div>
+                  )}
+
+                  {/* Overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+
+                  {/* Play overlay on hover — only if video exists */}
+                  {hasVideo && (
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-14 h-14 rounded-full bg-[#0047AB] flex items-center justify-center shadow-lg">
+                        <FaPlay className="text-white text-base ml-1" />
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-            </motion.div>
-          ))}
+
+                {/* Text content — white background, grows to fill remaining height */}
+                <div className="p-5 flex flex-col flex-1">
+                  {/* Icon + Title + Badge — one row */}
+                  <div className="flex items-center gap-3 mb-2 justify-between">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-[#0047AB]/10 border border-[#0047AB]/20">
+                        <Icon className="text-lg text-[#0047AB]" />
+                      </div>
+                      {/* Title — dark navy, all cards */}
+                      <h2 className="text-xl text-left font-black text-[#001D3D] tracking-tight line-clamp-1">
+                        {sw.title}
+                      </h2>
+                    </div>
+
+                    {/* Watch Now / Coming Soon badge */}
+                    {hasVideo ? (
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0047AB] hover:bg-[#FF8C00] text-white text-[9px] font-black uppercase tracking-widest transition-all duration-300 flex-shrink-0 shadow-md">
+                        <FaPlay className="text-[9px] ml-[1px]" />
+                        Watch Now
+                      </div>
+                    ) : (
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-100 border border-gray-200 text-gray-500 text-[9px] font-black uppercase tracking-widest flex-shrink-0">
+                        <FaPlay className="text-[9px] ml-[1px]" />
+                        Coming Soon
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Subtitle — brand blue, all cards */}
+                  <p className="text-[12px] text-left font-bold uppercase tracking-wider mb-2 text-[#0047AB]">
+                    {sw.subtitle}
+                  </p>
+
+                  {/* Description — full text, no clamp */}
+                  <p className="text-gray-500 text-sm text-left leading-relaxed">
+                    {sw.description}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </Container>
 
-      {/* Video Popup Modal */}
+      {/* ── Video Popup Modal ── */}
       <AnimatePresence>
         {selectedVideo && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8"
+            className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6"
           >
-            {/* Overlay */}
+            {/* Backdrop */}
             <div
               className="absolute inset-0 bg-black/95 backdrop-blur-md"
-              onClick={() => setSelectedVideo(null)}
+              onClick={closeModal}
             />
 
-            {/* Modal Content */}
+            {/* Modal */}
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
+              initial={{ scale: 0.92, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-[90vw] md:w-[80vw] lg:w-[75vw] max-w-5xl max-h-[95vh] bg-[#000510] border border-white/10 rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-[0_0_150px_rgba(0,71,171,0.4)] z-10 flex flex-col"
+              exit={{ scale: 0.92, opacity: 0 }}
+              className="relative w-full max-w-4xl bg-[#000c1f] border border-white/10 rounded-2xl shadow-[0_0_80px_rgba(0,71,171,0.4)] z-10 flex flex-col overflow-hidden"
+              style={{ maxHeight: "90vh" }}
             >
-              {/* Scrollable Container for Video + Text */}
-              <div className="flex-1 overflow-y-auto custom-scrollbar">
-                <div className="aspect-video w-full bg-black">
-                  <iframe
-                    src={selectedVideo.url} // Use embed URL
-                    className="w-full h-full"
-                    allowFullScreen
-                    title={selectedVideo.title}
-                  />
-                </div>
+              {/* ── Close button — always visible, top-right corner ── */}
+              <button
+                onClick={closeModal}
+                className="absolute top-3 right-3 z-20 w-9 h-9 rounded-full bg-white/10 hover:bg-white/25 border border-white/20 flex items-center justify-center transition-all duration-200 backdrop-blur-sm"
+                aria-label="Close video"
+              >
+                <FaTimes className="text-white text-sm" />
+              </button>
 
-                {/* <div className="py-8 md:py-12 px-6 md:px-12 text-center border-t border-white/10">
-                  <h2 className="text-xl sm:text-3xl font-black text-white mb-4 uppercase tracking-tighter">
-                    {selectedVideo.title}
-                  </h2>
-                  <p className="typo-body text-gray-400 font-medium max-w-4xl mx-auto text-xs sm:text-sm md:text-base">
-                    {selectedVideo.description}
-                  </p>
-                </div> */}
+              {/* Video — fills available width, keeps 16:9 */}
+              <div
+                className="w-full"
+                style={{ aspectRatio: "16/9", flexShrink: 0 }}
+              >
+                <iframe
+                  src={selectedVideo.url}
+                  className="w-full h-full"
+                  allowFullScreen
+                  allow="autoplay; encrypted-media"
+                  title={selectedVideo.title}
+                />
+              </div>
+
+              {/* Title + Subtitle — always visible below video, never hidden */}
+              <div className="flex-shrink-0 px-5 py-4 border-t border-white/10 bg-[#000c1f]">
+                <h2 className="text-base sm:text-lg font-black text-white leading-tight">
+                  {selectedVideo.title}
+                </h2>
+                <p className="text-[#FF8C00] text-[11px] font-bold uppercase tracking-wider mt-1">
+                  {selectedVideo.subtitle}
+                </p>
               </div>
             </motion.div>
           </motion.div>

@@ -115,21 +115,21 @@ const Footer = () => {
                 ))}
 
                 {section.contact?.map((item, cIdx) => (
-                  <li key={cIdx} className="pl-4 list-none">
+                  <li key={cIdx} className="list-none">
                     <a
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`flex items-center space-x-3 transition-all ${
+                      className={`flex items-start gap-2.5 transition-all group pl-4 ${
                         item.highlight
-                          ? "text-gemini-orange font-bold text-sm"
+                          ? "text-green-400 font-bold hover:text-green-300"
                           : "text-gray-400 hover:text-white"
                       }`}
                     >
-                      <item.icon className="text-base flex-shrink-0" />
-                      <span className="text-md leading-tight">
-                        {item.label}
-                      </span>
+                      <item.icon
+                        className={`text-xl flex-shrink-0 mt-[3px] ${item.highlight ? "text-green-400" : ""}`}
+                      />
+                      <span className="text-lg leading-snug">{item.label}</span>
                     </a>
                   </li>
                 ))}

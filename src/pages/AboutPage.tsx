@@ -110,64 +110,21 @@ const AboutPage = () => {
       image:
         "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=2070",
     },
+    {
+      year: "2012",
+      description:
+        "Gemini Nexatech founded with a bold vision to transform industrial operations through innovative technology.",
+      image:
+        "https://images.unsplash.com/photo-1512453979798-5ea4e7388814?auto=format&fit=crop&q=80&w=2070",
+    },
+    {
+      year: "2011",
+      description:
+        "Gemini Nexatech founded with a bold vision to transform industrial operations through innovative technology.",
+      image:
+        "https://images.unsplash.com/photo-1512453979798-5ea4e7388814?auto=format&fit=crop&q=80&w=2072",
+    },
   ];
-
-  // const videoLibrary = [
-  //   {
-  //     id: 1,
-  //     title: "AI Video Analytics for Site Safety",
-  //     description:
-  //       "Learn how our AI-driven surveillance ensures uncompromising safety levels across hazardous industrial sites.",
-  //     thumbnail:
-  //       "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2070",
-  //     duration: "3:45",
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "RTLS Precision Tracking in Logistics",
-  //     description:
-  //       "Discover the power of centimeter-level accuracy in asset tracking and its impact on supply chain efficiency.",
-  //     thumbnail:
-  //       "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2070",
-  //     duration: "4:20",
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "RFID Solutions for Inventory Control",
-  //     description:
-  //       "A deep dive into how our smart RFID systems automate identification and intelligent inventory management.",
-  //     thumbnail:
-  //       "https://images.unsplash.com/photo-1566576721346-d4a3b4eaad5b?auto=format&fit=crop&q=80&w=2070",
-  //     duration: "2:55",
-  //   },
-  //   {
-  //     id: 4,
-  //     title: "IoT Smart Monitoring Systems",
-  //     description:
-  //       "Real-time visibility and operational control through our advanced IoT device integration and connectivity.",
-  //     thumbnail:
-  //       "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2070",
-  //     duration: "5:10",
-  //   },
-  //   {
-  //     id: 5,
-  //     title: "Industrial Safety in Oil & Gas",
-  //     description:
-  //       "Certified safety solutions designed for hazardous high-risk environments in the energy sector.",
-  //     thumbnail:
-  //       "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&q=80&w=2069",
-  //     duration: "3:15",
-  //   },
-  //   {
-  //     id: 6,
-  //     title: "Digital Transformation Consulting",
-  //     description:
-  //       "Our approach to aligning digital strategy with business objectives through expert tech consulting.",
-  //     thumbnail:
-  //       "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=2070",
-  //     duration: "4:40",
-  //   },
-  // ];
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -427,113 +384,6 @@ const AboutPage = () => {
           </div>
         </Container>
       </section>
-
-      {/* <section className="py-24 bg-[#000510] relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gemini-blue/5 blur-[150px] rounded-full pointer-events-none" />
-
-        <Container>
-          <div className="text-center mb-20 relative z-10">
-            <motion.span
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="typo-tab-heading text-gemini-blue mb-4 block"
-            >
-              Innovation in Motion
-            </motion.span>
-            <motion.h2
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="typo-heading text-4xl lg:text-7xl mb-6"
-            >
-              OUR VIDEO <span className="text-gemini-orange">LIBRARY</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              className="typo-body max-w-2xl mx-auto opacity-70"
-            >
-              Explore our technical showcases and site-level implementations of
-              industry-leading AI, RTLS, and tracking technologies.
-            </motion.p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 relative z-10">
-            {videoLibrary.map((video, idx) => (
-              <motion.div
-                key={video.id}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: idx * 0.1 }}
-                viewport={{ once: true }}
-                className="group flex flex-col h-full rounded-[2.5rem] overflow-hidden bg-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:shadow-gemini-blue/20 transition-all duration-500 hover:-translate-y-3"
-              >
-                <div className="relative aspect-video overflow-hidden">
-                  <img
-                    src={video.thumbnail}
-                    alt={video.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gemini-blue/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                    <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-gemini-blue text-2xl shadow-2xl transform scale-75 group-hover:scale-100 transition-transform duration-500">
-                      <FaPlay className="ml-1" />
-                    </div>
-                  </div>
-                  <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md text-white text-[10px] px-3 py-1 rounded-full flex items-center gap-1.5 font-bold tracking-widest">
-                    <FaClock className="text-gemini-orange" />
-                    {video.duration}
-                  </div>
-                </div>
-
-                <div className="flex-1 p-8 flex flex-col">
-                  <h3 className="text-[#001D3D] text-xl lg:text-2xl font-black mb-4 leading-tight group-hover:text-gemini-blue transition-colors">
-                    {video.title}
-                  </h3>
-                  <p className="text-[#001D3D]/70 text-sm mb-8 line-clamp-3 leading-relaxed font-medium">
-                    {video.description}
-                  </p>
-
-                  <div className="mt-auto">
-                    <button className="flex items-center gap-3 text-gemini-blue font-black text-xs tracking-[0.2em] group/btn hover:text-gemini-orange transition-colors">
-                      WATCH NOW
-                      <div className="w-10 h-10 rounded-full border-2 border-gemini-blue/10 flex items-center justify-center group-hover/btn:border-gemini-orange group-hover/btn:bg-gemini-orange group-hover/btn:text-white transition-all shadow-lg">
-                        <FaArrowRight className="text-[10px]" />
-                      </div>
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="mt-20 text-center relative z-10">
-            <button className="bg-gemini-blue text-white font-black py-5 px-12 rounded-2xl hover:bg-gemini-orange transition-all transform hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(0,71,171,0.3)] tracking-[0.2em] text-[10px] uppercase">
-              VIEW FULL VIDEO GALLERY
-            </button>
-          </div>
-        </Container>
-      </section> */}
-
-      {/* CTA Section
-      <section className="py-32">
-        <Container>
-          <div className="bg-gradient-to-br from-gemini-blue to-blue-900 rounded-[50px] p-12 lg:p-24 text-center relative overflow-hidden shadow-2xl">
-            <div className="absolute inset-0 bg-tech-blueprint opacity-20" />
-            <div className="relative z-10">
-              <h2 className="text-4xl lg:text-7xl font-black text-white mb-8 tracking-tighter">
-                READY TO BUILD THE FUTURE?
-              </h2>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <button className="bg-white text-gemini-blue font-black py-5 px-12 rounded-2xl hover:bg-gemini-orange hover:text-white transition-all transform active:scale-95 shadow-xl">
-                  CONTACT US TODAY
-                </button>
-                <button className="bg-transparent border-2 border-white/30 text-white font-black py-5 px-12 rounded-2xl hover:bg-white/10 transition-all transform active:scale-95">
-                  VIEW SOLUTIONS
-                </button>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section> */}
     </div>
   );
 };

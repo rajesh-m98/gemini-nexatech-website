@@ -443,3 +443,37 @@ body {
   height: 0;
   visibility: hidden;
 }
+
+/* ===== FORCE ANIMATIONS ON ALL DEVICES =====
+   Some laptops have "Reduce Motion" enabled in OS settings.
+   This override ensures hover effects and animations always work.
+*/
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Override: keep our intentional animations alive regardless */
+.animate-ripple-cyan,
+.animate-ripple-orange,
+.animate-ripple-cyan-minimal,
+.animate-ripple-green,
+.animate-scroll-left,
+.footer-aura,
+[class*="animate-"] {
+  animation-play-state: running !important;
+}
+
+/* GPU acceleration for smoother hover & motion effects */
+[class*="hover:"],
+[class*="transition"],
+[class*="motion"] {
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}

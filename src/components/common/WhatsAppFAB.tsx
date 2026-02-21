@@ -6,7 +6,7 @@ const WhatsAppFAB = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   const openWhatsApp = () => {
-    window.open("https://wa.me/971555133884", "_blank", "noopener,noreferrer");
+    window.open("https://wa.me/918590899899", "_blank", "noopener,noreferrer");
   };
 
   return (

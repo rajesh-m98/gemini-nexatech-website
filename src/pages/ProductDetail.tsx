@@ -45,27 +45,25 @@ const ProductDetail = () => {
               </span>
             </Link>
           </div>
-          <div className="md:text-center w-full lg:max-w-5xl ml-auto">
-            <motion.h1
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-2xl md:text-3xl xl:text-5xl font-black uppercase tracking-tight leading-tight bg-gradient-to-r from-white via-white to-gemini-orange bg-clip-text text-transparent"
-            >
-              {product.title}
-            </motion.h1>
-          </div>
         </div>
 
         <div className="grid lg:grid-cols-12 gap-6 xl:gap-8 items-stretch">
           {/* Column 1: Subtitle, Description & CTA */}
-          <div className="lg:col-span-4 flex flex-col items-start pt-2 group">
+          <div className="lg:col-span-4 flex flex-col items-start pt-4 group">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               className="space-y-6"
             >
+              <motion.h1
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-2xl md:text-3xl text-left xl:text-5xl font-black uppercase tracking-tight leading-tight bg-gradient-to-r from-white via-white to-gemini-orange bg-clip-text text-transparent"
+              >
+                {product.title}
+              </motion.h1>
               <div className="space-y-4">
                 <p className="text-lg lg:text-xl text-gemini-orange font-black uppercase tracking-widest leading-tight text-left">
                   {product.subtitle}
@@ -75,12 +73,14 @@ const ProductDetail = () => {
                 </p>
               </div>
 
-              <Link
-                to="/contact"
-                className="inline-block bg-white text-gemini-blue hover:bg-gemini-orange hover:text-white font-black py-4 px-12 rounded-xl transition-all shadow-xl uppercase tracking-[0.15em] text-[11px] transform hover:scale-105 active:scale-95"
-              >
-                CONSULT OUR EXPERTS
-              </Link>
+              <div className="text-left">
+                <Link
+                  to="/contact"
+                  className="inline-block bg-white text-gemini-blue hover:bg-gemini-orange hover:text-white font-black py-4 px-12 rounded-xl transition-all shadow-xl uppercase tracking-[0.15em] text-[11px] transform hover:scale-105 active:scale-95"
+                >
+                  CONSULT OUR EXPERTS
+                </Link>
+              </div>
             </motion.div>
           </div>
 

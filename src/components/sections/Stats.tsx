@@ -8,9 +8,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 const STATS = [
   { numericValue: 15, suffix: "+", label: "Years of Excellence" },
-  { numericValue: 1000, suffix: "+", label: "Empowered Clients" },
+  { numericValue: 100, suffix: "+", label: "Empowered Clients" },
   { numericValue: 10, suffix: "+", label: "Countries Served" },
-  { numericValue: 250, suffix: "+", label: "Tech Engineers" },
+  { numericValue: 30, suffix: "+", label: "Tech Engineers" },
 ];
 
 const StatCard = ({

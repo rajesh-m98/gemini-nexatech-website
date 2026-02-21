@@ -1,15 +1,27 @@
 import customSoftwareImg from "../assets/services/Custom-Software-Development.jpg";
+import customSoftwareImg1 from "../assets/services/Custom-Software-Development1.jpg";
 import webAppImg from "../assets/services/web_application_development.jpg";
+import webAppImg1 from "../assets/services/web_application_development1.jpg";
 import mobileAppImg from "../assets/services/mobile-app-development.png";
+import mobileAppImg1 from "../assets/services/mobile-app-development1.png";
 import uiUxImg from "../assets/services/ui_ux.webp";
+import uiUxImg1 from "../assets/services/ui_ux1.webp";
 import aiDevImg from "../assets/services/ai-development.webp";
+import aiDevImg1 from "../assets/services/ai-development1.webp";
 import consultingImg from "../assets/services/Software-Consulting.webp";
+import consultingImg1 from "../assets/services/Software-Consulting1.webp";
 import cloudDevOpsImg from "../assets/services/cloud_devops.png";
+import cloudDevOpsImg1 from "../assets/services/cloud_devops1.png";
 import apiIntegrationImg from "../assets/services/api_integration.jpg";
+import apiIntegrationImg1 from "../assets/services/api_integration1.jpg";
 import enterpriseAppImg from "../assets/services/enterprise-application-development.webp";
+import enterpriseAppImg1 from "../assets/services/enterprise-application-development1.webp";
 import iotImg from "../assets/services/iot.webp";
+import iotImg1 from "../assets/services/iot1.webp";
 import dataAnalyticsImg from "../assets/services/data-analytics-techniques.avif";
+import dataAnalyticsImg1 from "../assets/services/data-analytics-techniques1.avif";
 import maintenanceImg from "../assets/services/application-support.jpg";
+import maintenanceImg1 from "../assets/services/application-support1.jpg";
 
 export const services = [
     {
@@ -26,8 +38,8 @@ export const services = [
         icon: "software",
         image: customSoftwareImg,
         images: [
-            "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2070",
-            "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&q=80&w=2070"
+            customSoftwareImg,
+            customSoftwareImg1
         ]
     },
     {
@@ -44,8 +56,8 @@ export const services = [
         icon: "globe",
         image: webAppImg,
         images: [
-            "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2015",
-            "https://images.unsplash.com/photo-1508921234172-b68ed335b3e6?auto=format&fit=crop&q=80&w=2070"
+            webAppImg,
+            webAppImg1
         ]
     },
     {
@@ -62,8 +74,8 @@ export const services = [
         icon: "mobile",
         image: mobileAppImg,
         images: [
-            "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=2070",
-            "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?auto=format&fit=crop&q=80&w=2072"
+            mobileAppImg,
+            mobileAppImg1
         ]
     },
     {
@@ -80,8 +92,8 @@ export const services = [
         icon: "palette",
         image: uiUxImg,
         images: [
-            "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=2000",
-            "https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&q=80&w=2080"
+            uiUxImg,
+            uiUxImg1
         ]
     },
     {
@@ -98,8 +110,8 @@ export const services = [
         icon: "brain",
         image: aiDevImg,
         images: [
-            "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=2070",
-            "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2070"
+            aiDevImg,
+            aiDevImg1
         ]
     },
     {
@@ -116,8 +128,8 @@ export const services = [
         icon: "users",
         image: consultingImg,
         images: [
-            "https://images.unsplash.com/photo-1454165833767-027ffea9e77b?auto=format&fit=crop&q=80&w=2070",
-            "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=2070"
+            consultingImg,
+            consultingImg1
         ]
     },
     {
@@ -134,13 +146,13 @@ export const services = [
         icon: "cloud",
         image: cloudDevOpsImg,
         images: [
-            "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2072",
-            "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2015"
+            cloudDevOpsImg,
+            cloudDevOpsImg1
         ]
     },
     {
         id: "api-integration",
-        title: "API Development & System Integration",
+        title: "API Development & Integration",
         description: "We develop secure APIs and integrate systems to ensure smooth communication between platforms, devices, and enterprise software.",
         features: [
             "RESTful & secure API development",
@@ -152,8 +164,8 @@ export const services = [
         icon: "link",
         image: apiIntegrationImg,
         images: [
-            "https://images.unsplash.com/photo-1558494949-ef010cbdcc4b?auto=format&fit=crop&q=80&w=2026",
-            "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2070"
+            apiIntegrationImg,
+            apiIntegrationImg1
         ]
     },
     {
@@ -170,8 +182,8 @@ export const services = [
         icon: "briefcase",
         image: enterpriseAppImg,
         images: [
-            "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070",
-            "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=2070"
+            enterpriseAppImg,
+            enterpriseAppImg1
         ]
     },
     {
@@ -188,13 +200,13 @@ export const services = [
         icon: "cpu",
         image: iotImg,
         images: [
-            "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2070",
-            "https://images.unsplash.com/photo-1563770660941-20978e87081b?auto=format&fit=crop&q=80&w=2070"
+            iotImg,
+            iotImg1
         ]
     },
     {
         id: "data-analytics",
-        title: "Data Analytics & Business Intelligence",
+        title: "Business Data Analytics",
         description: "We turn complex data into actionable insights through intelligent dashboards and reporting systems.",
         features: [
             "Custom BI dashboards",
@@ -206,8 +218,8 @@ export const services = [
         icon: "bar-chart",
         image: dataAnalyticsImg,
         images: [
-            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2070",
-            "https://images.unsplash.com/photo-1504868584819-f8e905b6cbe0?auto=format&fit=crop&q=80&w=2070"
+            dataAnalyticsImg,
+            dataAnalyticsImg1
         ]
     },
     {
@@ -224,8 +236,8 @@ export const services = [
         icon: "shield",
         image: maintenanceImg,
         images: [
-            "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=2070",
-            "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070"
+            maintenanceImg,
+            maintenanceImg1
         ]
     }
 ];

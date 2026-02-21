@@ -47,26 +47,12 @@ export const useServicesAnimations = (
                         onScrollUpdate(progress, self.direction);
                     }
 
+                    // Header stays visible — no fade out
                     if (headerRef.current) {
-                        // Smoothly fade out the header
-                        const headerFade = Math.min(1, progress / 0.15);
                         gsap.set(headerRef.current, {
-                            opacity: 1 - headerFade,
-                            y: -(headerFade * 50),
-                            pointerEvents: headerFade > 0.8 ? "none" : "auto",
-                            force3D: true
-                        });
-                    }
-
-                    if (cardRef.current) {
-                        const centerProgress = Math.min(1, progress / 0.2);
-                        // Subtle lift to center the card visually. 
-                        // Using a smaller value (70px) to prevent icons from hitting the navbar.
-                        const yOffset = -(70 * centerProgress);
-
-                        gsap.set(cardRef.current, {
-                            y: yOffset,
-                            boxShadow: `0 ${20 + (centerProgress * 40)}px ${60 + (centerProgress * 20)}px rgba(0,0,0,0.8)`,
+                            opacity: 1,
+                            y: 0,
+                            pointerEvents: "auto",
                             force3D: true
                         });
                     }

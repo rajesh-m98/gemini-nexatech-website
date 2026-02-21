@@ -1,8 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { FaChevronDown, FaCheck } from "react-icons/fa";
+import {
+  FaChevronDown,
+  FaCheck,
+  FaWhatsapp,
+  FaMapMarkerAlt,
+} from "react-icons/fa";
 import Container from "../components/common/Container";
-import { HERO_DATA } from "../components/hero/heroData";
 
 const countries = [
   { name: "Afghanistan", code: "+93", iso: "af" },
@@ -144,8 +148,6 @@ const ContactPage = () => {
       c.code.includes(searchQuery),
   );
 
-  const brandLogos = HERO_DATA.trustedBy.logos;
-
   return (
     <div className="bg-[#000510] text-white min-h-screen pt-15 relative overflow-hidden font-inter flex flex-col">
       {/* Background Glows */}
@@ -163,7 +165,7 @@ const ContactPage = () => {
                   className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight"
                 >
                   Take the first step towards{" "}
-                  <span className="text-gemini-orange">innovation</span>
+                  <span className="text-gemini-orange">Innovation</span>
                 </motion.h1>
 
                 <div className="space-y-4">
@@ -199,28 +201,46 @@ const ContactPage = () => {
                     sales@gemininexatech.com
                   </a>
                 </p>
-              </div>
 
-              {/* Trusted By Section */}
-              <div className="space-y-6">
-                <div className="inline-flex items-center gap-2 bg-gemini-blue/10 px-4 py-1.5 rounded-full border border-gemini-blue/20">
-                  <span className="text-[10px] uppercase font-black tracking-widest text-blue-400">
-                    Trusted by
-                  </span>
-                </div>
-                <div className="flex flex-wrap items-center gap-4 lg:gap-6">
-                  {brandLogos.map((logo, idx) => (
-                    <div
-                      key={idx}
-                      className="bg-white p-2 sm:p-3 rounded-xl flex items-center justify-center w-24 h-14 sm:w-28 sm:h-16 shadow-xl hover:scale-110 transition-transform duration-500 overflow-hidden"
-                    >
-                      <img
-                        src={logo.src}
-                        alt={logo.name}
-                        className="w-full h-full object-contain"
-                      />
+                {/* WhatsApp & Address Info Row */}
+                <div className="pt-6 flex flex-col md:flex-row items-start">
+                  <div className="space-y-4 flex-1">
+                    <h4 className="text-gemini-orange font-black text-[13px] uppercase tracking-[0.2em] flex items-center gap-3">
+                      <span className="w-4 h-1 bg-gemini-orange rounded-full" />
+                      Quick Support
+                    </h4>
+                    <div className="flex items-center w-3/4 gap-4 group">
+                      <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-green-500/10 group-hover:border-green-500/20 transition-all">
+                        <FaWhatsapp className="text-green-500 text-xl" />
+                      </div>
+                      <div className="text-left">
+                        <a
+                          href="https://wa.me/918590899899"
+                          className="text-white font-bold text-sm tracking-wide hover:text-green-400 transition-colors"
+                        >
+                          +91 85908 99899
+                        </a>
+                      </div>
                     </div>
-                  ))}
+                  </div>
+
+                  <div className="space-y-4 flex-1">
+                    <h4 className="text-gemini-blue font-black text-[13px] uppercase tracking-[0.2em] flex items-center gap-3">
+                      <span className="w-4 h-1 bg-gemini-blue rounded-full" />
+                      Visit Us
+                    </h4>
+                    <div className="flex items-start gap-2">
+                      <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                        <FaMapMarkerAlt className="text-gemini-blue text-lg" />
+                      </div>
+                      <div className="text-left pt-0.5">
+                        <p className="text-white/80 text-sm leading-relaxed font-bold">
+                          Campus-1a, MILLENIA BUSINESS PARK-I, Perungudi,
+                          Chennai, Tamil Nadu 600096
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -259,7 +279,7 @@ const ContactPage = () => {
                       </div>
                       <div className="space-y-1 group">
                         <label className="text-[11px] uppercase font-black tracking-widest text-white/40 ml-1 group-focus-within:text-gemini-orange transition-colors">
-                          Business Name
+                          Company Name
                         </label>
                         <input
                           type="text"
@@ -296,7 +316,7 @@ const ContactPage = () => {
                       </div>
                       <div className="space-y-1 group">
                         <label className="text-[11px] uppercase font-black tracking-widest text-white/40 ml-1 group-focus-within:text-gemini-orange transition-colors">
-                          Mobile Number
+                          Contact Number
                         </label>
                         <div
                           className={`flex items-center gap-2 relative border-b ${showErrors && !formData.phone ? "border-red-500 shadow-[0_1px_0_0_rgba(239,68,68,0.5)]" : "border-white/20"} group-focus-within:border-gemini-orange transition-all`}
@@ -445,7 +465,7 @@ const ContactPage = () => {
                           <span
                             className={`text-[12px] ${showErrors && !formData.updates ? "text-red-400" : "text-white/40"} font-bold group-hover:text-white/80 transition-colors leading-tight`}
                           >
-                            I agree to receive SMS and Whatsapp
+                            I agree to receive Phone call and Whatsapp Messages
                           </span>
                         </div>
                       </div>

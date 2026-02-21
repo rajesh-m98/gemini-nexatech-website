@@ -5,20 +5,84 @@ import { FaArrowLeft, FaCheck } from "react-icons/fa";
 import Container from "../components/common/Container";
 import { useEffect, useState } from "react";
 
+/* ─────────────────────────────────────────────
+   AccordionImages — Industries-style expand panels
+   ───────────────────────────────────────────── */
+const AccordionImages = ({
+  images,
+  title,
+}: {
+  images: string[];
+  title: string;
+}) => {
+  const [hovered, setHovered] = useState<number | null>(null);
+  const count = Math.min(images.length, 3);
+  const imgs = images.slice(0, count);
+
+  return (
+    <div
+      className="flex gap-2 h-[360px] lg:h-[420px] w-full rounded-2xl overflow-hidden"
+      onMouseLeave={() => setHovered(null)}
+    >
+      {imgs.map((src, idx) => {
+        const isActive = hovered === idx;
+        const isInactive = hovered !== null && hovered !== idx;
+        return (
+          <div
+            key={idx}
+            onMouseEnter={() => setHovered(idx)}
+            className="relative overflow-hidden rounded-xl cursor-pointer"
+            style={{
+              flex: isActive ? 3.5 : isInactive ? 0.8 : 1,
+              transition: "flex 0.7s cubic-bezier(0.4, 0, 0.2, 1)",
+              minWidth: 0,
+            }}
+          >
+            {/* Background Image */}
+            <img
+              src={src}
+              alt={`${title} ${idx + 1}`}
+              className="w-full h-full object-cover"
+              style={{
+                transform: isActive ? "scale(1.05)" : "scale(1.12)",
+                filter: isActive ? "grayscale(0%)" : "grayscale(60%)",
+                opacity: isInactive ? 0.5 : isActive ? 1 : 0.75,
+                transition:
+                  "transform 0.8s ease, filter 0.8s ease, opacity 0.6s ease",
+              }}
+            />
+
+            {/* Dark overlay */}
+            <div
+              className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+              style={{
+                opacity: isActive ? 0.4 : 0.7,
+                transition: "opacity 0.6s ease",
+              }}
+            />
+
+            {/* Orange bottom bar — expands on hover */}
+            <div
+              className="absolute bottom-0 left-0 h-[3px] bg-gemini-orange"
+              style={{
+                width: isActive ? "100%" : "0%",
+                transition: "width 0.7s ease",
+              }}
+            />
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
 const ServiceDetail = () => {
   const { id } = useParams();
   const service = services.find((s) => s.id === id);
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
   useEffect(() => {
     window.scrollTo(0, 0);
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
   }, [id]);
-
-  const isMobile = windowWidth < 768;
 
   if (!service) {
     return (
@@ -32,12 +96,12 @@ const ServiceDetail = () => {
   }
 
   return (
-    <div className="bg-[#000510] min-h-screen pt-24 pb-8 relative overflow-hidden font-inter flex flex-col justify-center">
+    <div className="bg-[#000510] min-h-screen pt-24 pb-16 relative overflow-hidden font-inter">
       {/* Dynamic Aura Background */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-gemini-blue/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-gemini-orange/5 blur-[120px] rounded-full pointer-events-none" />
 
-      <Container className="relative z-10 w-full">
+      <Container className="relative m-4 z-10 w-full">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 lg:mb-8">
           <div className="flex-shrink-0">
             <Link
@@ -50,7 +114,7 @@ const ServiceDetail = () => {
               </span>
             </Link>
           </div>
-          <div className="md:text-left w-full lg:max-w-5xl ml-auto">
+          <div className="md:text-right w-full lg:max-w-5xl ml-auto">
             <motion.h1
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -62,7 +126,7 @@ const ServiceDetail = () => {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
           {/* Column 1: Content (Description -> Points -> CTA) */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -120,46 +184,27 @@ const ServiceDetail = () => {
             </motion.div>
           </motion.div>
 
-          {/* Column 2: Rummy Cards Animation (Optimized for 2 cards) */}
-          <div className="relative h-[280px] md:h-[350px] lg:h-[450px] flex items-center justify-center mt-4 lg:mt-0">
-            <div className="relative w-full max-w-[320px] aspect-[4/5] flex items-center justify-center group/container">
-              {service.images?.slice(0, 2).map((img, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                    rotate: idx === 0 ? -8 : 8,
-                    x: idx === 0 ? (isMobile ? -25 : -40) : isMobile ? 25 : 40,
-                    zIndex: 10 - idx,
-                  }}
-                  whileHover={{
-                    scale: 1.1,
-                    rotate: 0,
-                    x: 0,
-                    zIndex: 50,
-                    transition: { duration: 0.3, ease: "easeOut" },
-                  }}
-                  className="absolute w-[85%] h-[85%] rounded-[1.5rem] overflow-hidden border-2 border-white/10 shadow-2xl cursor-pointer backdrop-blur-sm"
-                  style={{ transformOrigin: "bottom center" }}
-                >
-                  <img
-                    src={img}
-                    alt={`${service.title} view ${idx + 1}`}
-                    className="w-full h-full object-cover transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Background Decorative Circles */}
-            <div className="absolute inset-0 -z-10 flex items-center justify-center pointer-events-none">
-              <div className="w-[100%] aspect-square border border-white/5 rounded-full animate-pulse opacity-10" />
-              <div className="absolute w-[70%] aspect-square border border-white/5 rounded-full animate-pulse delay-700 opacity-10" />
-            </div>
-          </div>
+          {/* Column 2: Accordion Image Gallery (Industries-style) */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="w-full mt-2 lg:mt-0"
+          >
+            {service.images && service.images.length > 0 ? (
+              <AccordionImages images={service.images} title={service.title} />
+            ) : (
+              /* Placeholder when no images yet */
+              <div className="h-[360px] rounded-2xl border-2 border-white/10 bg-white/5 flex flex-col items-center justify-center gap-3">
+                <div className="w-14 h-14 rounded-2xl bg-gemini-blue/20 border border-gemini-blue/30 flex items-center justify-center">
+                  <span className="text-gemini-blue text-2xl">📷</span>
+                </div>
+                <p className="text-white/30 text-xs font-bold uppercase tracking-widest">
+                  Images Coming Soon
+                </p>
+              </div>
+            )}
+          </motion.div>
         </div>
       </Container>
     </div>

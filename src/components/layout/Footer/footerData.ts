@@ -10,12 +10,12 @@ export const FOOTER_DATA = {
         {
             title: "Our Softwares",
             links: [
-                { label: "Gemini AI", href: "" },
-                { label: "Gemini AI", href: "" },
-                { label: "Gemini AI", href: "" },
-                { label: "Gemini AI", href: "" },
-                { label: "Gemini AI", href: "" },
-                { label: "Gemini AI", href: "" },
+                { label: "ProtectEx", href: "/video-library" },
+                { label: "TrackPro", href: "/video-library" },
+                { label: "Tyre Sense 360", href: "/video-library" },
+                { label: "CargoVision", href: "/video-library" },
+                { label: "TrackBus", href: "/video-library" },
+                { label: "NexTrace", href: "/video-library" },
             ]
         },
         {
@@ -25,7 +25,7 @@ export const FOOTER_DATA = {
                 { label: "Services", href: "#services" },
                 { label: "Products", href: "#products" },
                 { label: "Industries", href: "#industries" },
-                { label: "Insights", href: "/video-library" },
+                { label: "Video Library", href: "/video-library" },
                 { label: "Blogs", href: "/blogs" },
             ]
         },
@@ -35,7 +35,7 @@ export const FOOTER_DATA = {
                 { icon: FaPhone, label: "+91 9003275271", href: "tel:+919003275271" },
                 { icon: FaEnvelope, label: "sales@gemininexatech.com", href: "mailto:sales@gemininexatech.com" },
                 { icon: FaMapMarkerAlt, label: "Campus-1a, MILLENIA BUSINESS PARK-I, Perungudi, Chennai, Tamil Nadu 600096", href: "https://www.google.com/maps/search/?api=1&query=Campus-1a,+MILLENIA+BUSINESS+PARK-I,+Perungudi,+Chennai,+Tamil+Nadu+600096" },
-                { icon: FaWhatsapp, label: "Chat on WhatsApp", href: "https://wa.me/919003275271", highlight: true }
+                { icon: FaWhatsapp, label: "Chat on WhatsApp", href: "https://wa.me/918590899899", highlight: true }
             ]
         }
     ],

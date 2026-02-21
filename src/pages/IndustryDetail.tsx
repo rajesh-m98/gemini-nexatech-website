@@ -40,16 +40,6 @@ const IndustryDetail = () => {
               </span>
             </Link>
           </div>
-          <div className="md:text-center w-full lg:max-w-5xl">
-            <motion.h1
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-2xl md:text-3xl xl:text-5xl font-black uppercase tracking-tight leading-tight bg-gradient-to-r from-white via-white to-gemini-orange bg-clip-text text-transparent"
-            >
-              {industry.title}
-            </motion.h1>
-          </div>
         </div>
 
         <div className="grid lg:grid-cols-12 gap-6 xl:gap-8 items-stretch">
@@ -61,6 +51,14 @@ const IndustryDetail = () => {
               transition={{ duration: 0.8 }}
               className="space-y-6"
             >
+              <motion.h1
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-2xl md:text-3xl xl:text-5xl text-left font-black uppercase tracking-tight leading-tight bg-gradient-to-r from-white via-white to-gemini-orange bg-clip-text text-transparent"
+              >
+                {industry.title}
+              </motion.h1>
               <div className="space-y-4">
                 <p className="text-lg lg:text-xl text-gemini-orange font-black uppercase tracking-widest leading-tight text-left">
                   {industry.subtitle}
@@ -69,13 +67,14 @@ const IndustryDetail = () => {
                   {industry.description}
                 </p>
               </div>
-
-              <Link
-                to="/contact"
-                className="inline-block bg-white text-gemini-blue hover:bg-gemini-orange hover:text-white font-black py-4 px-12 rounded-xl transition-all shadow-xl uppercase tracking-[0.15em] text-[11px] transform hover:scale-105 active:scale-95"
-              >
-                CONSULT OUR EXPERTS
-              </Link>
+              <div className="text-left">
+                <Link
+                  to="/contact"
+                  className="inline-block bg-white text-gemini-blue hover:bg-gemini-orange hover:text-white font-black py-4 px-12 rounded-xl transition-all shadow-xl uppercase tracking-[0.15em] text-[11px] transform hover:scale-105 active:scale-95"
+                >
+                  CONSULT OUR EXPERTS
+                </Link>
+              </div>
             </motion.div>
           </div>
 
